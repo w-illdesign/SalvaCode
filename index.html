@@ -95,7 +95,36 @@
   z-index:1;
   mix-blend-mode: lighten; /* fait que l'image transparente capte la lumière derrière */
 }
-  
+
+/* --- Styles pour lazy-loading / skeleton --- */
+/* image en attente : flou + légère échelle */
+.lazy-loading{
+  filter: blur(8px) saturate(.9);
+  transform: scale(1.01);
+  transition: filter .45s ease, transform .45s ease, opacity .45s ease;
+  opacity:0.95;
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+}
+
+/* quand l'image est chargée -> suppression du flou + fade-in */
+img:not([data-src]).lazy-placeholder,
+img.loaded {
+  filter: none;
+  transform: none;
+  opacity:1;
+}
+
+/* petit placeholder carré pour aperçus */
+.img-preview-placeholder{
+  width:84px;
+  height:84px;
+  border-radius:10px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+  border:1px solid var(--ring);
+}
+
+/* fin styles lazy/skeleton */
+
     .overlay {
   position: absolute;
   inset: 0;
@@ -217,9 +246,11 @@
       box-shadow:0 4px 12px rgba(0,0,0,0.5);
       flex:0 0 72px;
       border:1px solid rgba(255,255,255,0.04); /* bordure par défaut */
+      transition:filter .25s ease, transform .2s ease;
+      filter: saturate(0.95) contrast(0.94);
     }
+    .student-card img.lazy-loading{ filter: blur(6px) grayscale(.15); transform: scale(.995) }
 
-    /* Podium: bordure colorée SUR LA PHOTO (profil) */
     .student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
     .student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); }
     .student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
@@ -267,7 +298,8 @@
 
       <div class="img-wrap" role="img" aria-label="Hero image">
         <div class="img-inner">
-          <img src="hero.webp" alt="Hero — WillPython">
+          <!-- lazy ajouté : data-src au lieu de src, loading lazy pour navigateur -->
+          <img data-src="hero.webp" alt="Hero — WillPython" loading="lazy" class="lazy-loading">
         </div>
       </div>
     </section>
@@ -386,12 +418,54 @@
         div.innerHTML = `
           ${noteHtml}
           <div class="name">${s.nom ?? '—'}</div>
-          <img src="${s.profil ?? ''}" alt="${s.nom ?? 'Profil'}">
+          <img data-src="${s.profil ?? ''}" alt="${s.nom ?? 'Profil'}" loading="lazy" class="lazy-loading">
         `;
 
         studentGrid.appendChild(div);
       });
+
+      // après insertion, démarre lazy-loading des images
+      observeLazyImages();
     })();
+
+    // SIMPLE lazy loader : remplace data-src par src quand visible
+    function observeLazyImages(){
+      const imgs = document.querySelectorAll('img[data-src]');
+      if('IntersectionObserver' in window){
+        const obs = new IntersectionObserver((entries, o) => {
+          entries.forEach(e => {
+            if(e.isIntersecting){
+              const img = e.target;
+              img.src = img.dataset.src;        // on charge l'image
+              img.addEventListener('load', function onLoad(){
+                img.classList.remove('lazy-loading');
+                img.classList.add('loaded');
+                img.removeEventListener('load', onLoad);
+              });
+              img.removeAttribute('data-src');  // on nettoie
+              o.unobserve(img);                 // on arrête d'observer cette image
+            }
+          });
+        }, {rootMargin: "200px 0px"}); // commence à charger un peu avant d'entrer dans le viewport
+        imgs.forEach(img => obs.observe(img));
+      } else {
+        // Fallback pour vieux navigateurs : on charge tout directement
+        imgs.forEach(img => {
+          img.src = img.dataset.src;
+          img.addEventListener('load', function onLoad(){
+            img.classList.remove('lazy-loading');
+            img.classList.add('loaded');
+            img.removeEventListener('load', onLoad);
+          });
+          img.removeAttribute('data-src');
+        });
+      }
+    }
+
+    // on lance observe pour le hero si présent (au cas où)
+    document.addEventListener('DOMContentLoaded', () => {
+      observeLazyImages();
+    });
   </script>
 </body>
 </html>
