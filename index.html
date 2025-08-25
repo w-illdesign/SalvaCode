@@ -216,11 +216,11 @@
       object-fit:cover;
       box-shadow:0 4px 12px rgba(0,0,0,0.5);
       flex:0 0 72px;
-      border:3px solid rgba(255,255,255,0.04); /* bordure par défaut */
+      border:1px solid rgba(255,255,255,0.04); /* bordure par défaut */
     }
 
     /* Podium: bordure colorée SUR LA PHOTO (profil) */
-    .student-card.rank-1 img { border-color: #ffcc33; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
+    .student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
     .student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); }
     .student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
 
@@ -267,22 +267,22 @@
 
       <div class="img-wrap" role="img" aria-label="Hero image">
         <div class="img-inner">
-          <img src="2025082520325852.png" alt="Hero — WillPython">
+          <img src="hero.png" alt="Hero — WillPython">
         </div>
       </div>
     </section>
   </div>
-
+<section class="students" aria-label="Mes étudiants">
+    <h2 style="margin-bottom:12px; margin-right: 30px; margin-left: 30px;">Participants</h2>
+    <div class="student-grid" id="student-grid" aria-live="polite"></div>
+  </section>
   <!-- Plan du cours : placé directement sous le hero pour le rendre visible -->
   <main>
     <div class="grid" id="grid"></div>
   </main>
 
   <!-- Section Étudiants : SOUS le hero et SOUS le plan, liste verticale -->
-  <section class="students" aria-label="Mes étudiants">
-    <h2 style="margin-bottom:12px; margin-right: 30px; margin-left: 30px;">Participants</h2>
-    <div class="student-grid" id="student-grid" aria-live="polite"></div>
-  </section>
+  
 
   <script>
     /* STEPS : génération du plan (inchangé) */
