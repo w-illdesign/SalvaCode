@@ -14,99 +14,91 @@
       font-family:system-ui,-apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
       background:linear-gradient(180deg,#0f0f12 0%, #121318 60%, #0e0f13 100%);
       color:var(--ink);
-    }header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  backdrop-filter:saturate(1.2) blur(8px);
-  background:linear-gradient(180deg,#121317bb,#12131799 60%, transparent);
-  border-bottom:1px solid var(--ring);
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg,#121317bb,#12131799 60%, transparent);
+      border-bottom:1px solid var(--ring);
+    }
+    .wrap{ max-width:1200px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between }
+    h1{margin:0;font-size:clamp(18px,2.6vw,26px)}
+    .exam-badge{background:var(--chip);border:1px solid var(--ring);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:8px}
+    .exam-badge strong{color:var(--accent);font-weight:900}/* bouton pour ouvrir l'écran de changement */
+.change-toggle{
+  appearance:none;border:0;background:transparent;color:var(--muted);font-weight:800;padding:8px 10px;border-radius:10px;cursor:pointer;
+  display:inline-flex;gap:6px;align-items:center;justify-content:center;border:1px solid transparent;transition:transform .15s ease, background .15s ease;
 }
-.wrap{
-  max-width:1200px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between
-}
-h1{margin:0;font-size:clamp(18px,2.6vw,26px)}
-.exam-badge{background:var(--chip);border:1px solid var(--ring);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:8px}
-.exam-badge strong{color:var(--accent);font-weight:900}
+.change-toggle:focus{outline:2px solid var(--ring)}
+.change-toggle:hover{transform:translateY(-2px);color:var(--ink)}
 
-/* Hero */
+/* --- ECRAN DE CHANGEMENT (overlay fullscreen) --- */
+.change-screen{
+  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  background:rgba(3,4,6,0.72);backdrop-filter: blur(8px) saturate(120%);
+}
+/* fond de petits points animé : pattern en repeating-radial-gradient */
+.change-screen::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image: repeating-radial-gradient(circle, rgba(255,255,255,0.055) 0 1px, transparent 1px 8px);
+  background-size: 16px 16px;opacity:0.95;mix-blend-mode:overlay;filter: blur(0.8px) saturate(1.05);
+  animation: moveDots 18s linear infinite;
+}
+@keyframes moveDots{ from{background-position:0 0} to{background-position:500px 500px} }
+
+/* carte centrale pour citations */
+.change-card{
+  position:relative;z-index:2;min-width:min(860px,92%);max-width:1100px;border-radius:16px;padding:28px 28px 22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+.change-card .title{font-size:18px;font-weight:900;color:var(--accent);letter-spacing:0.6px}
+.quote-wrap{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px}
+.quote{
+  font-family:'Patrick Hand', cursive;font-size:24px;line-height:1.2;text-align:center;color:var(--ink);max-width:88%;opacity:0;transform:translateY(6px);transition:opacity .45s ease, transform .45s ease;
+}
+.quote.visible{opacity:1;transform:translateY(0)}
+
+.quote-meta{font-size:13px;color:var(--muted);font-weight:700}
+
+/* contrôles bas: précédent / pause / suivant / fermer */
+.controls{display:flex;gap:8px;align-items:center}
+.controls button{appearance:none;border:0;background:#111215;padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;border:1px solid var(--ring);font-weight:800}
+.controls button.primary{background:var(--accent);color:#fff}
+
+/* bouton de fermeture (coin) */
+.change-close{position:absolute;right:14px;top:14px;z-index:3;background:transparent;border:0;color:var(--muted);font-weight:900;cursor:pointer;padding:6px 8px}
+
+/* responsive */
+@media (max-width:780px){
+  .change-card{padding:18px;min-width:92%}
+  .quote{font-size:18px}
+}
+
+/* reste du code CSS utilisateur (compressé) */
+/* Hero, cards, students etc. (conservé intact) */
 .hero-wrap{max-width:1200px;margin:18px auto;padding:0 16px; display:flex; flex-direction:column; align-items:center;}
-.hero{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  border:1px solid var(--ring);
-  border-radius:14px;
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-  position:relative;
-  overflow:hidden;
-}
-
-.img-wrap{ position:relative; padding:8px; display:block; width:300px; height:auto; margin-top:auto; box-sizing:border-box; }
-
-.img-wrap::before{ content:""; position:absolute; inset:0; border-radius:12px; background: conic-gradient( from 0deg, #ff0066, #ff9900, #ffd500, #33ff77, #00d4ff, #7a6cff, #ff0066 ); filter: blur(14px) saturate(120%); opacity:0.95; transform: translateZ(0); animation: spin-border 8s linear infinite, glow 3s ease-in-out infinite alternate; pointer-events:none; z-index:0; }
-
-.img-inner{ position:relative; z-index:1; overflow:hidden; }
-
-.img-inner img{ display:block; width:100%; height:auto; border-radius:10px; vertical-align:middle; /* pas de box-shadow, fond déjà supprimé / z-index:1; mix-blend-mode: lighten; / fait que l'image transparente capte la lumière derrière */ }
-
-/* --- Styles pour lazy-loading / skeleton --- / / image en attente : flou + légère échelle */ .lazy-loading{ filter: blur(8px) saturate(.9); transform: scale(1.01); transition: filter .45s ease, transform .45s ease, opacity .45s ease; opacity:0.95; background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
-
-/* quand l'image est chargée -> suppression du flou + fade-in */ img:not([data-src]).lazy-placeholder, img.loaded { filter: none; transform: none; opacity:1; }
-
-/* petit placeholder carré pour aperçus */ .img-preview-placeholder{ width:84px; height:84px; border-radius:10px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03)); border:1px solid var(--ring); }
-
-/* fin styles lazy/skeleton */
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: flex-end;  /* ✅ colle en bas */
-  justify-content: center;
-  pointer-events: none;
-  padding-bottom: 0px;   /* ✅ espace entre caption et le bas */
-}
-
-.overlay .caption {
-  background: rgba(2,6,11,0.45);
-  padding: 14px 20px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-family:'Patrick Hand', cursive;
-  font-weight: 700;
-  text-align: center;
-  color: var(--ink);
-  backdrop-filter: blur(100px) saturate(120%);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-  max-width: 92%;
-  line-height: 1.15;
-}
-
+.hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--ring);border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;overflow:hidden}
+.img-wrap{position:relative;padding:8px;display:block;width:300px;height:auto;margin-top:auto;box-sizing:border-box}
+.img-wrap::before{content:"";position:absolute;inset:0;border-radius:12px;background: conic-gradient(from 0deg,#ff0066,#ff9900,#ffd500,#33ff77,#00d4ff,#7a6cff,#ff0066);filter: blur(14px) saturate(120%);opacity:0.95;transform: translateZ(0);animation: spin-border 8s linear infinite, glow 3s ease-in-out infinite alternate;pointer-events:none;z-index:0}
+.img-inner{position:relative;z-index:1;overflow:hidden}
+.img-inner img{display:block;width:100%;height:auto;border-radius:10px;vertical-align:middle}
+.lazy-loading{filter: blur(8px) saturate(.9);transform: scale(1.01);transition: filter .45s ease, transform .45s ease, opacity .45s ease;opacity:0.95;background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));}
+img:not([data-src]).lazy-placeholder,img.loaded {filter: none;transform: none;opacity:1}
+.img-preview-placeholder{width:84px;height:84px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));border:1px solid var(--ring)}
+.overlay {position: absolute;inset: 0;z-index: 2;display: flex;align-items: flex-end;justify-content: center;pointer-events: none;padding-bottom: 0px}
+.overlay .caption {background: rgba(2,6,11,0.45);padding: 14px 20px;border-radius: 12px;font-size: 15px;font-family:'Patrick Hand', cursive;font-weight: 700;text-align: center;color: var(--ink);backdrop-filter: blur(100px) saturate(120%);box-shadow: 0 8px 30px rgba(0,0,0,0.6);max-width: 92%;line-height: 1.15}
 @keyframes spin-border{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
-@keyframes glow{
-  0%{filter: blur(6px) saturate(120%) brightness(1);} 
-  50%{filter: blur(16px) saturate(160%) brightness(1.3);} 
-  100%{filter: blur(6px) saturate(120%) brightness(1);} 
-}
-@keyframes light-effect{
-  0%{filter: brightness(1);} 
-  50%{filter: brightness(1.25);} 
-  100%{filter: brightness(1);} 
-}
-
+@keyframes glow{ 0%{filter: blur(6px) saturate(120%) brightness(1);} 50%{filter: blur(16px) saturate(160%) brightness(1.3);} 100%{filter: blur(6px) saturate(120%) brightness(1);} }
+@keyframes light-effect{ 0%{filter: brightness(1);} 50%{filter: brightness(1.25);} 100%{filter: brightness(1);} }
 main{padding:18px 16px;max-width:1200px;margin:0 auto}
 .grid{display:grid;gap:14px;grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))}
-
 .card{background:var(--card);border:1px solid var(--ring);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-height:160px}
 .meta{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--ring)}
 .meta .step{font-weight:800;font-size:13px;background:#2a2d36;padding:6px 10px;border-radius:999px;color:var(--muted)}
 .meta .title{font-weight:700;font-size:15px}
-.sample{padding:16px 16px 6px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;word-break:break-word;
-  font-family:'Patrick Hand', cursive; font-size:18px; color:var(--ink)}
+.sample{padding:16px 16px 6px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;word-break:break-word;font-family:'Patrick Hand', cursive; font-size:18px; color:var(--ink)}
 .module-list{padding:6px 18px 18px;color:var(--muted); font-size:14px}
 .module-list ul{margin:8px 0 0 18px}
 .module-list li{margin:6px 0}
@@ -114,249 +106,164 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
 .btn{flex:1;text-align:center;padding:8px 10px;border-radius:10px;font-size:13px;text-decoration:none;cursor:pointer;border:1px solid var(--ring);background:#1b1d23;color:var(--ink)}
 .btn.primary{background:var(--accent);border-color:transparent}
 
-/* Section Étudiants (marges gauche/droite ajoutées) */
-.students{margin:30px 40px;}
-.student-grid{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.student-card{
-  background:var(--card); /* fond standard noir */
-  border:1px solid var(--ring);
-  border-radius:12px;
-  padding:10px 12px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-align:left;
-  justify-content:space-between;
-  min-height:64px; /* compacte */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
-}
-
-/* Layout interne : icône+note à gauche, nom au centre, photo à droite */
+.students{margin:30px 40px}
+.student-grid{display:flex;flex-direction:column;gap:12px}
+.student-card{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:12px;text-align:left;justify-content:space-between;min-height:64px;box-shadow: 0 6px 20px rgba(0,0,0,0.45)}
 .student-card .note{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  width:92px;
-  text-align:left;
-  font-weight:700;
-  color:var(--muted);
-  font-size:14px;
-  flex:0 0 92px;
-}
-.student-card .note svg{
-  width:18px;
-  height:18px;
-  flex:0 0 18px;
-  fill:var(--muted);
-  opacity:0.95;
-}
-.student-card .note .score{
-  font-weight:800;
-  color:var(--muted);
-  font-size:14px;
+
+display:flex;align-items:center;gap:8px;width:110px;text-align:left;font-weight:700;color:var(--muted);font-size:14px;flex:0 0 110px;} .student-card .note svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted);opacity:0.95} .student-card .note .score{font-weight:800;color:var(--muted);font-size:14px, }
+
+/* petite pastille de position */ .position-bubble{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:#ffffff;flex:0 0 36px} .position-bubble .pos-number{line-height:1;display:inline-block} .note-star{width:18px;height:18px;flex:0 0 18px;display:inline-block;margin-left:4px}
+
+/* overrides de couleur selon le rang (mêmes couleurs que la bordure du profil) */ .student-card.rank-1 .position-bubble{background:#00ab10;border-color:#00ab10;color:#ffffff} .student-card.rank-2 .position-bubble{background:#ff7a00;border-color:#ff7a00;color:#ffffff} .student-card.rank-3 .position-bubble{background:#cc0000;border-color:#cc0000;color:#ffffff}
+
+.student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); } .student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); } .student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
+
+/* s'assurer que texte reste lisible */ .student-card.rank-1 .name, .student-card.rank-2 .name, .student-card.rank-3 .name { color:var(--ink); } .student-card .name{flex:1 1 auto;text-align:center;font-weight:800;font-size:15px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 8px} .student-card img{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,0.5);flex:0 0 72px;border:1px solid rgba(255,255,255,0.04);transition:filter .25s ease, transform .2s ease;filter: saturate(0.95) contrast(0.94)} .student-card img.lazy-loading{ filter: blur(6px) grayscale(.15); transform: scale(.995) } .student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); } .student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); } .student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); } .student-card.rank-1 .name,.student-card.rank-2 .name,.student-card.rank-3 .name { color:var(--ink); } @media (max-width:780px){ .wrap{flex-direction:column;align-items:flex-start} .grid{grid-template-columns:1fr} .students{margin:20px 18px;} } @media (max-width:480px){ .student-card{ padding:8px; min-height:62px; gap:8px; } .student-card img{ width:56px; height:56px; flex:0 0 56px; } .student-card .note{ flex:0 0 64px; width:64px; font-size:13px;} .student-card .name{ font-size:14px; } }
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: 1x; /* espace entre la pastille et le score-section */
+  color: #FFD700;
 }
 
-.student-card .name{
-  flex:1 1 auto;
-  text-align:center;
-  font-weight:800;
-  font-size:15px;
-  color:var(--ink);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  padding:0 8px;
-}
-.student-card img{
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  object-fit:cover;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
-  flex:0 0 72px;
-  border:1px solid rgba(255,255,255,0.04); /* bordure par défaut */
-  transition:filter .25s ease, transform .2s ease;
-  filter: saturate(0.95) contrast(0.94);
-}
-.student-card img.lazy-loading{ filter: blur(6px) grayscale(.15); transform: scale(.995) }
 
-.student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
-.student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); }
-.student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
-
-/* s'assurer que texte reste lisible */
-.student-card.rank-1 .name,
-.student-card.rank-2 .name,
-.student-card.rank-3 .name { color:var(--ink); }
-
-@media (max-width:780px){
-  .wrap{flex-direction:column;align-items:flex-start}
-  .grid{grid-template-columns:1fr}
-  .students{margin:20px 18px;}
-}
-@media (max-width:480px){
-  .student-card{ padding:8px; min-height:62px; gap:8px; }
-  .student-card img{ width:56px; height:56px; flex:0 0 56px; }
-  .student-card .note{ flex:0 0 64px; width:64px; font-size:13px;}
-  .student-card .name{ font-size:14px; }
+/* Section contenant score + étoile */
+.score-section {
+margin-left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* espace entre score et étoile */
+  color: #FFD700; /* même couleur que le SVG */
+  font-weight: 700;
+  font-size: 14px;
 }
 
-/* ==========================
-   ECRAN DE CHANGEMENT (overlay)
-   petites pastilles + citations
-   ========================== */
-.change-screen{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none; /* affiché via JS */
-  align-items:center;
-  justify-content:center;
-  background: rgba(2,6,11,0.72);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-  pointer-events:auto;
-}
-.change-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-  padding:22px 26px;
-  border-radius:14px;
-  max-width:860px;
-  width:92%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  border:1px solid rgba(255,255,255,0.03);
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-}
-.dots{
-  display:grid;
-  grid-template-columns: repeat(12, 10px);
-  gap:8px;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  max-width:540px;
-  margin:0 auto;
-}
-.dots .dot{
-  width:10px;height:10px;border-radius:50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  box-shadow: 0 4px 10px rgba(0,0,0,0.45), inset 0 -1px 0 rgba(255,255,255,0.02);
-  transform: translateY(0) scale(1);
-  opacity:0.9;
-  animation: dotWave 1200ms ease-in-out infinite;
-}
-/* décalage par index pour effet ondulant */
-.dots .dot:nth-child(1){ animation-delay: 0ms}
-.dots .dot:nth-child(2){ animation-delay: 80ms}
-.dots .dot:nth-child(3){ animation-delay: 160ms}
-.dots .dot:nth-child(4){ animation-delay: 240ms}
-.dots .dot:nth-child(5){ animation-delay: 320ms}
-.dots .dot:nth-child(6){ animation-delay: 400ms}
-.dots .dot:nth-child(7){ animation-delay: 480ms}
-.dots .dot:nth-child(8){ animation-delay: 560ms}
-.dots .dot:nth-child(9){ animation-delay: 640ms}
-.dots .dot:nth-child(10){ animation-delay: 720ms}
-.dots .dot:nth-child(11){ animation-delay: 800ms}
-.dots .dot:nth-child(12){ animation-delay: 880ms}
-
-@keyframes dotWave{
-  0%{ transform: translateY(0) scale(1); opacity:0.7 }
-  50%{ transform: translateY(-8px) scale(1.18); opacity:1 }
-  100%{ transform: translateY(0) scale(1); opacity:0.7 }
+/* Optionnel : taille de l'étoile */
+.note-star {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
-.code-quote{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
-  font-size:16px;
-  color:var(--ink);
-  max-width:880px;
-  text-align:center;
-  line-height:1.25;
-  padding:10px 14px;
-  border-radius:10px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.02));
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-  white-space:pre-wrap;
+.module-section {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  margin-top: 18px;
 }
 
-.change-close{
-  appearance:none;border:0;background:transparent;color:var(--muted);font-size:22px;padding:6px 8px;border-radius:8px;cursor:pointer;
-}
-.change-close:hover{ color:var(--ink); }
-
-@media (max-width:520px){
-  .dots{ grid-template-columns: repeat(8, 10px); gap:7px }
-  .dots .dot{ width:9px; height:9px }
-  .change-inner{ padding:16px }
-  .code-quote{ font-size:15px }
+.module-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-  </style>
+.module-header .step {
+  font-weight: 800;
+  font-size: 13px;
+  background: #2a2d36;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.module-header .title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.module-list ul {
+  margin: 8px 0 0 18px;
+}
+
+.module-list li {
+  margin: 6px 0;
+  font-size: 14px;
+  color: var(--muted);
+} 
+</style>
+
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="wrap">
       <div style="display:flex;flex-direction:column;"></div>
-  <div class="exam-badge" role="status" aria-label="Examens">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L20 7V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V7L12 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    <span>Na</span>
-    <strong>Somko</strong>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="exam-badge" role="status" aria-label="Examens">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L20 7V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V7L12 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span>Na</span>
+          <strong>Somko</strong>
+        </div><!-- Bouton pour ouvrir l'écran de changement (trois petits points) -->
+    <button class="change-toggle" id="open-change" aria-label="Ouvrir écran de changement"> 
+      <span aria-hidden="true">●</span>
+      <span aria-hidden="true">●</span>
+      <span aria-hidden="true">●</span>
+    </button>
   </div>
 </div>
 
-  </header>  <!-- === ÉCRAN DE CHANGEMENT (overlay) === -->  <div id="change-screen" class="change-screen" aria-hidden="true" role="dialog" aria-label="Écran de changement">
-    <div class="change-inner" role="document">
-      <div class="dots" id="dots" aria-hidden="true"></div>
-      <blockquote class="code-quote" id="code-quote">Chargement…</blockquote>
-      <button id="change-close" class="change-close" aria-label="Fermer l'écran de changement">×</button>
-    </div>
-  </div>  <!-- HERO -->  <div class="hero-wrap">
+  </header>  <!-- HERO -->  <div class="hero-wrap">
     <section class="hero" aria-label="Section hero">
       <div class="overlay" aria-hidden="true">
         <div class="caption">Devenez programmeur web python avec Django et Flask</div>
-      </div><div class="img-wrap" role="img" aria-label="Hero image">
-    <div class="img-inner">
-      <!-- lazy ajouté : data-src au lieu de src, loading lazy pour navigateur -->
-      <img data-src="hero.webp" alt="Hero — WillPython" loading="lazy" class="lazy-loading">
+      </div>
+      <div class="img-wrap" role="img" aria-label="Hero image">
+        <div class="img-inner">
+          <!-- lazy ajouté : data-src au lieu de src, loading lazy pour navigateur -->
+          <img data-src="hero.webp" alt="Hero — WillPython" loading="lazy" class="lazy-loading">
+        </div>
+      </div>
+    </section>
+    
+  </div>  <!-- ECRAN DE CHANGEMENT : petits points animés + citations -->  <div class="change-screen" id="change-screen" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Écran de changement - citations de codage">
+    <div class="change-card" role="document">
+      <button class="change-close" id="close-change" aria-label="Fermer écran">✕</button>
+      <div class="title">Pause — citations et inspiration</div>
+      <div class="quote-wrap">
+        <div class="quote" id="quote-text">Chargement...</div>
+      </div>
+      <div class="quote-meta" id="quote-author"></div>
+      <div class="controls" aria-hidden="false">
+        <button id="prev-quote">◀</button>
+        <button id="toggle-rotation" class="primary">Pause</button>
+        <button id="next-quote">▶</button>
+      </div>
     </div>
-  </div>
-</section>
-
-  </div>
-<section class="students" aria-label="Mes étudiants">
+  </div>  <section class="students" aria-label="Mes étudiants">
     <h2 style="margin-bottom:12px; margin-right: 30px; margin-left: 30px;">Participants</h2>
     <div class="student-grid" id="student-grid" aria-live="polite"></div>
-  </section>
-  <!-- Plan du cours : placé directement sous le hero pour le rendre visible -->
-  <main>
+  </section>  <!-- Plan du cours : placé directement sous le hero pour le rendre visible -->  <main>
+      <section class="module-section">
+  <div class="module-header">
+    <span class="step">Avant tout </span>
+    <h3 class="title">Installation des outils</h3>
+  </div>
+  <div class="module-list">
+    <p><strong>Beaucoup de gens pensent que coder est difficile.</strong> Mais en réalité, avec les bons outils et un peu de pratique, chacun peut progresser rapidement. Cette étape va vous préparer pour réussir les modules suivants :</p>
+    <ul>
+      <li><strong>Python :</strong> le langage que vous utiliserez pour tous les exercices.</li>
+      <li><strong>Éditeur de code :</strong> (VS Code, PyCharm, ou autre) pour écrire et tester vos programmes facilement.</li>
+      <li><strong>Test de configuration :</strong> vérifier que tout fonctionne correctement avant de commencer.</li>
+    </ul>
+    <p>Une fois ces outils installés, vous serez prêt à coder et à suivre les prochains modules avec confiance et motivation.</p>
+    <ul>
+      <li>Ressources : <a href="lien_ressource.html">Lien vers la page HTML</a></li>
+      <li>Exercices : <a href="lien_exercice.html">Lien vers la page HTML</a></li>
+    </ul>
+  </div>
+</section>
     <div class="grid" id="grid"></div>
   </main>  <script>
-    /* STEPS : génération du plan (inchangé) */
-    const STEPS = [
-      { number: 0, title: "Installation des outils", items: ["Installation de Python","Installation d’un éditeur de code (VS Code, PyCharm, ou autre)","Test de la configuration"] },
-      { number: 1, title: "Bases du langage", items: ["Variables et types de données","Entrées et sorties","Opérations arithmétiques et logiques"] },
-      { number: 2, title: "Structures conditionnelles", items: ["if, else, elif","Expressions booléennes","Exercices simples"] },
-      { number: 3, title: "Boucles", items: ["Boucle for","Boucle while","Utilisation de break et continue"] },
-      { number: 4, title: "Fonctions", items: ["Définition et appel de fonctions","Paramètres et valeurs de retour","Portée des variables"] },
-      { number: 5, title: "Listes et tuples", items: ["Création et manipulation de listes","Itérations sur les séquences","Différence entre liste et tuple"] },
-      { number: 6, title: "Dictionnaires et ensembles", items: ["Paires clé-valeur","Opérations sur les dictionnaires","Introduction aux ensembles (set)"] },
-      { number: 7, title: "Gestion des fichiers", items: ["Lecture et écriture de fichiers texte","Modes d'ouverture (r, w, a)","Gestion des erreurs avec try/except"] },
-      { number: 8, title: "Programmation orientée objet (POO)", items: ["Classes et objets","Attributs et méthodes","Héritage simple"] },
-      { number: 9, title: "Modules et bibliothèques", items: ["Importation de modules (math, random, etc.)","Installation de bibliothèques avec pip","Exemples pratiques"] },
-      
-      { number: 10, title: "Projet final", items: ["Réalisation d’un petit projet (exemple : calculatrice, gestionnaire de tâches, jeu simple)"] }
-    ];
-
+    /* -------------------- Chargement des modules depuis steps.json -------------------- */
     const grid = document.getElementById('grid');
+
     function makeCard(step){
       const card = document.createElement('article');
       card.className = 'card';
@@ -364,40 +271,66 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
       meta.className = 'meta';
       const stepBadge = document.createElement('div');
       stepBadge.className = 'step';
-      stepBadge.textContent = 'Étape ' + step.number;
+      stepBadge.textContent = 'Étape ' + (step.number ?? '');
       const titleMeta = document.createElement('div');
       titleMeta.className = 'title';
-      titleMeta.textContent = step.title;
+      titleMeta.textContent = step.title ?? '';
       meta.appendChild(stepBadge);
       meta.appendChild(titleMeta);
+
       const sample = document.createElement('div');
       sample.className = 'sample';
-      sample.textContent = step.title;
+      sample.textContent = step.sample || step.title || '';
+
       const moduleList = document.createElement('div');
       moduleList.className = 'module-list';
       const intro = document.createElement('div');
       intro.textContent = "Contenu du module :";
       const ul = document.createElement('ul');
-      step.items.forEach(it => {
+      (step.items || []).forEach(it => {
         const li = document.createElement('li');
         li.textContent = it;
         ul.appendChild(li);
       });
       moduleList.appendChild(intro);
       moduleList.appendChild(ul);
+
       const links = document.createElement('div');
       links.className = 'links';
-      links.innerHTML = `<a class="btn" href="#" onclick="return false">Ressources</a>
-                         <a class="btn primary" href="#" onclick="return false">Exercices</a>`;
+      const resHref = step.links && step.links.resources ? step.links.resources : '#';
+      const exHref = step.links && step.links.exercises ? step.links.exercises : '#';
+      links.innerHTML = ` <a class="btn" href="${resHref}" target="_blank" rel="noopener">Ressources</a>
+                         <a class="btn primary" href="${exHref}" target="_blank" rel="noopener">Exercices</a>`;
+
       card.appendChild(meta);
       card.appendChild(sample);
       card.appendChild(moduleList);
       card.appendChild(links);
       return card;
     }
-    STEPS.forEach(s => grid.appendChild(makeCard(s)));
 
-    // Chargement de participants.json (doit être placé à côté du HTML)
+    async function loadStepsFromJSON(){
+      let data = null;
+      try {
+        const res = await fetch('steps.json', { cache: "no-store" });
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        data = await res.json();
+      } catch(err) {
+        console.warn('Impossible de charger steps.json — fallback minimal.', err);
+        data = [
+          { number: 0, title: "Installation des outils", sample: "Installation des outils", items: ["Installation de Python","Installation d’un éditeur de code (VS Code, PyCharm, ou autre)","Test de la configuration"], links: { resources: "installation-outils.html", exercises: "exercices-installation.html" } }
+        ];
+      }
+
+      grid.innerHTML = '';
+      data.forEach(s => grid.appendChild(makeCard(s)));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStepsFromJSON();
+    });
+
+    /* -------------------- Chargement participants (fallback) -------------------- */
     (async function loadParticipants(){
       const fallback = [
         {"profil":"https://i.pravatar.cc/150?img=1","nom":"*KASONGO* Serge","note":18},
@@ -417,25 +350,32 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
         data = fallback;
       }
 
-      // Trier par note décroissante (si note existe)
       data.sort((a,b) => (b.note||0) - (a.note||0));
 
       const studentGrid = document.getElementById('student-grid');
-      studentGrid.innerHTML = ''; // vider si nécessaire
+      studentGrid.innerHTML = '';
 
       data.forEach((s, idx) => {
         const div = document.createElement('div');
         div.className = 'student-card' + (idx===0? ' rank-1' : idx===1? ' rank-2' : idx===2? ' rank-3' : '');
 
-        // Icône SVG (étoile) + note (sans le mot "Note")
         const noteHtml = `
           <div class="note" aria-hidden="false">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
-              <title>Icône note</title>
-              <path d="M12 .587l3.668 7.431L23.5 9.748l-5.75 5.6L19.335 24 12 20.01 4.665 24l1.585-8.652L.5 9.748l7.832-1.73L12 .587z"/>
-            </svg>
-            <span class="score">${s.note ?? ''}</span>
-          </div>
+
+  <!-- Pastille de position -->
+  <div class="position-bubble" aria-hidden="true" title="Position">
+    <span class="pos-number">${idx+1}</span>
+  </div>
+
+  <!-- Score + étoile dans une section alignée -->
+  <div class="score-section">
+    <span class="score">${s.note ?? ''}</span>
+    <svg class="note-star" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 .587l3.668 7.431L23.5 9.748l-5.75 5.6L19.335 24 12 20.01 4.665 24l1.585-8.652L.5 9.748l7.832-1.73L12 .587z" fill="#FFD700"/>
+    </svg>
+  </div>
+
+</div>
         `;
 
         div.innerHTML = `
@@ -447,11 +387,10 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
         studentGrid.appendChild(div);
       });
 
-      // après insertion, démarre lazy-loading des images
       observeLazyImages();
     })();
 
-    // SIMPLE lazy loader : remplace data-src par src quand visible
+   /* -------------------- Lazy loader (inchangé) -------------------- */
     function observeLazyImages(){
       const imgs = document.querySelectorAll('img[data-src]');
       if('IntersectionObserver' in window){
@@ -459,20 +398,19 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
           entries.forEach(e => {
             if(e.isIntersecting){
               const img = e.target;
-              img.src = img.dataset.src;        // on charge l'image
+              img.src = img.dataset.src;
               img.addEventListener('load', function onLoad(){
                 img.classList.remove('lazy-loading');
                 img.classList.add('loaded');
                 img.removeEventListener('load', onLoad);
               });
-              img.removeAttribute('data-src');  // on nettoie
-              o.unobserve(img);                 // on arrête d'observer cette image
+              img.removeAttribute('data-src');
+              o.unobserve(img);
             }
           });
-        }, {rootMargin: "200px 0px"}); // commence à charger un peu avant d'entrer dans le viewport
+        }, {rootMargin: "200px 0px"});
         imgs.forEach(img => obs.observe(img));
       } else {
-        // Fallback pour vieux navigateurs : on charge tout directement
         imgs.forEach(img => {
           img.src = img.dataset.src;
           img.addEventListener('load', function onLoad(){
@@ -485,114 +423,79 @@ main{padding:18px 16px;max-width:1200px;margin:0 auto}
       }
     }
 
-    // on lance observe pour le hero si présent (au cas où)
     document.addEventListener('DOMContentLoaded', () => {
       observeLazyImages();
-      // pré-crée les pastilles de l'écran de changement
-      createDots(12);
     });
 
-    /* ======================
-       ECRAN DE CHANGEMENT JS
-       Utilisation:
-         startChangeScreen({duration:3000}) // affiche pendant 3s
-         showChangeScreen() / hideChangeScreen()
-    */
-    const QUOTES = [
-      "« Le code, c'est comme la poésie : lisible d'abord. » — Anonyme",
-      "« Écris du code qui explique. Les commentaires servent à expliquer pourquoi, pas quoi. » — Dev Sage",
-      "« Keep it simple: la simplicité économise les erreurs. » — Système",
-      "« Debugging: la marge d'erreur est la meilleure des leçons. » — Anonyme",
-      "« Les bons développeurs lisent plus de code qu'ils n'écrivent. » — Inconnu",
-      "« Refactorise tôt, refactorise souvent. » — Dev Team",
-      "« Les tests automatisés sont votre filet de sécurité. » — Ingénieur logiciel",
-      "« Un morceau de code bien nommé vaut mille commentaires. » — Philosophie DRY"
-    ];
+    /* -------------------- ÉCRAN DE CHANGEMENT : citations -------------------- */
+    (function changeScreenModule(){
+      const quotes = [
+        {t: "Écris du code que les humains comprennent.", a: "— Robert C. Martin"},
+        {t: "Les bons programmeurs commentent, les grands réécrivent.", a: "— Inconnu"},
+        {t: "Debugging is like being the detective in a crime movie where you are also the murderer.", a: "— Filipe Fortes"},
+        {t: "Premature optimization is the root of all evil.", a: "— Donald Knuth"},
+        {t: "Répète jusqu'à ce que ça marche, puis nettoie jusqu'à ce que ce soit beau.", a: "— Will"}
+      ];
 
-    let _quoteTimer = null;
-    let _hideTimer = null;
-    let _currentQuoteIndex = 0;
+      let idx = 0; let rotating = true; let rotTimer = null;
+      const screen = document.getElementById('change-screen');
+      const openBtn = document.getElementById('open-change');
+      const closeBtn = document.getElementById('close-change');
+      const qText = document.getElementById('quote-text');
+      const qAuthor = document.getElementById('quote-author');
+      const prevBtn = document.getElementById('prev-quote');
+      const nextBtn = document.getElementById('next-quote');
+      const toggleBtn = document.getElementById('toggle-rotation');
 
-    function createDots(n){
-      const container = document.getElementById('dots');
-      if(!container) return;
-      container.innerHTML = '';
-      for(let i=0;i<n;i++){
-        const s = document.createElement('span');
-        s.className = 'dot';
-        s.setAttribute('aria-hidden','true');
-        container.appendChild(s);
-      }
-    }
-
-    function showChangeScreen(){
-      const el = document.getElementById('change-screen');
-      const quoteEl = document.getElementById('code-quote');
-      if(!el || !quoteEl) return;
-      // reset quote index
-      _currentQuoteIndex = Math.floor(Math.random()*QUOTES.length);
-      quoteEl.textContent = QUOTES[_currentQuoteIndex];
-
-      // show
-      el.style.display = 'flex';
-      el.setAttribute('aria-hidden','false');
-      // start rotating quotes
-      if(_quoteTimer) clearInterval(_quoteTimer);
-      _quoteTimer = setInterval(()=>{
-        _currentQuoteIndex = (_currentQuoteIndex+1) % QUOTES.length;
-        // fade animation
-        quoteEl.style.opacity = 0;
+      function renderQuote(i){
+        qText.classList.remove('visible');
         setTimeout(()=>{
-          quoteEl.textContent = QUOTES[_currentQuoteIndex];
-          quoteEl.style.opacity = 1;
-        }, 240);
-      }, 3200);
+          qText.textContent = quotes[i].t;
+          qAuthor.textContent = quotes[i].a;
+          qText.classList.add('visible');
+        }, 120);
+      }
 
-      // focus close for accessibility
-      const close = document.getElementById('change-close');
-      if(close) close.focus();
+      function startRotation(){
+        rotTimer = setInterval(()=>{ idx = (idx+1) % quotes.length; renderQuote(idx); }, 4500);
+        toggleBtn.textContent = 'Pause'; rotating = true;
+      }
+      function stopRotation(){ clearInterval(rotTimer); rotTimer = null; toggleBtn.textContent = 'Lecture'; rotating = false; }
 
-      return {
-        hide: hideChangeScreen
-      };
-    }
+      openBtn.addEventListener('click', ()=>{ showChangeScreen(); });
+      closeBtn.addEventListener('click', ()=>{ hideChangeScreen(); });
+      prevBtn.addEventListener('click', ()=>{ idx = (idx - 1 + quotes.length) % quotes.length; renderQuote(idx); });
+      nextBtn.addEventListener('click', ()=>{ idx = (idx + 1) % quotes.length; renderQuote(idx); });
+      toggleBtn.addEventListener('click', ()=>{ rotating ? stopRotation() : startRotation(); });
 
-    function hideChangeScreen(){
-      const el = document.getElementById('change-screen');
-      if(!el) return;
-      el.style.display = 'none';
-      el.setAttribute('aria-hidden','true');
-      if(_quoteTimer) { clearInterval(_quoteTimer); _quoteTimer = null }
-      if(_hideTimer) { clearTimeout(_hideTimer); _hideTimer = null }
-    }
+      function showChangeScreen(){
+        screen.style.display = 'flex';
+        screen.setAttribute('aria-hidden','false');
+        renderQuote(idx);
+        if(rotTimer) clearInterval(rotTimer);
+        startRotation();
+        // focus accessible
+        closeBtn.focus();
+      }
+      function hideChangeScreen(){
+        screen.style.display = 'none';
+        screen.setAttribute('aria-hidden','true');
+        stopRotation();
+      }
 
-    function startChangeScreen(opts){
-      opts = opts || {};
-      const duration = typeof opts.duration === 'number' ? opts.duration : 3000;
-      showChangeScreen();
-      if(_hideTimer) clearTimeout(_hideTimer);
-      _hideTimer = setTimeout(()=>{
-        hideChangeScreen();
-      }, duration);
-    }
+      // fermer si on clique en dehors de la carte
+      screen.addEventListener('click', (ev) => {
+        if(ev.target === screen) hideChangeScreen();
+      });
+      // fermer à echap
+      document.addEventListener('keydown', (ev) => { if(ev.key === 'Escape') hideChangeScreen(); });
 
-    // close button
-    document.addEventListener('click', (e)=>{
-      if(e.target && e.target.id === 'change-close') hideChangeScreen();
-    });
+      // expose functions si besoin (ex: tests ou ouverture depuis autre module)
+      window.showChangeScreen = showChangeScreen;
+      window.hideChangeScreen = hideChangeScreen;
 
-    // ESC to hide
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') hideChangeScreen();
-    });
+    })();
 
-    // expose helpers globalement pour pouvoir les appeler depuis d'autres scripts
-    window.showChangeScreen = showChangeScreen;
-    window.hideChangeScreen = hideChangeScreen;
-    window.startChangeScreen = startChangeScreen;
-
-    // for demo: show overlay 1.2s on first load (comment this line if you don't want it)
-    // window.addEventListener('load', ()=> startChangeScreen({duration:1200}));
   </script>
 </body>
 </html>
