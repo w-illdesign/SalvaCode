@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,123 +14,58 @@
       font-family:system-ui,-apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
       background:linear-gradient(180deg,#0f0f12 0%, #121318 60%, #0e0f13 100%);
       color:var(--ink);
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:10;
-      backdrop-filter:saturate(1.2) blur(8px);
-      background:linear-gradient(180deg,#121317bb,#12131799 60%, transparent);
-      border-bottom:1px solid var(--ring);
-    }
-    .wrap{
-      max-width:1200px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between
-    }
-    h1{margin:0;font-size:clamp(18px,2.6vw,26px)}
-    .exam-badge{background:var(--chip);border:1px solid var(--ring);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:8px}
-    .exam-badge strong{color:var(--accent);font-weight:900}
-
-    /* Hero */
-    .hero-wrap{max-width:1200px;margin:18px auto;padding:0 16px; display:flex; flex-direction:column; align-items:center;}
-    .hero{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid var(--ring);
-      border-radius:14px;
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-      position:relative;
-      overflow:hidden;
-    }
-.img-wrap{
-  position:relative;
-  padding:8px;
-  display:block;
-  width:300px;
-  height:auto;
-  margin-top:auto;
-  box-sizing:border-box;
+    }header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:saturate(1.2) blur(8px);
+  background:linear-gradient(180deg,#121317bb,#12131799 60%, transparent);
+  border-bottom:1px solid var(--ring);
 }
-
-.img-wrap::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:12px;
-  background: conic-gradient(
-    from 0deg,
-    #ff0066,
-    #ff9900,
-    #ffd500,
-    #33ff77,
-    #00d4ff,
-    #7a6cff,
-    #ff0066
-  );
-  filter: blur(14px) saturate(120%);
-  opacity:0.95;
-  transform: translateZ(0);
-  animation: spin-border 8s linear infinite, glow 3s ease-in-out infinite alternate;
-  pointer-events:none;
-  z-index:0;
+.wrap{
+  max-width:1200px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between
 }
+h1{margin:0;font-size:clamp(18px,2.6vw,26px)}
+.exam-badge{background:var(--chip);border:1px solid var(--ring);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.exam-badge strong{color:var(--accent);font-weight:900}
 
-.img-inner{
+/* Hero */
+.hero-wrap{max-width:1200px;margin:18px auto;padding:0 16px; display:flex; flex-direction:column; align-items:center;}
+.hero{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border:1px solid var(--ring);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
   position:relative;
-  z-index:1;
   overflow:hidden;
 }
 
-.img-inner img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius:10px;
-  vertical-align:middle;
-  /* pas de box-shadow, fond déjà supprimé */
-  z-index:1;
-  mix-blend-mode: lighten; /* fait que l'image transparente capte la lumière derrière */
-}
+.img-wrap{ position:relative; padding:8px; display:block; width:300px; height:auto; margin-top:auto; box-sizing:border-box; }
 
-/* --- Styles pour lazy-loading / skeleton --- */
-/* image en attente : flou + légère échelle */
-.lazy-loading{
-  filter: blur(8px) saturate(.9);
-  transform: scale(1.01);
-  transition: filter .45s ease, transform .45s ease, opacity .45s ease;
-  opacity:0.95;
-  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-}
+.img-wrap::before{ content:""; position:absolute; inset:0; border-radius:12px; background: conic-gradient( from 0deg, #ff0066, #ff9900, #ffd500, #33ff77, #00d4ff, #7a6cff, #ff0066 ); filter: blur(14px) saturate(120%); opacity:0.95; transform: translateZ(0); animation: spin-border 8s linear infinite, glow 3s ease-in-out infinite alternate; pointer-events:none; z-index:0; }
 
-/* quand l'image est chargée -> suppression du flou + fade-in */
-img:not([data-src]).lazy-placeholder,
-img.loaded {
-  filter: none;
-  transform: none;
-  opacity:1;
-}
+.img-inner{ position:relative; z-index:1; overflow:hidden; }
 
-/* petit placeholder carré pour aperçus */
-.img-preview-placeholder{
-  width:84px;
-  height:84px;
-  border-radius:10px;
-  background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
-  border:1px solid var(--ring);
-}
+.img-inner img{ display:block; width:100%; height:auto; border-radius:10px; vertical-align:middle; /* pas de box-shadow, fond déjà supprimé / z-index:1; mix-blend-mode: lighten; / fait que l'image transparente capte la lumière derrière */ }
+
+/* --- Styles pour lazy-loading / skeleton --- / / image en attente : flou + légère échelle */ .lazy-loading{ filter: blur(8px) saturate(.9); transform: scale(1.01); transition: filter .45s ease, transform .45s ease, opacity .45s ease; opacity:0.95; background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
+
+/* quand l'image est chargée -> suppression du flou + fade-in */ img:not([data-src]).lazy-placeholder, img.loaded { filter: none; transform: none; opacity:1; }
+
+/* petit placeholder carré pour aperçus */ .img-preview-placeholder{ width:84px; height:84px; border-radius:10px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03)); border:1px solid var(--ring); }
 
 /* fin styles lazy/skeleton */
 
-    .overlay {
+.overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
   align-items: flex-end;  /* ✅ colle en bas */
-  
   justify-content: center;
   pointer-events: none;
   padding-bottom: 0px;   /* ✅ espace entre caption et le bas */
@@ -151,158 +85,252 @@ img.loaded {
   max-width: 92%;
   line-height: 1.15;
 }
-    
 
-    @keyframes spin-border{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
-    @keyframes glow{
-      0%{filter: blur(6px) saturate(120%) brightness(1);}
-      50%{filter: blur(16px) saturate(160%) brightness(1.3);}
-      100%{filter: blur(6px) saturate(120%) brightness(1);}
-    }
-    @keyframes light-effect{
-      0%{filter: brightness(1);}
-      50%{filter: brightness(1.25);}
-      100%{filter: brightness(1);}
-    }
+@keyframes spin-border{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
+@keyframes glow{
+  0%{filter: blur(6px) saturate(120%) brightness(1);} 
+  50%{filter: blur(16px) saturate(160%) brightness(1.3);} 
+  100%{filter: blur(6px) saturate(120%) brightness(1);} 
+}
+@keyframes light-effect{
+  0%{filter: brightness(1);} 
+  50%{filter: brightness(1.25);} 
+  100%{filter: brightness(1);} 
+}
 
-    main{padding:18px 16px;max-width:1200px;margin:0 auto}
-    .grid{display:grid;gap:14px;grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))}
+main{padding:18px 16px;max-width:1200px;margin:0 auto}
+.grid{display:grid;gap:14px;grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))}
 
-    .card{background:var(--card);border:1px solid var(--ring);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-height:160px}
-    .meta{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--ring)}
-    .meta .step{font-weight:800;font-size:13px;background:#2a2d36;padding:6px 10px;border-radius:999px;color:var(--muted)}
-    .meta .title{font-weight:700;font-size:15px}
-    .sample{padding:16px 16px 6px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;word-break:break-word;
-      font-family:'Patrick Hand', cursive; font-size:18px; color:var(--ink)}
-    .module-list{padding:6px 18px 18px;color:var(--muted); font-size:14px}
-    .module-list ul{margin:8px 0 0 18px}
-    .module-list li{margin:6px 0}
-    .links{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--ring)}
-    .btn{flex:1;text-align:center;padding:8px 10px;border-radius:10px;font-size:13px;text-decoration:none;cursor:pointer;border:1px solid var(--ring);background:#1b1d23;color:var(--ink)}
-    .btn.primary{background:var(--accent);border-color:transparent}
+.card{background:var(--card);border:1px solid var(--ring);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-height:160px}
+.meta{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--ring)}
+.meta .step{font-weight:800;font-size:13px;background:#2a2d36;padding:6px 10px;border-radius:999px;color:var(--muted)}
+.meta .title{font-weight:700;font-size:15px}
+.sample{padding:16px 16px 6px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;word-break:break-word;
+  font-family:'Patrick Hand', cursive; font-size:18px; color:var(--ink)}
+.module-list{padding:6px 18px 18px;color:var(--muted); font-size:14px}
+.module-list ul{margin:8px 0 0 18px}
+.module-list li{margin:6px 0}
+.links{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--ring)}
+.btn{flex:1;text-align:center;padding:8px 10px;border-radius:10px;font-size:13px;text-decoration:none;cursor:pointer;border:1px solid var(--ring);background:#1b1d23;color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:transparent}
 
-    /* Section Étudiants (marges gauche/droite ajoutées) */
-    .students{margin:30px 40px;}
-    .student-grid{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .student-card{
-      background:var(--card); /* fond standard noir */
-      border:1px solid var(--ring);
-      border-radius:12px;
-      padding:10px 12px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-align:left;
-      justify-content:space-between;
-      min-height:64px; /* compacte */
-      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
-    }
+/* Section Étudiants (marges gauche/droite ajoutées) */
+.students{margin:30px 40px;}
+.student-grid{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.student-card{
+  background:var(--card); /* fond standard noir */
+  border:1px solid var(--ring);
+  border-radius:12px;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+  justify-content:space-between;
+  min-height:64px; /* compacte */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
 
-    /* Layout interne : icône+note à gauche, nom au centre, photo à droite */
-    .student-card .note{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      width:92px;
-      text-align:left;
-      font-weight:700;
-      color:var(--muted);
-      font-size:14px;
-      flex:0 0 92px;
-    }
-    .student-card .note svg{
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
-      fill:var(--muted);
-      opacity:0.95;
-    }
-    .student-card .note .score{
-      font-weight:800;
-      color:var(--muted);
-      font-size:14px;
-    }
+/* Layout interne : icône+note à gauche, nom au centre, photo à droite */
+.student-card .note{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:92px;
+  text-align:left;
+  font-weight:700;
+  color:var(--muted);
+  font-size:14px;
+  flex:0 0 92px;
+}
+.student-card .note svg{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  fill:var(--muted);
+  opacity:0.95;
+}
+.student-card .note .score{
+  font-weight:800;
+  color:var(--muted);
+  font-size:14px;
+}
 
-    .student-card .name{
-      flex:1 1 auto;
-      text-align:center;
-      font-weight:800;
-      font-size:15px;
-      color:var(--ink);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      padding:0 8px;
-    }
-    .student-card img{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      object-fit:cover;
-      box-shadow:0 4px 12px rgba(0,0,0,0.5);
-      flex:0 0 72px;
-      border:1px solid rgba(255,255,255,0.04); /* bordure par défaut */
-      transition:filter .25s ease, transform .2s ease;
-      filter: saturate(0.95) contrast(0.94);
-    }
-    .student-card img.lazy-loading{ filter: blur(6px) grayscale(.15); transform: scale(.995) }
+.student-card .name{
+  flex:1 1 auto;
+  text-align:center;
+  font-weight:800;
+  font-size:15px;
+  color:var(--ink);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  padding:0 8px;
+}
+.student-card img{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  flex:0 0 72px;
+  border:1px solid rgba(255,255,255,0.04); /* bordure par défaut */
+  transition:filter .25s ease, transform .2s ease;
+  filter: saturate(0.95) contrast(0.94);
+}
+.student-card img.lazy-loading{ filter: blur(6px) grayscale(.15); transform: scale(.995) }
 
-    .student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
-    .student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); }
-    .student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
+.student-card.rank-1 img { border-color: #00ab10; box-shadow: 0 6px 18px rgba(255,204,51,0.14); }
+.student-card.rank-2 img { border-color: #ff7a00; box-shadow: 0 6px 18px rgba(255,122,0,0.14); }
+.student-card.rank-3 img { border-color: #cc0000; box-shadow: 0 6px 18px rgba(204,0,0,0.14); }
 
-    /* s'assurer que texte reste lisible */
-    .student-card.rank-1 .name,
-    .student-card.rank-2 .name,
-    .student-card.rank-3 .name { color:var(--ink); }
+/* s'assurer que texte reste lisible */
+.student-card.rank-1 .name,
+.student-card.rank-2 .name,
+.student-card.rank-3 .name { color:var(--ink); }
 
-    @media (max-width:780px){
-      .wrap{flex-direction:column;align-items:flex-start}
-      .grid{grid-template-columns:1fr}
-      .students{margin:20px 18px;}
-    }
-    @media (max-width:480px){
-      .student-card{ padding:8px; min-height:62px; gap:8px; }
-      .student-card img{ width:56px; height:56px; flex:0 0 56px; }
-      .student-card .note{ flex:0 0 64px; width:64px; font-size:13px;}
-      .student-card .name{ font-size:14px; }
-    }
+@media (max-width:780px){
+  .wrap{flex-direction:column;align-items:flex-start}
+  .grid{grid-template-columns:1fr}
+  .students{margin:20px 18px;}
+}
+@media (max-width:480px){
+  .student-card{ padding:8px; min-height:62px; gap:8px; }
+  .student-card img{ width:56px; height:56px; flex:0 0 56px; }
+  .student-card .note{ flex:0 0 64px; width:64px; font-size:13px;}
+  .student-card .name{ font-size:14px; }
+}
+
+/* ==========================
+   ECRAN DE CHANGEMENT (overlay)
+   petites pastilles + citations
+   ========================== */
+.change-screen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none; /* affiché via JS */
+  align-items:center;
+  justify-content:center;
+  background: rgba(2,6,11,0.72);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  pointer-events:auto;
+}
+.change-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  padding:22px 26px;
+  border-radius:14px;
+  max-width:860px;
+  width:92%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+.dots{
+  display:grid;
+  grid-template-columns: repeat(12, 10px);
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:540px;
+  margin:0 auto;
+}
+.dots .dot{
+  width:10px;height:10px;border-radius:50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  box-shadow: 0 4px 10px rgba(0,0,0,0.45), inset 0 -1px 0 rgba(255,255,255,0.02);
+  transform: translateY(0) scale(1);
+  opacity:0.9;
+  animation: dotWave 1200ms ease-in-out infinite;
+}
+/* décalage par index pour effet ondulant */
+.dots .dot:nth-child(1){ animation-delay: 0ms}
+.dots .dot:nth-child(2){ animation-delay: 80ms}
+.dots .dot:nth-child(3){ animation-delay: 160ms}
+.dots .dot:nth-child(4){ animation-delay: 240ms}
+.dots .dot:nth-child(5){ animation-delay: 320ms}
+.dots .dot:nth-child(6){ animation-delay: 400ms}
+.dots .dot:nth-child(7){ animation-delay: 480ms}
+.dots .dot:nth-child(8){ animation-delay: 560ms}
+.dots .dot:nth-child(9){ animation-delay: 640ms}
+.dots .dot:nth-child(10){ animation-delay: 720ms}
+.dots .dot:nth-child(11){ animation-delay: 800ms}
+.dots .dot:nth-child(12){ animation-delay: 880ms}
+
+@keyframes dotWave{
+  0%{ transform: translateY(0) scale(1); opacity:0.7 }
+  50%{ transform: translateY(-8px) scale(1.18); opacity:1 }
+  100%{ transform: translateY(0) scale(1); opacity:0.7 }
+}
+
+.code-quote{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-size:16px;
+  color:var(--ink);
+  max-width:880px;
+  text-align:center;
+  line-height:1.25;
+  padding:10px 14px;
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  white-space:pre-wrap;
+}
+
+.change-close{
+  appearance:none;border:0;background:transparent;color:var(--muted);font-size:22px;padding:6px 8px;border-radius:8px;cursor:pointer;
+}
+.change-close:hover{ color:var(--ink); }
+
+@media (max-width:520px){
+  .dots{ grid-template-columns: repeat(8, 10px); gap:7px }
+  .dots .dot{ width:9px; height:9px }
+  .change-inner{ padding:16px }
+  .code-quote{ font-size:15px }
+}
+
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="wrap">
-      <div style="display:flex;flex-direction:column;">
-        
-       
-      </div>
-      <div class="exam-badge" role="status" aria-label="Examens">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L20 7V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V7L12 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        <span>Na</span>
-        <strong>Somko</strong>
-      </div>
-    </div>
-  </header>
+      <div style="display:flex;flex-direction:column;"></div>
+  <div class="exam-badge" role="status" aria-label="Examens">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L20 7V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V7L12 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <span>Na</span>
+    <strong>Somko</strong>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <div class="hero-wrap">
+  </header>  <!-- === ÉCRAN DE CHANGEMENT (overlay) === -->  <div id="change-screen" class="change-screen" aria-hidden="true" role="dialog" aria-label="Écran de changement">
+    <div class="change-inner" role="document">
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <blockquote class="code-quote" id="code-quote">Chargement…</blockquote>
+      <button id="change-close" class="change-close" aria-label="Fermer l'écran de changement">×</button>
+    </div>
+  </div>  <!-- HERO -->  <div class="hero-wrap">
     <section class="hero" aria-label="Section hero">
       <div class="overlay" aria-hidden="true">
         <div class="caption">Devenez programmeur web python avec Django et Flask</div>
-      </div>
+      </div><div class="img-wrap" role="img" aria-label="Hero image">
+    <div class="img-inner">
+      <!-- lazy ajouté : data-src au lieu de src, loading lazy pour navigateur -->
+      <img data-src="hero.webp" alt="Hero — WillPython" loading="lazy" class="lazy-loading">
+    </div>
+  </div>
+</section>
 
-      <div class="img-wrap" role="img" aria-label="Hero image">
-        <div class="img-inner">
-          <!-- lazy ajouté : data-src au lieu de src, loading lazy pour navigateur -->
-          <img data-src="hero.webp" alt="Hero — WillPython" loading="lazy" class="lazy-loading">
-        </div>
-      </div>
-    </section>
   </div>
 <section class="students" aria-label="Mes étudiants">
     <h2 style="margin-bottom:12px; margin-right: 30px; margin-left: 30px;">Participants</h2>
@@ -311,12 +339,7 @@ img.loaded {
   <!-- Plan du cours : placé directement sous le hero pour le rendre visible -->
   <main>
     <div class="grid" id="grid"></div>
-  </main>
-
-  <!-- Section Étudiants : SOUS le hero et SOUS le plan, liste verticale -->
-  
-
-  <script>
+  </main>  <script>
     /* STEPS : génération du plan (inchangé) */
     const STEPS = [
       { number: 0, title: "Installation des outils", items: ["Installation de Python","Installation d’un éditeur de code (VS Code, PyCharm, ou autre)","Test de la configuration"] },
@@ -465,7 +488,111 @@ img.loaded {
     // on lance observe pour le hero si présent (au cas où)
     document.addEventListener('DOMContentLoaded', () => {
       observeLazyImages();
+      // pré-crée les pastilles de l'écran de changement
+      createDots(12);
     });
+
+    /* ======================
+       ECRAN DE CHANGEMENT JS
+       Utilisation:
+         startChangeScreen({duration:3000}) // affiche pendant 3s
+         showChangeScreen() / hideChangeScreen()
+    */
+    const QUOTES = [
+      "« Le code, c'est comme la poésie : lisible d'abord. » — Anonyme",
+      "« Écris du code qui explique. Les commentaires servent à expliquer pourquoi, pas quoi. » — Dev Sage",
+      "« Keep it simple: la simplicité économise les erreurs. » — Système",
+      "« Debugging: la marge d'erreur est la meilleure des leçons. » — Anonyme",
+      "« Les bons développeurs lisent plus de code qu'ils n'écrivent. » — Inconnu",
+      "« Refactorise tôt, refactorise souvent. » — Dev Team",
+      "« Les tests automatisés sont votre filet de sécurité. » — Ingénieur logiciel",
+      "« Un morceau de code bien nommé vaut mille commentaires. » — Philosophie DRY"
+    ];
+
+    let _quoteTimer = null;
+    let _hideTimer = null;
+    let _currentQuoteIndex = 0;
+
+    function createDots(n){
+      const container = document.getElementById('dots');
+      if(!container) return;
+      container.innerHTML = '';
+      for(let i=0;i<n;i++){
+        const s = document.createElement('span');
+        s.className = 'dot';
+        s.setAttribute('aria-hidden','true');
+        container.appendChild(s);
+      }
+    }
+
+    function showChangeScreen(){
+      const el = document.getElementById('change-screen');
+      const quoteEl = document.getElementById('code-quote');
+      if(!el || !quoteEl) return;
+      // reset quote index
+      _currentQuoteIndex = Math.floor(Math.random()*QUOTES.length);
+      quoteEl.textContent = QUOTES[_currentQuoteIndex];
+
+      // show
+      el.style.display = 'flex';
+      el.setAttribute('aria-hidden','false');
+      // start rotating quotes
+      if(_quoteTimer) clearInterval(_quoteTimer);
+      _quoteTimer = setInterval(()=>{
+        _currentQuoteIndex = (_currentQuoteIndex+1) % QUOTES.length;
+        // fade animation
+        quoteEl.style.opacity = 0;
+        setTimeout(()=>{
+          quoteEl.textContent = QUOTES[_currentQuoteIndex];
+          quoteEl.style.opacity = 1;
+        }, 240);
+      }, 3200);
+
+      // focus close for accessibility
+      const close = document.getElementById('change-close');
+      if(close) close.focus();
+
+      return {
+        hide: hideChangeScreen
+      };
+    }
+
+    function hideChangeScreen(){
+      const el = document.getElementById('change-screen');
+      if(!el) return;
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden','true');
+      if(_quoteTimer) { clearInterval(_quoteTimer); _quoteTimer = null }
+      if(_hideTimer) { clearTimeout(_hideTimer); _hideTimer = null }
+    }
+
+    function startChangeScreen(opts){
+      opts = opts || {};
+      const duration = typeof opts.duration === 'number' ? opts.duration : 3000;
+      showChangeScreen();
+      if(_hideTimer) clearTimeout(_hideTimer);
+      _hideTimer = setTimeout(()=>{
+        hideChangeScreen();
+      }, duration);
+    }
+
+    // close button
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id === 'change-close') hideChangeScreen();
+    });
+
+    // ESC to hide
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') hideChangeScreen();
+    });
+
+    // expose helpers globalement pour pouvoir les appeler depuis d'autres scripts
+    window.showChangeScreen = showChangeScreen;
+    window.hideChangeScreen = hideChangeScreen;
+    window.startChangeScreen = startChangeScreen;
+
+    // for demo: show overlay 1.2s on first load (comment this line if you don't want it)
+    // window.addEventListener('load', ()=> startChangeScreen({duration:1200}));
   </script>
 </body>
 </html>
