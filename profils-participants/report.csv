@@ -1,0 +1,7 @@
+original,status,message,original_size,output_size
+p1.png,ok,converted and replaced,19442,19442
+p2.jpg,error,Fichier inexistant ou vide,0,0
+p3.png,ok,converted and replaced,21476,21476
+p4.jpg,error,Fichier inexistant ou vide,0,0
+p5.png,ok,converted and replaced,27714,27714
+p6.jpg,error,Fichier inexistant ou vide,0,0

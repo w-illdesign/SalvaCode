@@ -1,0 +1,806 @@
+/* =========================
+   FONTS
+   - Déclarations @font-face
+   ========================= */
+@font-face {
+    font-family: 'Cookie';
+    src: url('../fonts/Cookie-Regular.ttf') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Exemple pour Roboto */
+@font-face {
+    font-family: 'Outfit';
+    src: url('../fonts/Outfit-VariableFont_wght.ttf') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Police 2';
+    src: url('../fonts/Satisfy-Regular.ttf') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* =========================
+   VARIABLES GLOBALES (THEME)
+   - Couleurs, accents, etc.
+   ========================= */
+:root {
+    --bg: #0f0f12;
+    --panel: #15161a;
+    --ink: #e9e9ef;
+    --muted: #a4a6b0;
+    --accent: #e63946;
+    --chip: #1e2026;
+    --card: #131417;
+    --ring: #2a2d36;
+}
+
+/* =========================
+   RÈGLES DE BASE
+   - html / body, typographie par défaut
+   ========================= */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+    background: linear-gradient(180deg, #0f0f12 0%, #121318 60%, #0e0f13 100%);
+    color: var(--ink);
+}
+
+/* =========================
+   HEADER / NAV
+   ========================= */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(1.2) blur(8px);
+    background: linear-gradient(180deg, #121317bb, #12131799 60%, transparent);
+    border-bottom: 1px solid var(--ring);
+}
+
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(18px, 2.6vw, 26px);
+}
+
+/* =========================
+   BADGE / TOGGLE
+   - Exam badge, bouton d'ouverture
+   ========================= */
+.exam-badge {
+    background: var(--chip);
+    border: 1px solid var(--ring);
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Cookie';
+}
+
+.exam-badge strong {
+    color: var(--accent);
+    font-weight: 900;
+}
+
+/* bouton pour ouvrir l'écran de changement */
+.change-toggle {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-weight: 800;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease;
+}
+
+.change-toggle:focus {
+    outline: 2px solid var(--ring);
+}
+
+.change-toggle:hover {
+    transform: translateY(-2px);
+    color: var(--ink);
+}
+
+/* =========================
+   ECRAN DE CHANGEMENT (OVERLAY)
+   - Fullscreen overlay avec animation de pattern
+   ========================= */
+.change-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3,4,6,0.72);
+    backdrop-filter: blur(8px) saturate(120%);
+}
+
+/* fond de petits points animé : pattern en repeating-radial-gradient */
+.change-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-radial-gradient(circle, rgba(255,255,255,0.055) 0 1px, transparent 1px 8px);
+    background-size: 16px 16px;
+    opacity: 0.95;
+    mix-blend-mode: overlay;
+    filter: blur(0.8px) saturate(1.05);
+    animation: moveDots 18s linear infinite;
+}
+
+@keyframes moveDots {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 500px 500px;
+    }
+}
+
+/* =========================
+   CARTE CENTRALE (QUOTE / CHANGE CARD)
+   ========================= */
+.change-card {
+    position: relative;
+    z-index: 2;
+    min-width: min(860px, 92%);
+    max-width: 1100px;
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.change-card .title {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 0.6px;
+}
+
+/* zone citation */
+.quote-wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+}
+
+.quote {
+    font-family: 'Police 2';
+    cursive;
+    font-size: 24px;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--ink);
+    max-width: 88%;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .45s ease, transform .45s ease;
+}
+
+.quote.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-meta {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+/* =========================
+   CONTRÔLES (PREV / PLAY / NEXT / CLOSE)
+   ========================= */
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.controls button {
+    appearance: none;
+    border: 0;
+    background: #111215;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: var(--muted);
+    cursor: pointer;
+    border: 1px solid var(--ring);
+    font-weight: 800;
+}
+
+.controls button.primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* bouton de fermeture (coin) */
+.change-close {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    z-index: 3;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-weight: 900;
+    cursor: pointer;
+    padding: 6px 8px;
+}
+
+/* =========================
+   RESPONSIVE (petits écrans)
+   ========================= */
+@media (max-width:780px) {
+    .change-card {
+        padding: 18px;
+        min-width: 92%;
+    }
+    .quote {
+        font-size: 18px;
+    }
+}
+
+/* =========================
+   HERO / IMAGES / EFFETS
+   - Section hero, bordure animée, placeholders, lazy-loading
+   ========================= */
+.hero-wrap {
+    max-width: 1200px;
+    margin: 18px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border: 1px solid var(--ring);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-wrap {
+    position: relative;
+    padding: 8px;
+    display: block;
+    width: 300px;
+    height: auto;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.img-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: conic-gradient(from 0deg, #ff0066, #ff9900, #ffd500, #33ff77, #00d4ff, #7a6cff, #ff0066);
+    filter: blur(14px) saturate(120%);
+    opacity: 0.95;
+    transform: translateZ(0);
+    animation: spin-border 8s linear infinite, glow 3s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.img-inner {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.img-inner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.lazy-loading {
+    filter: blur(8px) saturate(.9);
+    transform: scale(1.01);
+    transition: filter .45s ease, transform .45s ease, opacity .45s ease;
+    opacity: 0.95;
+    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+}
+
+img:not([data-src]).lazy-placeholder,
+img.loaded {
+    filter: none;
+    transform: none;
+    opacity: 1;
+}
+
+.img-preview-placeholder {
+    width: 84px;
+    height: 84px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+    border: 1px solid var(--ring);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    padding-bottom: 0px;
+}
+
+.overlay .caption {
+    background: rgba(2,6,11,0.45);
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Police 2';
+    , cursive;
+    font-weight: 700;
+    text-align: center;
+    color: var(--ink);
+    backdrop-filter: blur(100px) saturate(120%);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    max-width: 92%;
+    line-height: 1.15;
+}
+
+@keyframes spin-border {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    0% {
+        filter: blur(6px) saturate(120%) brightness(1);
+    }
+    50% {
+        filter: blur(16px) saturate(160%) brightness(1.3);
+    }
+    100% {
+        filter: blur(6px) saturate(120%) brightness(1);
+    }
+}
+
+@keyframes light-effect {
+    0% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.25);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/* =========================
+   MAIN / GRID / CARDS
+   ========================= */
+main {
+    padding: 18px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid var(--ring);
+}
+
+.meta .step {
+    font-weight: 800;
+    font-size: 13px;
+    background: #2a2d36;
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+}
+
+.meta .title {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.sample {
+    padding: 16px 16px 6px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
+    font-family: 'Cookie', cursive;
+    font-size: 18px;
+    color: var(--ink);
+}
+
+.module-list {
+    padding: 6px 18px 18px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.module-list ul {
+    margin: 8px 0 0 18px;
+}
+
+.module-list li {
+    margin: 6px 0;
+}
+
+.links {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--ring);
+}
+
+.btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--ring);
+    background: #1b1d23;
+    color: var(--ink);
+}
+
+.btn.primary {
+    background: var(--accent);
+    border-color: transparent;
+}
+
+/* =========================
+   STUDENTS / LISTS
+   ========================= */
+.students {
+    margin: 30px 40px;
+}
+
+.student-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.student-card {
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    justify-content: space-between;
+    min-height: 64px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+.student-card .note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 110px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 14px;
+    flex: 0 0 110px;
+}
+
+.student-card .note svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    fill: var(--muted);
+    opacity: 0.95;
+}
+
+.student-card .note .score {
+    font-weight: 800;
+    color: var(--muted);
+    font-size: 14px,
+}
+
+/* petite pastille de position */
+.position-bubble {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 13px;
+    border: 2px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+    color: #ffffff;
+    flex: 0 0 36px;
+}
+
+.position-bubble .pos-number {
+    line-height: 1;
+    display: inline-block;
+}
+
+.note-star {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+/* overrides de couleur selon le rang (mêmes couleurs que la bordure du profil) */
+.student-card.rank-1 .position-bubble {
+    background: #00ab10;
+    border-color: #00ab10;
+    color: #ffffff;
+}
+
+.student-card.rank-2 .position-bubble {
+    background: #ff7a00;
+    border-color: #ff7a00;
+    color: #ffffff;
+}
+
+.student-card.rank-3 .position-bubble {
+    background: #cc0000;
+    border-color: #cc0000;
+    color: #ffffff;
+}
+
+.student-card.rank-1 img {
+    border-color: #00ab10;
+    box-shadow: 0 6px 18px rgba(255,204,51,0.14);
+}
+
+.student-card.rank-2 img {
+    border-color: #ff7a00;
+    box-shadow: 0 6px 18px rgba(255,122,0,0.14);
+}
+
+.student-card.rank-3 img {
+    border-color: #cc0000;
+    box-shadow: 0 6px 18px rgba(204,0,0,0.14);
+}
+
+/* s'assurer que texte reste lisible */
+.student-card.rank-1 .name,
+.student-card.rank-2 .name,
+.student-card.rank-3 .name {
+    color: var(--ink);
+}
+
+.student-card .name {
+    flex: 1 1 auto;
+    text-align: center;
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 8px;
+}
+
+.student-card img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    flex: 0 0 72px;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: filter .25s ease, transform .2s ease;
+    filter: saturate(0.95) contrast(0.94);
+}
+
+.student-card img.lazy-loading {
+    filter: blur(6px) grayscale(.15);
+    transform: scale(.995);
+}
+
+.student-card.rank-1 img {
+    border-color: #00ab10;
+    box-shadow: 0 6px 18px rgba(255,204,51,0.14);
+}
+
+.student-card.rank-2 img {
+    border-color: #ff7a00;
+    box-shadow: 0 6px 18px rgba(255,122,0,0.14);
+}
+
+.student-card.rank-3 img {
+    border-color: #cc0000;
+    box-shadow: 0 6px 18px rgba(204,0,0,0.14);
+}
+
+.student-card.rank-1 .name,
+.student-card.rank-2 .name,
+.student-card.rank-3 .name {
+    color: var(--ink);
+}
+
+@media (max-width:780px) {
+    .wrap {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .students {
+        margin: 20px 18px;
+    }
+}
+
+@media (max-width:480px) {
+    .student-card {
+        padding: 8px;
+        min-height: 62px;
+        gap: 8px;
+    }
+    .student-card img {
+        width: 56px;
+        height: 56px;
+        flex: 0 0 56px;
+    }
+    .student-card .note {
+        flex: 0 0 64px;
+        width: 64px;
+        font-size: 13px;
+    }
+    .student-card .name {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   NOTE / SCORE (petite section)
+   ========================= */
+.note {
+    display: flex;
+    align-items: center;
+    gap: 1x; /* espace entre la pastille et le score-section */
+    color: #FFD700;
+}
+
+/* Section contenant score + étoile */
+.score-section {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* espace entre score et étoile */
+    color: #FFD700; /* même couleur que le SVG */
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Optionnel : taille de l'étoile */
+.note-star {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* =========================
+   MODULE (listes de modules)
+   ========================= */
+.module-section {
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.module-header .step {
+    font-weight: 800;
+    font-size: 13px;
+    background: #2a2d36;
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+}
+
+.module-header .title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+}
+
+.module-list ul {
+    margin: 8px 0 0 18px;
+}
+
+.module-list li {
+    margin: 6px 0;
+    font-size: 14px;
+    color: var(--muted);
+}

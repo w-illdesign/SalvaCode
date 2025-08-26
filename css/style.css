@@ -1,0 +1,166 @@
+/* =========================
+   Variables & Reset
+========================= */
+:root {
+  --bg: #0f0f12;
+  --card: #131417;
+  --ink: #e9e9ef;
+  --muted: #a4a6b0;
+  --accent: #e63946;
+  --ring: #2a2d36;
+  --success: #2bb673;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, var(--bg) 0%, #121318 60%, #0e0f13 100%);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================
+   Header
+========================= */
+header {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--ring);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(18px, 2.6vw, 26px);
+  color: var(--accent);
+}
+
+/* =========================
+   Layout
+========================= */
+main {
+  
+  
+  padding: 0 16px;
+}
+
+section {
+max-width: 980px;
+margin: 28px auto;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+.hero{
+      background: var(--card);
+  border: 1px solid var(--ring);
+}
+h2, h3 {
+  margin: 0 0 10px 0;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+p, ul {
+  color: var(--muted);
+  margin: 8px 0;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+li {
+  margin: 6px 0;
+}
+
+/* =========================
+   Command Blocks
+========================= */
+.cmd-row {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  margin: 12px 0;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Prism code block */
+pre.cmd {
+  width: 100%;
+  margin: 0;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #44475a;
+  background: #282a36; /* Dracula theme gère le fond */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre;
+  text-align: start;
+  overflow-x: auto;
+}
+
+pre.cmd code {
+  display: block;
+  white-space: pre;
+}
+
+/* =========================
+   Copy Button
+========================= */
+button.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #44475a;
+  background: #1e1f29;
+  color: #bd93f9;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+button.copy-btn:hover {
+  background: #44475a;
+  color: #f8f8f2;
+}
+
+.copied {
+  background: linear-gradient(180deg, var(--success), #1f7a4f);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* =========================
+   Inline Code Utility
+========================= */
+code.inline {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--ink);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 640px) {
+  pre.cmd {
+    font-size: 12px;
+  }
+
+  button.copy-btn {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  
+  }

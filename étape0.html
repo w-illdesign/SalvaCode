@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ressources pour l'étape 0 : installation des outils pour coder en Python (PC et Android)." />
+  <title>Ressources — Étape 0 (Installation des outils)</title>
+  <style>
+    :root{
+      --bg:#0f0f12; --card:#131417; --ink:#e9e9ef; --muted:#a4a6b0; --accent:#e63946; --ring:#2a2d36;
+      --success:#2bb673;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Noto Sans",sans-serif;background:linear-gradient(180deg,var(--bg) 0%, #121318 60%, #0e0f13 100%);color:var(--ink);-webkit-font-smoothing:antialiased}
+    header{padding:20px 16px;border-bottom:1px solid var(--ring);text-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    header h1{margin:0;font-size:clamp(18px,2.6vw,26px);color:var(--accent)}
+    main{max-width:980px;margin:28px auto;padding:0 16px}
+    section{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:18px;margin-bottom:18px}
+    h2{margin:0 0 10px 0;color:var(--accent);font-size:18px}
+    p{color:var(--muted);margin:8px 0}
+    ul{color:var(--muted);margin:8px 0 0 20px}
+    li{margin:6px 0}
+    /* layout for command rows: code block left, copy button right */
+    .cmd-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;margin:12px 0}
+    pre.cmd{margin:0;padding:12px;border-radius:8px;background:rgba(0,0,0,0.12);border:1px solid var(--ring);overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;font-size:13px;line-height:1.4;white-space:pre-wrap}
+    pre.cmd code{display:block;color:var(--ink)}
+    pre.cmd code .comment{color:var(--muted);font-style:italic}
+    /* copy button */
+    button.copy-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--ring);background:linear-gradient(180deg,#222,#111);color:var(--muted);cursor:pointer;font-weight:700}
+    button.copy-btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    button.copy-btn:focus{outline:3px solid rgba(99,102,241,0.18);outline-offset:2px}
+    /* small success state */
+    .copied{background:linear-gradient(180deg,var(--success),#1f7a4f);color:#fff;border-color:transparent}
+    /* links / actions */
+    .actions a{display:inline-block;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--ink);background:#1b1d23;border:1px solid var(--ring);font-weight:700;margin-right:8px}
+    .actions a.primary{background:var(--accent);color:#fff;border-color:transparent}
+    /* responsive */
+    @media (max-width:640px){
+      .cmd-row{grid-template-columns:1fr auto}
+      pre.cmd{font-size:12px}
+      button.copy-btn{padding:8px 10px;font-size:13px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ressources — Étape 0 : Installation des outils</h1>
+  </header>
+  <main id="main-content" role="main"><!-- Résumé structuré -->
+<section aria-labelledby="resume-title">
+
+  <h2 id="resume-title">Résumé structuré — Étape 0</h2>
+  <p><strong>Objectif :</strong> Préparer votre environnement pour coder en Python (PC ou Android) et démarrer des projets Flask/Django.</p>
+
+  <ul>
+    <li>
+      <strong>Installer :</strong> les outils nécessaires selon votre appareil :
+      <ul>
+        <li><em>Ordinateur (Windows/macOS/Linux) :</em> Python, VS Code ou PyCharm, Git pour versionner vos projets.</li>
+        <li><em>Smartphone Android :</em> Termux (émulateur terminal), Python et Git via Termux, éditeur de code léger (nano, vim ou micro).</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>Pré-requis :</strong>
+      <ul>
+        <li>Ordinateur ou smartphone Android</li>
+        <li>Connexion Internet pour télécharger les outils</li>
+        <li>Un peu de patience pour configurer l’environnement la première fois</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>Résultat attendu :</strong>
+      <ul>
+        <li>Pouvoir lancer <code>python</code> depuis votre terminal</li>
+        <li>Créer et activer un environnement virtuel (<code>venv</code>)</li>
+        <li>Versionner vos projets avec Git et éventuellement pousser sur GitHub/GitLab</li>
+      </ul>
+    </li>
+
+    <li><strong>Durée estimée :</strong> ~20–30 minutes selon votre expérience et votre appareil.</li>
+
+  </ul>
+
+  <p style="color:var(--muted);margin-top:10px;font-size:13px">
+    Chaque bloc de commande contient un commentaire (lignes commençant par <code>#</code>) expliquant l’action,
+    et le bouton <em>Copier</em> à droite pour coller directement la commande dans votre terminal.
+  </p>
+
+  <section>
+    <h3>Outils pour ordinateur</h3>
+    <ul>
+      <li><strong>Python :</strong> interpréteur pour exécuter vos scripts.</li>
+      <li><strong>VS Code / PyCharm :</strong> éditeurs pour écrire, tester et déboguer votre code.</li>
+      <li><strong>Git :</strong> gestionnaire de version pour sauvegarder vos projets et collaborer.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Outils pour smartphone Android</h3>
+    <ul>
+      <li><strong>Termux :</strong> terminal qui permet d’installer Python et Git sur Android.</li>
+      <li><strong>Python :</strong> pour exécuter vos scripts directement dans Termux.</li>
+      <li><strong>Éditeur de code léger :</strong> nano, vim ou micro pour écrire vos scripts dans Termux.</li>
+      <li><strong>Git :</strong> pour versionner vos projets et les synchroniser avec un dépôt distant.</li>
+    </ul>
+  </section>
+
+</section>
+
+<!-- Outils -->
+<section aria-labelledby="tools-title">
+  <h2 id="tools-title">Outils principaux</h2>
+  <ul>
+    <li><strong>Python</strong> — langage utilisé pour tous les exercices. <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Téléchargement officiel</a>.</li>
+    <li><strong>Éditeur</strong> — VS Code (recommandé) ou PyCharm. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Code</a> — <a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="noopener noreferrer">PyCharm</a>.</li>
+    <li><strong>Git</strong> — gestion de versions : <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">git-scm</a>.</li>
+    <li><strong>Termux</strong> (Android) — terminal Linux pour Android : <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener noreferrer">F-Droid / Termux</a>.</li>
+  </ul>
+</section>
+
+<!-- Commandes : Termux -->
+<section aria-labelledby="cmds-title">
+  <h2 id="cmds-title">Commandes (copiables)</h2>
+
+  <h3>Termux (Android)</h3>
+
+  <div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-termux-update"><span class="comment"># Mettre à jour les paquets</span>
+
+pkg update && pkg upgrade</code></pre> <button type="button" class="copy-btn" data-target="cmd-termux-update" aria-label="Copier la commande de mise à jour">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-termux-python"><span class="comment"># Installer Python</span>
+
+pkg install python</code></pre> <button type="button" class="copy-btn" data-target="cmd-termux-python" aria-label="Copier la commande d'installation de Python">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-termux-git"><span class="comment"># Installer Git (optionnel)</span>
+
+pkg install git</code></pre> <button type="button" class="copy-btn" data-target="cmd-termux-git" aria-label="Copier la commande d'installation de Git">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-termux-verify"><span class="comment"># Vérifier Python</span>
+
+python --version</code></pre> <button type="button" class="copy-btn" data-target="cmd-termux-verify" aria-label="Copier la commande de vérification Python">Copier</button> </div>
+
+<hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:16px 0">
+
+  <h3>PC / macOS / Linux</h3>
+
+  <div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-pc-verify"><span class="comment"># Vérifier Python (PC/Mac/Linux)</span>
+
+python --version  # ou python3 --version</code></pre> <button type="button" class="copy-btn" data-target="cmd-pc-verify" aria-label="Copier la commande de vérification Python pour PC">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-vscode-interp"><span class="comment"># Dans VS Code : ouvrir la palette de commandes</span>
+
+Ctrl+Shift+P → Python: Select Interpreter</code></pre> <button type="button" class="copy-btn" data-target="cmd-vscode-interp" aria-label="Copier la commande VS Code select interpreter">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-vscode-install"><span class="comment"># Windows (winget) — installer VS Code</span>
+
+winget install --id Microsoft.VisualStudioCode</code></pre> <button type="button" class="copy-btn" data-target="cmd-vscode-install" aria-label="Copier la commande d'installation VS Code (Windows)">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-git-version"><span class="comment"># Vérifier Git</span>
+
+git --version</code></pre> <button type="button" class="copy-btn" data-target="cmd-git-version" aria-label="Copier la commande git --version">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-git-init"><span class="comment"># Initialiser un dépôt local</span>
+
+git init</code></pre> <button type="button" class="copy-btn" data-target="cmd-git-init" aria-label="Copier la commande git init">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-git-config"><span class="comment"># Configurer nom et e-mail (remplacez par vos infos)</span>
+
+git config --global user.name "Votre Nom" git config --global user.email "email@example.com"</code></pre> <button type="button" class="copy-btn" data-target="cmd-git-config" aria-label="Copier la commande de configuration Git">Copier</button> </div>
+
+<hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:16px 0">
+
+  <h3>Environnements virtuels & exécution</h3>
+
+  <div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-venv-unix"><span class="comment"># Linux / macOS</span>
+
+python -m venv env source env/bin/activate</code></pre> <button type="button" class="copy-btn" data-target="cmd-venv-unix" aria-label="Copier la commande venv Unix">Copier</button> </div>
+
+<div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-venv-win"><span class="comment"># Windows (PowerShell)</span>
+
+python -m venv env
+
+Dans PowerShell, exécutez :
+
+.\env\Scripts\Activate.ps1</code></pre>
+
+<button type="button" class="copy-btn" data-target="cmd-venv-win" aria-label="Copier la commande venv Windows">Copier</button>
+  </div>
+
+  <div class="cmd-row">
+    <pre class="cmd" tabindex="0"><code id="cmd-run"><span class="comment"># Exécuter un script Python</span>
+
+python main.py</code></pre> <button type="button" class="copy-btn" data-target="cmd-run" aria-label="Copier la commande pour exécuter un script">Copier</button> </div>
+
+</section>
+
+<!-- Liens & actions -->
+<section aria-labelledby="links-title">
+  <h2 id="links-title">Ressources & liens</h2>
+  <p class="note">Téléchargements officiels et pages de documentation.</p>
+  <p class="actions">
+    <a class="primary" href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Python — site officiel</a>
+    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>
+    <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Git</a>
+    <a class="primary" href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener noreferrer">Termux (F-Droid)</a>
+  </p>
+</section>
+
+  </main>  <script>
+    // Copy-to-clipboard: copies the textual content of the <code> element
+    (function () {
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        // fallback
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            resolve();
+          } catch (err) {
+            document.body.removeChild(ta);
+            reject(err);
+          }
+        });
+      }
+
+      function handleClick(e) {
+        var btn = e.target.closest('button.copy-btn');
+        if (!btn) return;
+        var targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        var code = document.getElementById(targetId);
+        if (!code) return;
+        var text = code.textContent.replace(/\u00A0/g, ''); // normalize
+        copyText(text).then(function () {
+          btn.classList.add('copied');
+          var original = btn.innerHTML;
+          btn.innerHTML = 'Copié ✓';
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            btn.innerHTML = original;
+          }, 1400);
+        }).catch(function () {
+          alert('Impossible de copier automatiquement. Sélectionnez manuellement et copiez (Ctrl/Cmd+C).');
+        });
+      }
+
+      document.addEventListener('click', handleClick);
+    })();
+  </script></body>
+</html>
