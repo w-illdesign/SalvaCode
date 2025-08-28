@@ -43,11 +43,6 @@ header h1 {
 /* =========================
    Layout
 ========================= */
-main {
-  
-  
-  padding: 0 16px;
-}
 
 section {
 max-width: 980px;
@@ -95,7 +90,7 @@ li {
 pre.cmd {
   width: 100%;
   margin: 0;
-  padding: 16px;
+  
   border-radius: 8px;
   border: 1px solid #44475a;
   background: #282a36; /* Dracula theme gère le fond */
@@ -153,14 +148,4 @@ code.inline {
 /* =========================
    Responsive
 ========================= */
-@media (max-width: 640px) {
-  pre.cmd {
-    font-size: 12px;
-  }
 
-  button.copy-btn {
-    padding: 6px 8px;
-    font-size: 12px;
-  }
-  
-  }
