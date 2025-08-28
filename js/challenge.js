@@ -153,8 +153,28 @@ def compteur_mots(text):
 // ==============================
 
 export const PARTICIPANTS = [
-  { id: 1, name: "FKLU", avatar: "participants/p3.jpg", score: 10.7 },
-  { id: 2, name: "VCFD", avatar: "participants/p3.jpg", score: 15 },
-  { id: 3, name: "SKL", avatar: "participants/p1.png", score: 18 },
-  { id: 4, name: "Will", avatar: "img/jp.jpg", score: 12.6 }
+  {
+    id: 1,
+    name: "M67",
+    avatar: "participants/p3.jpg",
+    score: 6.7,
+  },
+  {
+    id: 2,
+    name: "Chris",
+    avatar: "participants/p2.jpg",
+    score: 6.6,
+  },
+  {
+    id: 3,
+    name: "Serge",
+    avatar: "participants/p1.png",
+    score: 1.7,
+  },
+  {
+    id: 4,
+    name: "Will43",
+    avatar: "participants/p6.png",
+    score: 7.1,
+  },
 ];
