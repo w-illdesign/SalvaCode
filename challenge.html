@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Challenges</title>
 
     <!-- Feuilles de style principales -->
@@ -176,19 +176,46 @@ render("interface")
        MAIN
        ========================= -->
   <main>
+     <div>
+        <a href="#challenges-title" class="exam-badge">Voir les challenges</a>
+        <a href="#Commentcamarche" class="exam-badge">Comment ça marche ?</a>
+        </div>
+      
+      
       <!-- LISTE DES PARTICIPANTS -->
     <section aria-labelledby="participants-title" class="students">
       <h2 id="participants-title" class="sous-titre">Participants</h2>
       <div id="participant-list" class="challenge-grid"></div>
     </section>
+    <hr>
+    
     <!-- LISTE DES DEFIS -->
     <section aria-labelledby="challenges-title">
       <h2 id="challenges-title" class="sous-titre">Liste des défis</h2>
       <div id="challenge-list" class="grid challenge-grid" aria-live="polite"></div>
     </section>
-
-    
+   
+   <hr>
+   <section class="module-section">
+    <div class="question" id="Commentcamarche">Comment ça marche ?</div>
+       
+<div class="module-list">
+        <p>Cliquez <a href="https://api.whatsapp.com/send?phone=243972424235&text=Salut%20je%20souhaite%20participer%20au%20challenge%20sur%20SalvaCode"
+   target="_blank" rel="noopener">
+   là</a> pour parler à l'administrateur sur WhatsApp</p>
+        <ul>
+            <li>Envoyez votre pseudo et votre profil</li>
+          <li> Résolvez un challenge avant l'apparition de la résolution (avant la fin du compte à rebours du challenge)
+          <li>Envoyez une capture d'écran ou le code (copié-collé), votre pseudo et le numéro du challenge ou de l'exercice pour avoir des <b>points</b></li>
+          <li>Pour votre bien il est défendu d'utiliser <b>ChatGpt (IA)</b> pour résoudre les challenges sauf à l'indication contraire dans le challenge</li>
+          
+        </ul>
+        <p>⚠️ Ceux qui participent pas seront retirés de la liste</p>
+        </div>
+        
+    </section>
   </main>
+  
 
  <!-- Pied de page -->
   <footer style="padding:18px 20px; text-align:center; color:var(--muted); font-size:13px;">

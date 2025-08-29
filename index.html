@@ -2,7 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
   <title>Apprenez la programmation web python</title>
 
   <!-- Feuilles de style principales -->
@@ -44,7 +46,8 @@
       <div class="terminal" aria-hidden="true">
         <div class="scroll-window" id="scroll-window" aria-hidden="true">
           <template id="code-template">
-<pre class="language-python"><code class="language-python"># Démarrage des services
+<pre class="language-python"><code class="language-python">
+# Démarrage des services
 import json
 import requests
 from pathlib import Path
@@ -61,6 +64,8 @@ health = requests.get("/api/health").json()
 modules = [m for m in ("ui", "db", "auth") if m]
 render("interface")
 # waiting for mount...
+
+
 </code></pre>
           </template>
 
