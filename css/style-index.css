@@ -392,7 +392,7 @@ img.loaded {
 
 .img-preview-placeholder {
     width: 84px;
-q#   height: 84px;
+   height: 84px;
     border-radius: 10px;
     background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
     border: 1px solid var(--ring);
@@ -451,6 +451,17 @@ q#   height: 84px;
     width: fit-content;
     margin-top: 30px;
     margin-bottom: 30px;
+    
+}
+
+.question2{
+    font-weight: 800;
+    font-size: 13px;
+    background: #2a2d36;
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+
     
 }
 

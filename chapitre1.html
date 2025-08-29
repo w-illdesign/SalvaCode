@@ -37,7 +37,7 @@
           <span class="c yellow" aria-hidden="true"></span>
           <span class="c green" aria-hidden="true"></span>
         </div>
-        <div class="term-title">/SalvaCode/Erreur 404 — boot</div>
+        <div class="term-title">/SalvaCode/Module 1 — boot</div>
       </div>
 
       <!-- terminal area: prism-formatted python code (in template, injected by JS) -->
@@ -81,13 +81,10 @@ render("interface")
   </div>
 
   <!-- =========================
-       CONTENU DU SITE (inchangé)
-       Place ici tout ton contenu habituel — header, hero, sections, etc.
-       ========================= -->
-  <!-- =========================
        HEADER
        ========================= -->
   <header>
+
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <!-- LOGO -->
       <div class="logo" style="display:flex;align-items:center;gap:6px;">
@@ -169,118 +166,620 @@ render("interface")
 
   <main>
     
-
-  
-    
     <section>
-      <h2 class="sous-titre">Pour ceux qui ont un ordinateur</h2>
-      
-      <h3>1. Installer Python</h3>
-      <ol>
-        <li>Va sur <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
-        <li>Clique sur <b>Download Python 3.x</b>.</li>
-        <li>Lance le fichier d’installation.</li>
-        <li>Important : Coche impérativement <b>Add Python to PATH</b> avant de cliquer sur <b>Install Now</b>. ⚠️ Sans cela, Git Bash ne trouvera pas la commande <code class="inline">python</code>.</li>
-        <li>Termine l’installation.</li>
-        <li>Sur macOS/Linux : utilise Homebrew (macOS) ou ton gestionnaire de paquets (apt, yum) pour installer Python.</li>
-      </ol>
+  <h2 class="sous-titre">Pour ceux qui ont un ordinateur</h2>
 
-      <h3>2. Installer Git (Git Bash)</h3>
-      <ol>
-        <li>Télécharge Git : <a href="https://git-scm.com/downloads" target="_blank">git-scm.com/downloads</a></li>
-        <li>Installe Git en gardant les options par défaut.</li>
-        <li>Tu auras maintenant <b>Git Bash</b> dans ton menu Démarrer.</li>
-      </ol>
-      
-      <h3>3. Vérifier l’installation</h3>
-      <p>Ouvre Git Bash et tape :</p>
+  <!-- 1) Présentation courte pour démarrer -->
+  <p><b>Avant de commencer — quelques mots simples :</b></p>
+  <p>
+    Un <b>terminal</b> (ou « invite de commandes ») est un endroit où tu tapes des commandes (des instructions) pour dire à l'ordinateur
+    ce qu'il doit faire. Un <b>fichier</b> est comme une feuille de papier (par ex. <code>main.py</code>), et un <b>dossier</b> est comme une chemise où on range des fichiers.
+  </p>
+
+  <h3>1. Installer Python — qu’est-ce que c’est ?</h3>
+  <p>
+    <b>Python</b> est un langage de programmation : c’est l’outil qui va lire et exécuter les instructions que tu écris (tes programmes).
+    On commence par l’installer sur ton ordinateur.
+  </p>
+
+  <ol>
+    <li>
+      <b>Télécharger</b> Python :
+      <br>
+      Va sur <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>.
+      Tu verras un gros bouton <b>Download Python 3.x</b> — clique dessus.
+    </li>
+
+    <li>
+      <b>Exécuter l’installeur</b> :
+      <ul>
+        <li>Sur Windows : double-clic sur le fichier que tu as téléchargé (.exe).</li>
+        <li>Sur macOS : ouvre le paquet .pkg et suis les instructions.</li>
+        <li>Sur Linux : tu peux souvent installer depuis le gestionnaire de paquets (voir dessous).</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Important — Windows :</b> avant d’installer, coche la case <b>Add Python to PATH</b> dans la fenêtre d’installation.
+      <p><i>Pourquoi ?</i> <b>PATH</b> est une liste d'endroits où l'ordinateur cherche les programmes. Si Python n’est pas dans PATH, tu ne pourras pas lancer la commande <code>python</code> depuis le terminal.</p>
+    </li>
+
+    <li>
+      <b>Terminer l’installation</b> et fermer l’installeur. Si on te demande de redémarrer le terminal, accepte (ou ferme/rouvre le terminal).
+    </li>
+
+    <li>
+      <b>Linux (Debian/Ubuntu)</b> — si tu préfères installer avec les commandes :
       <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On vérifie que Python et Git sont bien installés.
-python --version
+        <pre class="cmd language-bash"><code>sudo apt update
+sudo apt install -y python3 python3-pip</code></pre>
+      </div>
+      <p>Sur macOS, tu peux utiliser Homebrew (optionnel) : <code>brew install python</code>.</p>
+    </li>
+  </ol>
+
+  <details>
+    <summary><b>Comment vérifier que Python est bien installé ?</b></summary>
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>python --version        # souvent fonctionne sur Windows si Add to PATH a été coché
+python3 --version       # souvent utilisé sur macOS / Linux
+py -3 --version         # alternative sur certaines installations Windows</code></pre>
+    </div>
+    <p>Tu dois voir quelque chose comme : <code>Python 3.11.4</code> (le numéro peut être différent).</p>
+  </details>
+
+  <h3>2. Installer Git (et Git Bash)</h3>
+  <p><b>Git</b> est un outil pour sauvegarder l’historique de tes fichiers (on l’utilise beaucoup en programmation). <b>Git Bash</b> est un terminal convivial pour Windows fourni avec Git.</p>
+
+  <ol>
+    <li>Télécharge Git depuis <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm.com/downloads</a> et installe-le (tu peux garder les options par défaut).</li>
+
+    <li>Après installation, ouvre <b>Git Bash</b> (sur Windows) ou ton terminal habituel (macOS/Linux).</li>
+
+    <li>Configure ton nom et ton e-mail — ces informations servent si tu veux sauvegarder des versions sur des services comme GitHub :</li>
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>git config --global user.name "Ton Nom"
+git config --global user.email "ton.email@example.com"</code></pre>
+    </div>
+    <p>Ces commandes disent à Git « qui travaille sur ces fichiers ». Elles n’envoient rien sur Internet, c’est juste pour ton ordinateur.</p>
+  </ol>
+
+  <details>
+    <summary><b>Petite explication : Git vs GitHub</b></summary>
+    <p>
+      Git est le logiciel sur ton ordinateur. GitHub (ou GitLab) est comme un service en ligne où tu peux stocker une copie de tes projets pour y accéder depuis d'autres ordinateurs.
+      Pour commencer, tu n’as pas besoin de GitHub — tu peux apprendre Git localement.
+    </p>
+  </details>
+
+  <h3>3. Vérifier que tout fonctionne (Python, pip, Git)</h3>
+  <p>Maintenant, allons dans le terminal (Git Bash) et vérifions les commandes. Tape exactement : </p>
+  <div class="cmd-row">
+    <pre class="cmd language-bash"><code>python --version
+python -m pip --version
 git --version</code></pre>
-      </div>
-      <p>Tu dois voir quelque chose comme <code class="inline">Python 3.x.x</code> et <code class="inline">git version x.y.z</code>.</p>
-      <p>Si <code class="inline">python</code> n’est pas reconnu, retourne à l’étape 1 et assure-toi d’avoir coché <b>Add to PATH</b>.</p>
+  </div>
+  <p>Résultat attendu (exemples) :</p>
+  <ul>
+    <li><code>Python 3.x.x</code></li>
+    <li><code>pip x.x.x from ...</code></li>
+    <li><code>git version x.y.z</code></li>
+  </ul>
 
-      <h3>4. Créer ton premier dossier projet</h3>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On se déplace vers le dossier "Documents".
-cd /c/Users/TonNom/Documents
-# On crée un nouveau dossier pour notre projet et on y entre.
+  <p><b>Si une commande n’est pas reconnue :</b></p>
+  <ol>
+    <li>Relis l’étape d’installation et vérifie que tu as bien coché “Add to PATH” (Windows).</li>
+    <li>Sur Windows, essaie la commande <code>py -3 --version</code> — parfois Python répond via le lanceur <code>py</code>.</li>
+    <li>Si besoin, relance l’ordinateur ou ferme/réouvre le terminal.</li>
+  </ol>
+
+  <h3>4. Créer ton premier dossier projet — pas à pas</h3>
+  <p>On va créer un dossier (un emplacement) pour ranger le projet. C’est très simple :</p>
+  <div class="cmd-row">
+    <pre class="cmd language-bash"><code># Aller dans le dossier "Documents" (toutes plateformes) :
+cd "$HOME/Documents"
+
+# Créer un dossier nommé "mon_projet" et entrer dedans :
 mkdir mon_projet && cd mon_projet
-# On vérifie notre position.
-pwd</code></pre>
-      </div>
 
-      <h3>5. Écrire et lancer ton premier script</h3>
-      <p>Ouvre VS Code, clique sur <b>Ouvrir un dossier</b>, et choisis <b>mon_projet</b>.</p>
-      <p>Crée un fichier <code class="inline">main.py</code> et écris :</p>
-      <div class="cmd-row">
-        <pre class="cmd language-python"><code># La commande print() affiche un message.
-print("Bonjour depuis Git Bash !")</code></pre>
-      </div>
-      <p>Sauvegarde (<code>Ctrl+S</code>).</p>
-      <p>Dans Git Bash, lance :</p>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On lance le script Python qu'on vient de créer.
-python main.py</code></pre>
-      </div>
-      <p>Résultat attendu : <code class="inline">Bonjour depuis Git Bash !</code></p>
-    </section>
+# Afficher où l'on est :
+pwd
+
+# Lister les fichiers (devrait être vide pour un début) :
+ls</code></pre>
+  </div>
+
+  <p><b>Explication ligne par ligne :</b></p>
+  <ol>
+    <li><code>cd "$HOME/Documents"</code> : se déplace dans le dossier Documents de ton compte (HOME signifie ton dossier personnel).</li>
+    <li><code>mkdir mon_projet</code> : crée un dossier appelé <code>mon_projet</code>.</li>
+    <li><code>cd mon_projet</code> : entre dans le dossier que tu viens de créer.</li>
+    <li><code>pwd</code> : montre le chemin complet du dossier où tu es (utile pour être sûr).</li>
+    <li><code>ls</code> : affiche les fichiers et dossiers présents.</li>
+  </ol>
+
+  <details>
+    <summary><b>Astuce Windows (si Git Bash ne pointe pas vers Documents)</b></summary>
+    <p>Tu peux utiliser :</p>
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>cd /c/Users/TonNom/Documents
+# Remplace "TonNom" par ton nom d'utilisateur Windows (celui que tu vois dans l'explorateur de fichiers)</code></pre>
+    </div>
+  </details>
+
     
+  <h3>5. Installer Vs code</h3>
+<ol>
+      <li>
+      <b>Télécharger VS Code</b> depuis le site officiel : <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a>. :contentReference[oaicite:0]{index=0}
+    </li>
+
+    2. <b>Choisir la bonne version</b> :
+    <ul>
+      <li>Windows : User Installer (pour un utilisateur) ou System Installer (si tu veux l’installer pour tous les comptes).</li>
+      <li>macOS : ouvre le .zip / .dmg et glisse VS Code dans Applications.</li>
+      <li>Linux : utilise le package .deb (Debian/Ubuntu) ou .rpm (Fedora) ou installe via le gestionnaire de paquets. Exemple : télécharger le .deb puis <code>sudo apt install ./vscode.deb</code>. :contentReference[oaicite:1]{index=1}</li>
+    </ul>
+
+    <li>
+      <b>Exemples pas à pas (Windows)</b> :
+      <ol>
+        <li>Double-clic sur le fichier téléchargé (User Installer).</li>
+        <li>Accepte la licence et garde les options par défaut (tu peux cocher « Add to PATH » si proposé).</li>
+        <li>Termine l’installation et lance VS Code depuis le menu Démarrer.</li>
+      </ol>
+    </li>
+
+    <li>
+      <b>Ouvrir ton dossier de projet dans VS Code</b> :
+      <p>Dans VS Code : <b>Fichier → Ouvrir un dossier</b> puis choisis <code>mon_projet</code>. Cela permet à VS Code de voir tous les fichiers du projet (comme ouvrir la chemise pour voir toutes les feuilles).</p>
+    </li>
+
+    <li>
+      <b>Ouvrir un terminal intégré</b> :
+      <p>Dans VS Code : <b>Terminal → Nouveau terminal</b>. Le terminal s’ouvre en bas de VS Code et fonctionne comme Git Bash / ton terminal habituel. Tu peux taper les mêmes commandes ici (ex. <code>python main.py</code>).</p>
+    </li>
+
+    <li>
+      <b>Installer l’extension Python (conseillé)</b> :
+      <p>Va dans l’onglet Extensions (icône en forme de blocs ou <code>Ctrl+Shift+X</code>), cherche « Python » (par Microsoft) et clique sur <b>Installer</b>. Cette extension aide pour l’autocomplétion, le diagnostic des erreurs et le débogage.</p>
+      <p><i>Analogie :</i> l’extension Python, c’est comme une loupe et un guide posé sur ton plan de travail : elle t’aide à repérer les erreurs et à travailler plus vite.</p>
+    </li>
+</ol>
+
+    
+  <h3>5. Écrire et lancer ton premier script Python — tout expliqué</h3>
+  <p>On va créer un petit fichier Python qui écrit un message dans le terminal. C’est l’étape la plus excitante !</p>
+
+  <ol>
+    <li><b>Ouvrir Visual Studio Code (VS Code)</b> :
+      <ul>
+        <li>Si VS Code est installé : ouvre-le, puis <b>Fichier → Ouvrir un dossier</b> et choisis le dossier <code>mon_projet</code> que tu as créé.</li>
+        <li>Si tu n’as pas VS Code, tu peux utiliser un éditeur simple (Notepad sous Windows, TextEdit sur macOS en mode texte, ou l’éditeur <code>nano</code> depuis le terminal).</li>
+      </ul>
+    </li>
+
+    <li><b>Créer le fichier</b> :
+      <p>Dans VS Code, clique sur l’icône « nouveau fichier » et nomme-le <code>main.py</code> (l’extension <code>.py</code> indique que c’est un fichier Python).</p>
+    </li>
+
+    <li><b>Écris ce code simple</b> dans <code>main.py</code> :</li>
+    <div class="cmd-row">
+      <pre class="cmd language-python"><code># Ceci affiche un message dans le terminal.
+print("Bonjour depuis Git Bash !")</code></pre>
+    </div>
+
+    <li><b>Enregistre</b> (sauvegarde) le fichier : <code>Ctrl+S</code> (Windows) ou <code>Cmd+S</code> (macOS).</li>
+
+    <li><b>Exécuter le script</b> (dans Git Bash ou terminal ouvert dans le dossier <code>mon_projet</code>) :</li>
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>python main.py      # ou: python3 main.py / py -3 main.py</code></pre>
+    </div>
+
+    <li><b>Résultat attendu</b> : tu vois dans le terminal la ligne suivante :</li>
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>Bonjour depuis Git Bash !</code></pre>
+    </div>
+  </ol>
+
+  <p><b>Si rien n’apparaît ou si tu as une erreur :</b></p>
+  <ol>
+    <li>Vérifie que tu es dans le bon dossier : tape <code>pwd</code> puis <code>ls</code> et assure-toi que <code>main.py</code> est listé.</li>
+    <li>Si l'ordinateur répond <code>python: command not found</code>, reviens à l’étape d’installation de Python et vérifie la case <b>Add to PATH</b> (Windows) ou utilise <code>python3</code> sur macOS/Linux.</li>
+    <li>Si tu as une erreur de syntaxe, regarde bien les guillemets et les parenthèses — VS Code montre souvent la ligne où il y a un problème.</li>
+  </ol>
+
+  <details>
+    <summary><b>Exemples simples à essayer ensuite</b></summary>
+    <div class="cmd-row">
+      <pre class="cmd language-python"><code>print(2 + 2)
+name = input("Comment tu t'appelles ? ")
+print("Bonjour", name)</code></pre>
+    </div>
+    <p>Ces petits essais t’aident à comprendre comment Python lit et exécute les lignes une par une.</p>
+  </details>
+
+  <hr>
+  <p><b>Derniers conseils pour un débutant :</b></p>
+  <ol>
+    <li>Ne t’inquiète pas des erreurs — elles arrivent toujours. Lis ce que l’ordinateur affiche : il donne souvent un indice précis (ligne, type d’erreur).</li>
+    <li>Prends ton temps : fais une étape à la fois (installer → vérifier → créer dossier → écrire fichier → exécuter).</li>
+    <li>Si quelque chose bloque, nous serons là pour t'aider et t'assister.</li>
+  </ol>
+
+</section>
     <hr>
     
     <section>
-      <h2 class="sous-titre">Pour ceux qui ont un smartphone (Android)</h2>
-      <p>Pour coder depuis un smartphone, nous utiliserons <b>Termux</b>, un terminal qui émule un environnement Linux.</p>
+  <h2 class="sous-titre">Pour ceux qui ont un smartphone (Android )</h2>
 
-      <h3>1. Installer Termux</h3>
-      <p>Télécharge l'application Termux depuis <a href="https://f-droid.org/fr/packages/com.termux/" target="_blank">F-Droid</a>, car la version du Play Store n'est plus mise à jour. Installe-la, tu auras une invite de commande prête à l'emploi.</p>
+<p>
+  Peut-être que tu n’as pas encore d’ordinateur, mais seulement un téléphone Android.  
+  Pas de problème ! Tu peux quand même apprendre à coder directement depuis ton smartphone.  
+</p>
 
-      <h3>2. Mettre à jour les paquets</h3>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On met à jour Termux et ses outils.
+<p>
+  Pour cela, nous allons utiliser une application qui s’appelle <b>Termux</b>.  
+  Mais alors, c’est quoi Termux ? 🤔  
+</p>
+
+<p>
+  Imagine que ton téléphone est comme une maison remplie de pièces fermées à clé.  
+  Tu as plein de choses à l’intérieur (photos, vidéos, applications…), mais tu ne vois pas toutes les portes.  
+  <b>Termux</b>, c’est comme une <i>clé magique</i> qui ouvre une porte secrète, donnant accès à une salle spéciale appelée <b>terminal</b>.  
+</p>
+
+<details>
+  <summary> Qu’est-ce qu’un <b>terminal</b> ?</summary>
+  <p>
+    Un <b>terminal</b> est un écran où tu écris des commandes en texte pour donner des ordres à ton appareil.  
+    C’est comme discuter avec ton téléphone en langage direct, sans passer par des boutons ou des icônes.  
+    Exemple : au lieu d’appuyer sur un bouton pour installer une application, tu écris une commande et ton téléphone le fait.
+  </p>
+</details>
+
+<p>
+  Dans ce terminal, tu ne cliques pas avec les doigts comme sur WhatsApp ou YouTube.  
+  Ici, tu <b>écris des ordres avec du texte</b>, et ton téléphone obéit.  
+  C’est comme si ton smartphone devenait ton employé et que tu pouvais lui dire :  
+  <i>« Hé, range-moi ce dossier », « écris-moi ça », « calcule ça »…</i>  
+</p>
+
+<div class="question">À quoi sert Termux ?</div>
+<ul>
+  <li>À transformer ton téléphone en un ordinateur miniature.</li>
+  <li>À apprendre à coder même sans PC.</li>
+  <li>À exécuter des programmes et tester directement tes idées.</li>
+</ul>
+
+<h3>1. Installer Termux</h3>
+<p>
+  D’abord, il faut télécharger Termux.  
+  ⚠️ Attention : ne le prends pas sur le Play Store, car cette version n’est plus à jour (comme un cahier rempli de vieilles leçons).  
+  Il faut aller sur <a href="https://f-droid.org/fr/packages/com.termux/" target="_blank">F-Droid</a>, qui est comme une librairie en ligne pour télécharger des applications gratuites et fiables.  
+</p>
+
+<details>
+  <summary> Qu’est-ce que <b>F-Droid</b> ?</summary>
+  <p>
+    <b>F-Droid</b> est une boutique d’applications gratuite et ouverte (un peu comme un marché bio 🥦 pour les applis).  
+    Contrairement au Play Store, tout y est <i>libre</i> et transparent : tu peux y trouver des applications sûres, sans pub et mises à jour régulièrement.
+  </p>
+</details>
+
+<p>
+  Une fois Termux installé et ouvert, tu verras un écran noir avec du texte blanc.  
+  Pas de panique 😅 ! Cet écran, c’est comme si tu parlais à ton téléphone en langage de commandes.
+</p>
+
+<h3>2. Mettre à jour les paquets</h3>
+<p>
+  Comme pour ton téléphone, où tu fais des mises à jour pour avoir les dernières fonctionnalités et corriger les bugs, ici aussi il faut mettre à jour Termux.  
+  C’est un peu comme remplir ton frigo avant de commencer à cuisiner : il faut être sûr que tout est frais.
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># On met à jour Termux et ses outils.
 pkg update && pkg upgrade -y</code></pre>
-      </div>
+</div>
 
-      <h3>3. Installer Python</h3>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On installe le langage Python.
+<details>
+  <summary>>Qu’est-ce qu’un <b>paquet</b> ?</summary>
+  <p>
+    Un <b>paquet</b> est comme une petite boîte qui contient un logiciel ou un outil.  
+    Quand on dit « mettre à jour les paquets », ça veut dire : installer les nouvelles versions de tous les outils pour qu’ils soient prêts et sécurisés.
+  </p>
+</details>
+
+<p>
+   Tape cette commande dans Termux et appuie sur "Entrée".  
+  Attends que ça finisse, ça peut prendre quelques minutes selon ta connexion.
+</p>
+
+<h3>3. Installer Python</h3>
+<p>
+  Maintenant, il est temps d’installer Python, notre langage de programmation.  
+  Imagine que Python est comme une langue étrangère : en l’installant, ton téléphone apprend à parler cette langue.  
+  Ensuite, toi tu vas apprendre à donner des phrases à ton téléphone pour qu’il obéisse (programmes).
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># On installe le langage Python.
 pkg install python</code></pre>
-      </div>
-      
-      <h3>4. Vérifier l’installation</h3>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On vérifie que Python est bien installé.
+</div>
+
+<p>
+   Tape cette commande et valide.  
+  Ton téléphone va télécharger et installer Python. C’est comme si tu ajoutais un dictionnaire dans ton sac pour apprendre une nouvelle langue.  
+</p>
+<p>
+  Une fois que c’est terminé, tu es prêt à écrire tes premiers programmes !
+</p>
+
+<p>
+  Tu verras que l’écran de Termux est noir avec du texte blanc (parfois vert).  
+  Cela peut sembler étrange au début, mais c’est la <b>porte d’entrée du monde des programmeurs</b>.  
+  Beaucoup de grands développeurs travaillent encore aujourd’hui avec ce genre d’outils !
+</p>
+
+<h3>4. Vérifier l’installation</h3>
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># On vérifie que Python est bien installé.
 python --version</code></pre>
-      </div>
-      <p>Tu devrais voir la version de Python que tu viens d'installer.</p>
+</div>
+
+<p>
+  Après avoir installé Python, il faut toujours vérifier si l’installation a bien fonctionné.  
+  Pour ça, on tape la commande <code>python --version</code> dans Termux.  
+</p>
+
+<details>
+  <summary> Que veut dire <code>--version</code> ?</summary>
+  <p>
+    L’option <code>--version</code> demande à un programme d’afficher sa version actuelle.  
+    C’est comme demander à quelqu’un : « Quel âge as-tu ? ».  
+    Ici, on demande à Python : « Quelle est ta version ? ».
+  </p>
+</details>
+
+<p>
+   Si tout s’est bien passé, tu verras apparaître un texte comme par exemple :
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code>Python 3.11.7</code></pre>
+</div>
+
+<p>
+  Ici, "3.11.7" est la version de Python. Toi, tu peux avoir une version un peu différente (par exemple <code>3.12.2</code>), et ce n’est pas grave : l’important est que quelque chose s’affiche !
+</p>
+
+<p>
+   Imagine que tu viens d’acheter un nouveau téléphone. Avant de l’utiliser, tu l’allumes pour vérifier qu’il fonctionne et qu’il a bien une batterie.  
+  Eh bien ici, c’est pareil : on installe Python, puis on le "réveille" avec <code>python --version</code> pour s’assurer qu’il est bien là et prêt à travailler.
+</p>
+
 
       <h3>5. Écrire et lancer ton premier script</h3>
-      <p>Tu peux utiliser un éditeur de texte simple comme <code class="inline">nano</code> qui est inclus.</p>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On crée un nouveau dossier pour notre projet et on y entre.
+
+<p>
+  Maintenant que Python est installé et reconnu, on va écrire notre tout premier programme.  
+  C’est un peu comme envoyer ton premier SMS 📱 avec un nouveau téléphone : on vérifie qu’il fonctionne vraiment.
+</p>
+
+<p>
+  Pour écrire du code, on utilise un éditeur de texte. Termux inclut déjà <code class="inline">nano</code>, qui est simple et pratique.
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># On crée un nouveau dossier pour notre projet et on y entre.
 mkdir mon_projet
 cd mon_projet
+
 # On crée et on ouvre le fichier pour écrire notre code.
 nano main.py</code></pre>
-      </div>
-      <p>Écris ton code :</p>
-      <div class="cmd-row">
-        <pre class="cmd language-python"><code># La commande print() affiche un message.
+</div>
+
+<details>
+  <summary> <div class="question2">Qu’est-ce qu’un <b>script</b> ?</div></summary>
+  <p>
+    Un <b>script</b> est simplement un fichier texte qui contient du code que Python va lire et exécuter.  
+    Dans notre cas, <code>main.py</code> est notre premier script : un petit programme que nous allons lancer.
+  </p>
+</details>
+
+<p>
+  Dans l’éditeur <code>nano</code>, tape ce code :
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-python"><code># La commande print() sert à afficher du texte à l’écran.
 print("Bonjour depuis Termux !")</code></pre>
-      </div>
-      <p>Sauvegarde et quitte en appuyant sur <code>Ctrl + X</code>, puis <code>Y</code> pour confirmer, et <code>Entrée</code>.</p>
-      <p>Lance ton script :</p>
-      <div class="cmd-row">
-        <pre class="cmd language-bash"><code># On lance notre script Python.
+</div>
+
+<details>
+  <summary> Qu’est-ce que <code>print()</code> ?</summary>
+  <p>
+    La fonction <code>print()</code> est l’une des plus utilisées en Python.  
+    Elle sert à afficher du texte ou des résultats à l’écran.  
+    Exemple : <code>print(2 + 3)</code> affichera <code>5</code>.
+  </p>
+</details>
+
+<p>
+  Ensuite, il faut enregistrer ton fichier :
+  <ul>
+    <li><kbd>Ctrl</kbd> + <kbd>X</kbd> (pour quitter)</li>
+    <li><kbd>Y</kbd> (pour confirmer l’enregistrement)</li>
+    <li><kbd>Entrée</kbd> (pour valider le nom du fichier)</li>
+  </ul>
+</p>
+
+<details>
+  <summary> Qu’est-ce que <code>nano</code> ?</summary>
+  <p>
+    <code>nano</code> est un éditeur de texte inclus dans Termux.  
+    Il s’ouvre directement dans ton terminal, et te permet de taper du code ou des notes.  
+    Il est léger, simple et parfait pour débuter.
+  </p>
+</details>
+
+<p>
+  Maintenant, lançons ton programme :
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># On exécute notre script Python.
 python main.py</code></pre>
-      </div>
-      <p>Le résultat attendu est : <code class="inline">Bonjour depuis Termux !</code></p>
+</div>
+
+<p>
+  Résultat attendu à l’écran :
+</p>
+
+<div class="cmd-row">
+  <pre class="cmd language-plaintext"><code>Bonjour depuis Termux !</code></pre>
+</div>
+
+<details>
+  <summary> Qu’est-ce que <b>Python</b> exactement ?</summary>
+  <p>
+    Python est un langage de programmation populaire, simple et lisible.  
+    Il est utilisé dans de nombreux domaines : intelligence artificielle, web, jeux vidéo, analyse de données, etc.  
+    Sa simplicité le rend idéal pour apprendre à programmer.
+  </p>
+</details>
+
+<p>
+  Bravo ! Tu viens d’exécuter ton tout premier programme Python sur Android grâce à Termux.  
+  À partir de là, tu pourras écrire des scripts de plus en plus complexes.
+</p>
+
       
-      
-      
-      
+ <h2 class="sous-titre"> Commandes de navigation et gestion de fichiers</h2>
+
+
+
+<h3>1️ Navigation dans les dossiers</h3>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Liste les fichiers et dossiers dans le dossier actuel
+ls</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Liste détaillée avec taille, date et permissions
+ls -l</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Entrer dans un dossier
+cd nom_du_dossier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Revenir au dossier précédent
+cd ..</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Afficher le chemin complet du dossier actuel
+pwd</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Afficher l’arborescence des dossiers et fichiers
+tree</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Copier un projet Git depuis Internet
+git clone url_du_repo</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Se déplacer sur une autre branche Git
+git checkout nom_de_branche</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Voir toutes les branches disponibles
+git branch</code></pre>
+</div>
+
+<h3>2️ Manipulation des fichiers</h3>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Crée un nouveau fichier vide
+touch nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Ouvre un fichier pour l’éditer
+nano nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Affiche le contenu d’un fichier
+cat nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Supprime un fichier (attention ⚠️)
+rm nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Renommer ou déplacer un fichier
+mv fichier1 fichier2</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Copier un fichier
+cp fichier1 fichier2</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Crée un nouveau dossier
+mkdir nom_du_dossier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Supprime un dossier vide
+rmdir nom_du_dossier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Supprime un dossier et tout son contenu (attention ⚠️)
+rm -r nom_du_dossier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Affiche les premières lignes d’un fichier
+head nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Affiche les dernières lignes d’un fichier
+tail nom_du_fichier</code></pre>
+</div>
+
+<div class="cmd-row">
+  <pre class="cmd language-bash"><code># Copier un dossier et tout son contenu
+cp -r dossier1 dossier2</code></pre>
+</div>
+
+
+<p>
+Avec ces commandes de base, tu peux déjà naviguer, créer et lancer tes premiers scripts en toute autonomie.  
+Le plus important maintenant est de <b>pratiquer un peu chaque jour</b> : même des petits programmes comme afficher ton prénom, faire une addition ou afficher une liste.  
+Petit à petit, tu deviendras à l’aise et tu pourras créer des projets plus grands  !
+</p>
+
+<p>Maintenant que vous avez installé des outils, On se retrouve au deuxième module sur les variables et types des données, N'oubliez pas de vous exercer sur <a href="404.html">la page des exercices</a> </p>
+   
+
+    
     </section>
     <hr>
     <section>
@@ -321,6 +820,7 @@ python main.py</code></pre>
       </section>
   </main>
 
+   
   
  <script src="js/notes.js"></script>
    <!-- Pied de page -->
