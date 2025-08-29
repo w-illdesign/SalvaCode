@@ -52,6 +52,11 @@
    RÈGLES DE BASE
    - html / body, typographie par défaut
    ========================= */
+   /* Bloquer la sélection de tout le contenu */
+* {
+  user-select: none;
+}
+
 html,
 body {
     height: 100%;
