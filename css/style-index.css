@@ -132,6 +132,8 @@ h1 {
     font-weight: 900;
 }
 
+
+
 .change-toggle {
     appearance: none;
     border: 0;
@@ -1435,4 +1437,27 @@ hr {
 /* caché si pas de challenge actif */
 .challenge-dot[hidden] {
   display: none;
+}
+
+
+
+.header-challenge {
+  display: flex;
+  justify-content: center; /* 1er à gauche, 2e à droite */
+  align-items: center;
+  flex-wrap: wrap;                /* permet au 3e de descendre */
+  gap: 10px; /* ajoute de l’espace entre les éléments */
+}
+
+.header-challenge .exam-badge {
+  text-align: center; /* centre le texte dans chaque bouton */
+}
+
+.header-challenge a:nth-child(3) {
+  margin: 0 auto; /* centre le 3e sans forcer sa largeur */
+}
+
+
+.header-challenge a {
+  text-decoration: none; /* enlève le soulignement */
 }
