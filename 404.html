@@ -26,157 +26,81 @@
         position: relative;
     }
 
-    /* wrapper de centrage uniquement pour la carte */
-    .card-center {
-      min-height: 50vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px; /* évite que ça colle aux bords sur petits écrans */
-      box-sizing: border-box;
-    }
-
-    .card-404 {
-      width: min(var(--center-max-width), 96vw);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 12px 40px rgba(2,6,11,0.6);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2px;
-      align-items: center;
-      justify-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .status {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-      text-align:center;
-      z-index: 4;
-      
-    }
-
-    .status h1 {
-      margin:0;
-      font-size: clamp(28px, 5vw, 42px);
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-    .status p {
-      margin:0;
-      color: var(--muted);
-      max-width: 68ch;
-      line-height:1.45;
-      font-size: 12px;
-    }
-
-    .img-wrap-404 {
-      position: relative;
-      
-      max-width: 40%;
-      height: auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 0; /* plus de padding */
-      margin-bottom: -10px;
-      margin-top: -5px;
-      box-sizing: border-box;
-      z-index: 2;
-      border-bottom: solid var(--muted) 3px;
-    }
-
-    /* plus aucune bordure/ombre sur l'image */
-
-
-    .img-wrap-404 img {
-      display:block;
-      width:100%;
-      height:auto;
-      object-fit:cover;
-      vertical-align: middle;
-    }
-
-    .small {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
+   
     
     
   </style>
 <body class="loader-active">
-  <!-- =========================
-       SITE LOADER (intégré)
-       - affiche code Python coloré par Prism
-       - disparaît uniquement sur téléphone (<= 486px) et seulement après window.load
-       - sur tablette/PC, reste bloquant et affiche un message
-       ========================= -->
-  <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
-    <div class="loader-card" id="loader-card">
-      <!-- header terminal -->
-      <div class="term-header" aria-hidden="true">
-        <div class="term-circles">
-          <span class="c red" aria-hidden="true"></span>
-          <span class="c yellow" aria-hidden="true"></span>
-          <span class="c green" aria-hidden="true"></span>
-        </div>
-        <div class="term-title">/SalvaCode/Erreur 404 — boot</div>
+
+
+<div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
+  <div class="loader-card" id="loader-card">
+
+    <!-- header terminal -->
+    <div class="term-header" aria-hidden="true">
+      <div class="term-circles">
+        <span class="c red" aria-hidden="true"></span>
+        <span class="c yellow" aria-hidden="true"></span>
+        <span class="c green" aria-hidden="true"></span>
       </div>
-
-      <!-- terminal area: prism-formatted python code (in template, injected by JS) -->
-      <div class="terminal" aria-hidden="true">
-        <div class="scroll-window" id="scroll-window" aria-hidden="true">
-          <template id="code-template">
-<pre class="language-python"><code class="language-python"># Démarrage des services
-import json
-import requests
-from pathlib import Path
-
-def load_config(path: Path) -> dict:
-    # lire le fichier de configuration
-    with path.open('r', encoding='utf-8') as f:
-        return json.loads(f.read())
-
-for n in range(5):
-    print(f"service.{n}")
-
-health = requests.get("/api/health").json()
-modules = [m for m in ("ui", "db", "auth") if m]
-render("interface")
-# waiting for mount...
-</code></pre>
-          </template>
-
-          <!-- conteneur où loader.js injectera deux clones du bloc ci-dessus pour boucle fluide -->
-          <div id="lines-container" aria-hidden="true"></div>
-        </div>
-
-        <!-- caret / boot line -->
-        <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
-          <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
-          <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
-        </div>
-      </div>
-
-      <!-- message affiché sur desktop/tablette (JS gère aria-hidden selon cas) -->
-      <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+      <div class="term-title">/SalvaCode/Module 1 — boot</div>
     </div>
-  </div>
 
-  <!-- =========================
-       CONTENU DU SITE (inchangé)
-       Place ici tout ton contenu habituel — header, hero, sections, etc.
-       ========================= -->
-  <!-- =========================
-       HEADER
-       ========================= -->
+    <div class="terminal" aria-hidden="true">
+      <div class="scroll-window" id="scroll-window" aria-hidden="true">
+        <template id="code-template">
+          <pre class="language-python chargement-page-code"><code class="language-python">
+import time
+import sys
+
+def attente(message, cycles=6, pause=0.4):
+    for i in range(cycles):
+        dots = "." * (i % 4)
+        sys.stdout.write(f"\r{message}{dots}   ")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print()  # sauter une ligne
+
+def progression(total=20, pause=0.2):
+    """Affiche une barre de progression simple"""
+    for i in range(total + 1):
+        bar = "#" * i + "-" * (total - i)
+        percent = int((i / total) * 100)
+        sys.stdout.write(f"\r[{bar}] {percent}%")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print("\n")
+
+# --- Déroulement ---
+print("Démarrage du système...\n")
+time.sleep(1)
+
+attente("Préparation des ressources")
+attente("Vérification du serveur")
+attente("Chargement du contenu")
+
+print("\nProgression du chargement :")
+progression()
+
+print("La page sera bientôt disponible.")
+time.sleep(1)
+print("Merci de votre patience.")
+          </code></pre>
+        </template>
+        <div id="lines-container" aria-hidden="true"></div>
+      </div>
+
+      <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
+        <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
+        <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
+      </div>
+    </div>
+
+    <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+  </div>
+</div>
+
+
   <header>
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <!-- LOGO -->
@@ -267,14 +191,19 @@ render("interface")
       </div>
 
       <!-- Illustration sans bordure ni ombre -->
-      <figure class="img-wrap-404" role="img" aria-label="Illustration page introuvable">
+      <figure class="img-wrap-illustration" role="img" aria-label="Illustration page introuvable">
         <div class="img-inner">
           <img src="illustrations/2025082816470571.png" alt="Illustration 404 — Page non trouvée">
         </div>
       </figure>
+      
+      
 
       <!-- Note -->
-      <p class="small">Si tu penses qu’il s’agit d’une erreur, contacte l’administrateur.</p>
+      <p class="small">Si tu penses qu’il s’agit d’une erreur, contacte <a href="https://api.whatsapp.com/send?phone=243972424235&text=Salut%20!%20Je%20soue%20participer%20au%20challenge%20pas%20une%20page"
+   target="_blank" rel="noopener">
+   l'administrateur sur WhatsApp
+</a>.</p>
     </article>
   </main>
 

@@ -134,7 +134,7 @@
     if (scrollWindowEl) scrollWindowEl.style.display = '';
 
     if (loaderMessage) {
-      loaderMessage.textContent = "😢 Ce site n'est pas accessible sur un écran de plus de 486px (PC et Tablettes). Réduis la largeur de la fenêtre ou utilise un téléphone.";
+      loaderMessage.textContent = "⚠️ Ce site n'est pas accessible sur un écran de plus de 486px (PC et Tablette). Réduis la largeur de la fenêtre puis recharge la page ou utilise un téléphone.";
       loaderMessage.setAttribute('aria-hidden', 'false');
     }
 

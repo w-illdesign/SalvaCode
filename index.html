@@ -7,13 +7,12 @@
   
   <title>Apprenez la programmation web python</title>
 
-  <!-- Feuilles de style principales -->
+ 
   <link rel="stylesheet" href="css/style-index.css">
-  <link rel="stylesheet" href="css/dracula-prism.css"> <!-- thème Prism local (utilisé par le loader) -->
-  
-  <link rel="stylesheet" href="css/loader.css">        <!-- styles spécifiques au loader -->
+  <link rel="stylesheet" href="css/dracula-prism.css">
+  <link rel="stylesheet" href="css/loader.css">  
 
-  <!-- Prism (highlighting) - chargé en defer -->
+ 
   <script src="js/prism.js" defer></script>
   <script src="js/prism-python.js" defer></script>
   <script src="js/prism-bash.js" defer></script>
@@ -24,72 +23,81 @@
 </head>
 
 <body class="loader-active">
-  <!-- =========================
-       SITE LOADER (intégré)
-       - affiche code Python coloré par Prism
-       - disparaît uniquement sur téléphone (<= 486px) et seulement après window.load
-       - sur tablette/PC, reste bloquant et affiche un message
-       ========================= -->
-  <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
-    <div class="loader-card" id="loader-card">
-      <!-- header terminal -->
-      <div class="term-header" aria-hidden="true">
-        <div class="term-circles">
-          <span class="c red" aria-hidden="true"></span>
-          <span class="c yellow" aria-hidden="true"></span>
-          <span class="c green" aria-hidden="true"></span>
-        </div>
-        <div class="term-title">/SalvaCode/Accueil — boot</div>
+    
+    
+     <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
+  <div class="loader-card" id="loader-card">
+
+    <!-- header terminal -->
+    <div class="term-header" aria-hidden="true">
+      <div class="term-circles">
+        <span class="c red" aria-hidden="true"></span>
+        <span class="c yellow" aria-hidden="true"></span>
+        <span class="c green" aria-hidden="true"></span>
       </div>
-
-      <!-- terminal area: prism-formatted python code (in template, injected by JS) -->
-      <div class="terminal" aria-hidden="true">
-        <div class="scroll-window" id="scroll-window" aria-hidden="true">
-          <template id="code-template">
-<pre class="language-python"><code class="language-python">
-# Démarrage des services
-import json
-import requests
-from pathlib import Path
-
-def load_config(path: Path) -> dict:
-    # lire le fichier de configuration
-    with path.open('r', encoding='utf-8') as f:
-        return json.loads(f.read())
-
-for n in range(5):
-    print(f"service.{n}")
-
-health = requests.get("/api/health").json()
-modules = [m for m in ("ui", "db", "auth") if m]
-render("interface")
-# waiting for mount...
-
-
-</code></pre>
-          </template>
-
-          <!-- conteneur où loader.js injectera deux clones du bloc ci-dessus pour boucle fluide -->
-          <div id="lines-container" aria-hidden="true"></div>
-        </div>
-
-        <!-- caret / boot line -->
-        <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
-          <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
-          <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
-        </div>
-      </div>
-
-      <!-- message affiché sur desktop/tablette (JS gère aria-hidden selon cas) -->
-      <div id="loader-message" aria-hidden="true">Chargement du projet…</div>
+      <div class="term-title">/SalvaCode/Acceuil — boot</div>
     </div>
-  </div>
 
-  <!-- =========================
-       CONTENU DU SITE (inchangé)
-       Place ici tout ton contenu habituel — header, hero, sections, etc.
-       ========================= -->
-  <header>
+    <div class="terminal" aria-hidden="true">
+      <div class="scroll-window" id="scroll-window" aria-hidden="true">
+        <template id="code-template">
+          <pre class="language-python chargement-page-code"><code class="language-python">
+import time
+import sys
+
+def attente(message, cycles=6, pause=0.4):
+    for i in range(cycles):
+        dots = "." * (i % 4)
+        sys.stdout.write(f"\r{message}{dots}   ")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print()  # sauter une ligne
+
+def progression(total=20, pause=0.2):
+    """Affiche une barre de progression simple"""
+    for i in range(total + 1):
+        bar = "#" * i + "-" * (total - i)
+        percent = int((i / total) * 100)
+        sys.stdout.write(f"\r[{bar}] {percent}%")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print("\n")
+
+# --- Déroulement ---
+print("Démarrage du système...\n")
+time.sleep(1)
+
+attente("Préparation des ressources")
+attente("Vérification du serveur")
+attente("Chargement du contenu")
+
+print("\nProgression du chargement :")
+progression()
+
+print("La page sera bientôt disponible.")
+time.sleep(1)
+print("Merci de votre patience.")
+          </code></pre>
+        </template>
+        <div id="lines-container" aria-hidden="true"></div>
+      </div>
+
+      <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
+        <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
+        <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
+      </div>
+    </div>
+
+    <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+  </div>
+</div>
+
+
+    
+</style> 
+   
+  <div id="header"></div>
+<header>
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <!-- LOGO -->
       <div class="logo" style="display:flex;align-items:center;gap:6px;">
@@ -100,16 +108,9 @@ render("interface")
         <strong>SalvaCode</strong>
       </div>
 
-      <!-- NAVIGATION -->
-      
-      <!-- Simple icons (place dans le header ou où tu veux remplacer le nav) -->
-<style>
- 
-</style>
-
-<nav class="simple-nav" aria-label="Navigation principale">
+      <nav class="simple-nav" aria-label="Navigation principale">
   <!-- Accueil -->
-  <a href="#" class="simple-link" aria-label="Accueil - page d'accueil">
+  <a href="index.html" class="simple-link" aria-label="Accueil - page d'accueil">
     <span class="icon-box" role="img" aria-hidden="false" title="Accueil">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true"
      style="width:24px;height:24px;transition:color .3s ease;color:var(--muted);display:inline-block;cursor:pointer;">
@@ -139,8 +140,6 @@ render("interface")
     </span>
     <span class="label">Apprendre</span>
   </a>
-
-  <!-- Challenge (coupe simple) -->
   
  <a href="challenge.html" class="simple-link" aria-label="Challenge">
   <span class="icon-box" role="img" title="Challenge">
@@ -159,6 +158,7 @@ render("interface")
   
 </nav>
 
+
       <!-- BADGE EXAM -->
       <div style="display:flex;gap:8px;align-items:center;">
         <div class="exam-badge" role="status" aria-label="Examens">
@@ -168,11 +168,12 @@ render("interface")
                   stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <strong>Pensez à participer aux challenges</strong>
+          <strong>Plus vous participez et plus gagnez des points</strong>
         </div>
       </div>
     </div>
   </header>
+
 
   <!-- HERO -->
   <div class="hero-wrap">
@@ -217,6 +218,12 @@ render("interface")
         <p>Tu as l'impression qu'il faut un ordinateur surpuissant pour coder ? Détrompe-toi ! La vérité, c'est que tu peux
           commencer à construire des projets passionnants avec le matériel que tu as déjà. Ce guide est conçu pour te montrer
           le chemin, que tu sois sur un PC ou un smartphone. Prépare-toi à créer ton tout premier programme.</p>
+          <figure class="img-wrap-illustration" role="img" aria-label="Illustration page introuvable">
+        <div class="img-inner">
+          <img src="illustrations/f.png" alt="Illustration">
+        </div>
+      </figure>
+      
 
         <h2>Langages</h2>
         <p>Dans ce cours nous allons ensemble apprendre :</p>
@@ -356,28 +363,17 @@ function changerTexte() {
   </main>
   
   
-  
-
- <!-- Pied de page -->
   <footer style="padding:18px 20px; text-align:center; color:var(--muted); font-size:13px;">
+      
+      
     © SalvaCode — Ressources pour apprendre à coder
   </footer>  
   
-  <!-- *********************** -->
-<!-- place cette ligne juste avant la balise fermante </body> -->
+  <!-- © 2025 TonNom. Ce site et son contenu sont protégés par le droit d’auteur. Tous droits réservés. -->
+  
 <script type="module" src="./js/challenge-app.js"></script>
-  <!-- scripts applicatifs -->
-  <script src="js/main.js" defer></script>
-  <script src="js/loader.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/loader.js" defer></script>
 
-  <!--
-    NOTES:
-    - Le fichier js/loader.js doit :
-      * injecter deux clones du <pre><code> contenu du template#code-template
-      * appeler Prism.highlightElement(...) sur les éléments injectés (Prism est chargé avec defer)
-      * démarrer la boucle de scroll (ajouter la classe .animated) sauf si prefers-reduced-motion
-      * n'enlever le loader que sur mobile (<=486px) et uniquement après l'événement window.load
-      * sur écrans >486px garder l'overlay visible et afficher le message ⚠️ dans #loader-message
-  -->
 </body>
 </html>

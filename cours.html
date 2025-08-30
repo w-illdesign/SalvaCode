@@ -22,71 +22,73 @@
 </head>
 
 <body class="loader-active">
-  <!-- =========================
-       SITE LOADER (intégré)
-       - affiche code Python coloré par Prism
-       - disparaît uniquement sur téléphone (<= 486px) et seulement après window.load
-       - sur tablette/PC, reste bloquant et affiche un message
-       ========================= -->
-  <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
-    <div class="loader-card" id="loader-card">
-      <!-- header terminal -->
-      <div class="term-header" aria-hidden="true">
-        <div class="term-circles">
-          <span class="c red" aria-hidden="true"></span>
-          <span class="c yellow" aria-hidden="true"></span>
-          <span class="c green" aria-hidden="true"></span>
-        </div>
-        <div class="term-title">/SalvaCode/Apprendre — boot</div>
+ <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
+  <div class="loader-card" id="loader-card">
+
+    <!-- header terminal -->
+    <div class="term-header" aria-hidden="true">
+      <div class="term-circles">
+        <span class="c red" aria-hidden="true"></span>
+        <span class="c yellow" aria-hidden="true"></span>
+        <span class="c green" aria-hidden="true"></span>
       </div>
-
-      <!-- terminal area: prism-formatted python code (in template, injected by JS) -->
-      <div class="terminal" aria-hidden="true">
-        <div class="scroll-window" id="scroll-window" aria-hidden="true">
-          <template id="code-template">
-<pre class="language-python"><code class="language-python"># Démarrage des services
-import json
-import requests
-from pathlib import Path
-
-def load_config(path: Path) -> dict:
-    # lire le fichier de configuration
-    with path.open('r', encoding='utf-8') as f:
-        return json.loads(f.read())
-
-for n in range(5):
-    print(f"service.{n}")
-
-health = requests.get("/api/health").json()
-modules = [m for m in ("ui", "db", "auth") if m]
-render("interface")
-# waiting for mount...
-</code></pre>
-          </template>
-
-          <!-- conteneur où loader.js injectera deux clones du bloc ci-dessus pour boucle fluide -->
-          <div id="lines-container" aria-hidden="true"></div>
-        </div>
-
-        <!-- caret / boot line -->
-        <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
-          <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
-          <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
-        </div>
-      </div>
-
-      <!-- message affiché sur desktop/tablette (JS gère aria-hidden selon cas) -->
-      <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+      <div class="term-title">/SalvaCode/Apprendre — boot</div>
     </div>
-  </div>
 
-  <!-- =========================
-       CONTENU DU SITE (inchangé)
-       Place ici tout ton contenu habituel — header, hero, sections, etc.
-       ========================= -->
-  <!-- =========================
-       HEADER
-       ========================= -->
+    <div class="terminal" aria-hidden="true">
+      <div class="scroll-window" id="scroll-window" aria-hidden="true">
+        <template id="code-template">
+          <pre class="language-python chargement-page-code"><code class="language-python">
+import time
+import sys
+
+def attente(message, cycles=6, pause=0.4):
+    for i in range(cycles):
+        dots = "." * (i % 4)
+        sys.stdout.write(f"\r{message}{dots}   ")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print()  # sauter une ligne
+
+def progression(total=20, pause=0.2):
+    """Affiche une barre de progression simple"""
+    for i in range(total + 1):
+        bar = "#" * i + "-" * (total - i)
+        percent = int((i / total) * 100)
+        sys.stdout.write(f"\r[{bar}] {percent}%")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print("\n")
+
+# --- Déroulement ---
+print("Démarrage du système...\n")
+time.sleep(1)
+
+attente("Préparation des ressources")
+attente("Vérification du serveur")
+attente("Chargement du contenu")
+
+print("\nProgression du chargement :")
+progression()
+
+print("La page sera bientôt disponible.")
+time.sleep(1)
+print("Merci de votre patience.")
+          </code></pre>
+        </template>
+        <div id="lines-container" aria-hidden="true"></div>
+      </div>
+
+      <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
+        <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
+        <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
+      </div>
+    </div>
+
+    <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+  </div>
+</div>
+       
   <header>
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <!-- LOGO -->

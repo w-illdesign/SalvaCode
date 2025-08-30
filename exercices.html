@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Challenges</title>
+  <title>Challenges — en programmation </title>
 
     <!-- Feuilles de style principales -->
   <link rel="stylesheet" href="css/style-index.css">
@@ -22,11 +22,7 @@
 </head>
 
 <body class="loader-active">
-  
-  
-  
-  
-  <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
+ <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
   <div class="loader-card" id="loader-card">
 
     <!-- header terminal -->
@@ -36,7 +32,7 @@
         <span class="c yellow" aria-hidden="true"></span>
         <span class="c green" aria-hidden="true"></span>
       </div>
-      <div class="term-title">/SalvaCode/Challenge — boot</div>
+      <div class="term-title">/SalvaCode/Exercices — boot</div>
     </div>
 
     <div class="terminal" aria-hidden="true">
@@ -106,11 +102,10 @@ print("Merci de votre patience.")
       </div>
 
       <!-- NAVIGATION -->
-        <!-- NAVIGATION -->
       <nav class="simple-nav" aria-label="Navigation principale">
   <!-- Accueil -->
   <a href="index.html" class="simple-link" aria-label="Accueil - page d'accueil">
-    <span class="icon-box" role="img" aria-hidden="false" title="Accueil">
+    <span class="icon-box" role="img"  title="Accueil">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true"
      style="width:24px;height:24px;transition:color .3s ease;color:var(--ring);display:inline-block;cursor:pointer;">
   <style>
@@ -128,7 +123,7 @@ print("Merci de votre patience.")
     <span class="icon-box" role="img" title="Cours">
         
         
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
      style="width:24px;height:24px;transition:color .3s ease;color: var(--ring);display:inline-block;cursor:pointer;">
   <style>
     svg:hover { color:var(--muted); } 
@@ -145,7 +140,7 @@ print("Merci de votre patience.")
  <a href="challenge.html" class="simple-link" aria-label="Challenge">
   <span class="icon-box" role="img" title="Challenge">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true"
-     style="width:24px;height:24px;transition:color .3s ease;color:var(--muted);display:inline-block;cursor:pointer;">
+     style="width:24px;height:24px;transition:color .3s ease;color:var(--ring);display:inline-block;cursor:pointer;">
   <style>
     svg:hover { color:var(--muted); }
     path { fill:currentColor; }
@@ -169,80 +164,45 @@ print("Merci de votre patience.")
                   stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <strong>Plus vous participez et plus gagnez des points</strong>
+          <strong>Essayez de résoudre avant de coher</strong>
         </div>
       </div>
     </div>
   </header>
-  
-  
-  
+
+
+
+
+
+
 
   <!-- =========================
        MAIN
        ========================= -->
   <main>
-    
-        <div class="header-challenge">
-  <a href="#challenges-title" class="exam-badge">Voir les challenges</a>
-  <a href="#Commentcamarche" class="exam-badge">Comment ça marche ?</a>
-  <a href="https://api.whatsapp.com/send?phone=243972424235&text=Voici%20ma%20résolution"
-   target="_blank" rel="noopener"
-   class="exam-badge third">Envoyer une résolution à l'administrateur</a>
-   
-  
-</div>
-      
-      <!-- LISTE DES PARTICIPANTS -->
-    <section aria-labelledby="participants-title" class="students">
-      <h2 id="participants-title" class="sous-titre">Participants</h2>
-      <div id="participant-list" class="challenge-grid"></div>
-    </section>
-    <hr>
-    
-    <!-- LISTE DES DEFIS -->
-    <section aria-labelledby="challenges-title">
-      <h2 id="challenges-title" class="sous-titre">Liste des défis</h2>
-      <div id="challenge-list" class="grid challenge-grid" aria-live="polite"></div>
-    </section>
-   
-   <hr>
-   <section class="module-section">
-    <div class="question" id="Commentcamarche">Comment ça marche ?</div>
-       
-<div class="module-list">
-        <p>Cliquez <a href="https://api.whatsapp.com/send?phone=243972424235&text=Salut%20je%20souhaite%20participer%20au%20challenge%20sur%20SalvaCode"
-   target="_blank" rel="noopener">
-   là</a> pour parler à l'administrateur sur WhatsApp</p>
-        <ul>
-            <li>Envoyez votre pseudo et votre profil</li>
-          <li> Résolvez un challenge avant l'apparition de la résolution (avant la fin du compte à rebours du challenge)
-          <li>Envoyez une capture d'écran ou le code (copié-collé), votre pseudo et le numéro du challenge ou de l'exercice pour avoir des <b>points</b></li>
-          <li>Pour votre bien il est défendu d'utiliser <b>ChatGpt (IA)</b> pour résoudre les challenges sauf à l'indication contraire dans le challenge</li>
-          
-        </ul>
-        
-        </div>
-        
-    </section>
-  </main>
-  
+  <div id="modules-container"></div>
+</main>
+
 
  <!-- Pied de page -->
   <footer style="padding:18px 20px; text-align:center; color:var(--muted); font-size:13px;">
     © SalvaCode — Ressources pour apprendre à coder
   </footer>
+
   <!-- =========================
        JS
        ========================= -->
   
+ 
+    <script src="js/exercices.js"></script>
+  <script src="js/loader.js" defer></script>
 <!-- *********************** -->
 <!-- place cette ligne juste avant la balise fermante </body> -->
 <script type="module" src="./js/challenge-app.js"></script>
   <!-- scripts applicatifs -->
   <script src="js/main.js" defer></script>
   <script src="js/loader.js" defer></script>
-
+<script src="js/notes.js"></script>
   <!--
     NOTES:
     - Le fichier js/loader.js doit :

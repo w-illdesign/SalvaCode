@@ -7,22 +7,22 @@ const modules = [
     items: [
       "Pour ceux qui ont des smartphones. (Termux)",
       "Pour ceux qui ont des ordinateurs. (Git)",
+      "Commandes de navigation et gestions des fichiers",
       "Problèmes <b>fréquents</b>"
     ],
     links: [
-      { text: "Notes", href: "chapitre1.html", icon: "M4 4h16v2H4V4zm0 6h16v2H4v-2zm0 6h10v2H4v-2z" },
-{ text: "Exercices", href: "404.html", icon: "M6.2 4.8l1.4-1.4 3 3 1-1 2 2-1 1 3 3 1-1 3 3-1.4 1.4-3-3-1 1-2-2 1-1-3-3-1 1-3-3z" }
+      { text: "Notes", href: "module1.html", icon: "M4 4h16v2H4V4zm0 6h16v2H4v-2zm0 6h10v2H4v-2z" }
     ]
   },
   {
-    title: "Variables & Types",
+    title: "Variables & Types des données",
     items: [
       "Introduction aux variables",
       "Types de données"
     ],
     links: [
-      { text: "Notes", href: "404.html", icon: "M4 4h16v2H4V4zm0 6h16v2H4v-2zm0 6h10v2H4v-2z" },
-      { text: "Exercices", href: "404.html", icon: "M19 3H5c-1.1 0-2 .9-2 2v14l7-3 7 3V5c0-1.1-.9-2-2-2z" }
+      { text: "Notes", href: "module2.html", icon: "M4 4h16v2H4V4zm0 6h16v2H4v-2zm0 6h10v2H4v-2z" },
+      { text: "Exercices", href: "exercices.html#variables-&-types-de données", icon: "M19 3H5c-1.1 0-2 .9-2 2v14l7-3 7 3V5c0-1.1-.9-2-2-2z" }
     ]
   }
 ];

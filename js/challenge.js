@@ -62,7 +62,7 @@ export const CHALLENGES = [
   {
     id: 1,
     title: "Swap de variables",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Échangez les valeurs de deux variables sans créer de variable temporaire. Technique très utile en Python.",
     tags: ["variables", "swap"],
@@ -78,7 +78,7 @@ print("x =", x, "y =", y)
   {
     id: 2,
     title: "Interpolation de chaînes avec f-strings",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Apprenez à insérer des variables dans une chaîne grâce aux f-strings pour un affichage plus lisible.",
     tags: ["chaînes", "f-strings"],
@@ -93,7 +93,7 @@ print(f"Je m'appelle {nom} et j'ai {age} ans.")
   {
     id: 3,
     title: "Calcul cercle",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Calculez l'aire et la circonférence d'un cercle en utilisant des variables et des opérations mathématiques.",
     tags: ["maths", "variables"],
@@ -114,7 +114,7 @@ print("Aire :", aire)
   {
     id: 4,
     title: "Affectation multiple",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Attribuez plusieurs valeurs à plusieurs variables sur une seule ligne. Pratique pour simplifier le code.",
     tags: ["variables", "affectation"],
@@ -127,7 +127,7 @@ print("a =", a, "b =", b, "c =", c)
   {
     id: 5,
     title: "Bonnes pratiques de nommage",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Apprenez à nommer correctement vos variables. Certaines formes sont interdites ou déconseillées.",
     tags: ["variables", "naming"],
@@ -146,7 +146,7 @@ taille1 = 1.75
   {
     id: 6,
     title: "Chaînes multi-lignes",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Créez une chaîne sur plusieurs lignes avec triple guillemets. Cela permet d'écrire des textes longs facilement.",
     tags: ["chaînes", "print"],
@@ -159,7 +159,7 @@ print(texte)
   {
     id: 7,
     title: "Booléens",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Créez une variable booléenne qui indique si une condition est vraie ou fausse. Très utile pour les tests et conditions.",
     tags: ["booléens", "conditions"],
@@ -175,7 +175,7 @@ print("x < y ?", resultat)
   {
     id: 8,
     title: "Conversion de types",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Transformez une saisie utilisateur en entier ou en flottant. C'est essentiel pour manipuler correctement les données reçues.",
     tags: ["types", "conversion"],
@@ -196,7 +196,7 @@ print("Flottant :", flottant)
   {
     id: 9,
     title: "Opérations sur les nombres",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Effectuez des opérations de base : addition, soustraction, multiplication, division et modulo. C'est la base pour manipuler des nombres en Python.",
     tags: ["nombres", "opérations"],
@@ -223,7 +223,7 @@ print("a % b =", a % b)
   {
     id: 10,
     title: "Concaténation de chaînes",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Combinez prénom et nom pour afficher le nom complet. Ceci illustre comment joindre plusieurs chaînes en Python.",
     tags: ["chaînes", "concaténation"],
@@ -239,7 +239,7 @@ print("Nom complet :", nom_complet)
   {
     id: 11,
     title: "Saisie utilisateur",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Demandez à l'utilisateur de saisir son prénom et son âge. Ceci permet de comprendre comment récupérer des données depuis l'extérieur du programme.",
     tags: ["input", "print"],
@@ -255,7 +255,7 @@ print(f"Bonjour {prenom}, vous avez {age} ans.")
   {
     id: 12,
     title: "Modification de variables",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("20:00:00 10.09.25"),
     description: "Apprenez à modifier la valeur d'une variable après sa création. Très utile pour mettre à jour des informations dans un programme.",
     tags: ["variables"],
@@ -272,7 +272,7 @@ print("Nouvelle valeur de x :", x)
   {
     id: 13,
     title: "Identifier les types de données",
-    difficulty: "Module 1",
+    difficulty: "Module 2",
     deadline: parseCustomDeadline("00:00:00 10.09.25"),
     description: "Apprenez à connaître le type d'une variable avec type(). Ici, vous identifierez un entier, un flottant et une chaîne de caractères.",
     tags: ["types", "type()"],
@@ -291,8 +291,8 @@ print(type(z))  # <class 'str'>
   {
     id: 14,
     title: "Création de variables et affichage",
-    difficulty: "Module 1",
-    deadline: parseCustomDeadline("20:00:00 10.09.25"),
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 10.09.22"),
     description: "Apprenez à créer des variables pour stocker votre nom, âge et taille. Ensuite, affichez-les à l'aide de print(). Ceci est la base pour manipuler des données en Python.",
     tags: ["variables", "print"],
     solution: cleanCode(`
@@ -309,6 +309,15 @@ print("Taille :", taille)
   }
 ];
 
+
+
+
+
+
+
+
+
+
 // ==============================
 // Données des participants
 // ==============================
@@ -318,23 +327,23 @@ export const PARTICIPANTS = [
     id: 1,
     name: "Marc",
     avatar: "participants/p3.jpg",
-    score: 6.1+7,
+    score: 6+1+7,
   },
   {
     id: 2,
     name: "Chris",
     avatar: "participants/p2.jpg",
-    score: 6,
+    score: 6+4,
   },
   {
-    id: 3,
+    id: 3+6+6,
     name: "Serge",
     avatar: "participants/p1.png",
-    score: 3,
+    score: 3+2,
   },
   {
-    id: 4,
-    name: "Jean",
+    id: 4+9+4,
+    name: "Naz",
     avatar: "participants/p6.png",
     score: 7,
   },

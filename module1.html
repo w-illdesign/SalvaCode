@@ -4,12 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Installer les outils de programmation python sur téléphone et sur ordinateur</title>
+  
+  <link rel="stylesheet" href="css/loader.css">        <!-- styles spécifiques au loader -->
 
     <!-- Feuilles de style principales -->
   <link rel="stylesheet" href="css/style-index.css">
   <link rel="stylesheet" href="css/dracula-prism.css"> <!-- thème Prism local (utilisé par le loader) -->
   
-  <link rel="stylesheet" href="css/loader.css">        <!-- styles spécifiques au loader -->
+  
 
   <!-- Prism (highlighting) - chargé en defer -->
   <script src="js/prism.js" defer></script>
@@ -22,67 +24,74 @@
 </head>
 
 <body class="loader-active">
-  <!-- =========================
-       SITE LOADER (intégré)
-       - affiche code Python coloré par Prism
-       - disparaît uniquement sur téléphone (<= 486px) et seulement après window.load
-       - sur tablette/PC, reste bloquant et affiche un message
-       ========================= -->
+ 
   <div id="site-loader" role="status" aria-live="polite" aria-hidden="false">
-    <div class="loader-card" id="loader-card">
-      <!-- header terminal -->
-      <div class="term-header" aria-hidden="true">
-        <div class="term-circles">
-          <span class="c red" aria-hidden="true"></span>
-          <span class="c yellow" aria-hidden="true"></span>
-          <span class="c green" aria-hidden="true"></span>
-        </div>
-        <div class="term-title">/SalvaCode/Module 1 — boot</div>
+  <div class="loader-card" id="loader-card">
+
+    <!-- header terminal -->
+    <div class="term-header" aria-hidden="true">
+      <div class="term-circles">
+        <span class="c red" aria-hidden="true"></span>
+        <span class="c yellow" aria-hidden="true"></span>
+        <span class="c green" aria-hidden="true"></span>
       </div>
-
-      <!-- terminal area: prism-formatted python code (in template, injected by JS) -->
-      <div class="terminal" aria-hidden="true">
-        <div class="scroll-window" id="scroll-window" aria-hidden="true">
-          <template id="code-template">
-<pre class="language-python"><code class="language-python"># Démarrage des services
-import json
-import requests
-from pathlib import Path
-
-def load_config(path: Path) -> dict:
-    # lire le fichier de configuration
-    with path.open('r', encoding='utf-8') as f:
-        return json.loads(f.read())
-
-for n in range(5):
-    print(f"service.{n}")
-
-health = requests.get("/api/health").json()
-modules = [m for m in ("ui", "db", "auth") if m]
-render("interface")
-# waiting for mount...
-</code></pre>
-          </template>
-
-          <!-- conteneur où loader.js injectera deux clones du bloc ci-dessus pour boucle fluide -->
-          <div id="lines-container" aria-hidden="true"></div>
-        </div>
-
-        <!-- caret / boot line -->
-        <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
-          <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
-          <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
-        </div>
-      </div>
-
-      <!-- message affiché sur desktop/tablette (JS gère aria-hidden selon cas) -->
-      <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+      <div class="term-title">/SalvaCode/Module 1 — boot</div>
     </div>
-  </div>
 
-  <!-- =========================
-       HEADER
-       ========================= -->
+    <div class="terminal" aria-hidden="true">
+      <div class="scroll-window" id="scroll-window" aria-hidden="true">
+        <template id="code-template">
+          <pre class="language-python chargement-page-code"><code class="language-python">
+import time
+import sys
+
+def attente(message, cycles=6, pause=0.4):
+    for i in range(cycles):
+        dots = "." * (i % 4)
+        sys.stdout.write(f"\r{message}{dots}   ")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print()  # sauter une ligne
+
+def progression(total=20, pause=0.2):
+    """Affiche une barre de progression simple"""
+    for i in range(total + 1):
+        bar = "#" * i + "-" * (total - i)
+        percent = int((i / total) * 100)
+        sys.stdout.write(f"\r[{bar}] {percent}%")
+        sys.stdout.flush()
+        time.sleep(pause)
+    print("\n")
+
+# --- Déroulement ---
+print("Démarrage du système...\n")
+time.sleep(1)
+
+attente("Préparation des ressources")
+attente("Vérification du serveur")
+attente("Chargement du contenu")
+
+print("\nProgression du chargement :")
+progression()
+
+print("La page sera bientôt disponible.")
+time.sleep(1)
+print("Merci de votre patience.")
+          </code></pre>
+        </template>
+        <div id="lines-container" aria-hidden="true"></div>
+      </div>
+
+      <div style="padding-top:8px; display:flex; align-items:center; justify-content:flex-start;">
+        <div style="color:#9aa0a6; font-size:0.88rem;">boot ›</div>
+        <div class="caret" aria-hidden="true" style="margin-left:10px;"></div>
+      </div>
+    </div>
+
+    <div id="loader-message" aria-hidden="true">Chargement de la page…</div>
+  </div>
+</div>
+
   <header>
 
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
@@ -165,23 +174,26 @@ render("interface")
   </header>
 
   <main>
-    
+      <div class="header-challenge">
+  <a href="#1" class="exam-badge">Pour ceux qui ont un ordinateur</a>
+  <a href="#2" class="exam-badge">Pour ceux qui ont un smartphone</a>
+  <a href="#3"
+   
+   class="exam-badge">Commandes de navigation et gestion des fichiers</a>
+   <a href="#4" class="exam-badge">Problèmes courants</a>
+   
+  
+</div>
+
+
+
+  
     <section>
-  <h2 class="sous-titre">Pour ceux qui ont un ordinateur</h2>
+  <h2 class="sous-titre" id="#">Pour ceux qui ont un ordinateur</h2>
 
   <!-- 1) Présentation courte pour démarrer -->
-  <p><b>Avant de commencer — quelques mots simples :</b></p>
-  <p>
-    Un <b>terminal</b> (ou « invite de commandes ») est un endroit où tu tapes des commandes (des instructions) pour dire à l'ordinateur
-    ce qu'il doit faire. Un <b>fichier</b> est comme une feuille de papier (par ex. <code>main.py</code>), et un <b>dossier</b> est comme une chemise où on range des fichiers.
-  </p>
-
-  <h3>1. Installer Python — qu’est-ce que c’est ?</h3>
-  <p>
-    <b>Python</b> est un langage de programmation : c’est l’outil qui va lire et exécuter les instructions que tu écris (tes programmes).
-    On commence par l’installer sur ton ordinateur.
-  </p>
-
+  
+  <h3 class="sous-titre-3">1. Installer Python</h3>
   <ol>
     <li>
       <b>Télécharger</b> Python :
@@ -192,11 +204,15 @@ render("interface")
 
     <li>
       <b>Exécuter l’installeur</b> :
-      <ul>
-        <li>Sur Windows : double-clic sur le fichier que tu as téléchargé (.exe).</li>
+      
+        <ul>
+           
+                <li>Sur Windows : double-clic sur le fichier que tu as téléchargé (.exe).</li>
         <li>Sur macOS : ouvre le paquet .pkg et suis les instructions.</li>
         <li>Sur Linux : tu peux souvent installer depuis le gestionnaire de paquets (voir dessous).</li>
-      </ul>
+           
+        </ul>
+      
     </li>
 
     <li>
@@ -216,19 +232,37 @@ sudo apt install -y python3 python3-pip</code></pre>
       </div>
       <p>Sur macOS, tu peux utiliser Homebrew (optionnel) : <code>brew install python</code>.</p>
     </li>
+    
+    <li><b>Comment vérifier que Python est bien installé ?</b>
+    
+    <div class="cmd-row">
+      <pre class="cmd language-bash"><code>python --version        # souvent fonctionne sur Windows si Add to PATH a été coché
+python3 --version # souvent utilisé sur macOS / Linux
+py -3 --version # alternative sur certaines installations Windows</code></pre>
+    </div>
+    
+    
+    <p>Tu dois voir quelque chose comme : <div class="cmd-row">
+      <pre class=" language-bash"><code>Python 3.12.11
+
+# Le numéro c'est la version
+# Tu pourrais avoir une version différente</code></pre>
+    </div> </p>
+        
+    </li>
   </ol>
 
   <details>
-    <summary><b>Comment vérifier que Python est bien installé ?</b></summary>
-    <div class="cmd-row">
-      <pre class="cmd language-bash"><code>python --version        # souvent fonctionne sur Windows si Add to PATH a été coché
-python3 --version       # souvent utilisé sur macOS / Linux
-py -3 --version         # alternative sur certaines installations Windows</code></pre>
-    </div>
-    <p>Tu dois voir quelque chose comme : <code>Python 3.11.4</code> (le numéro peut être différent).</p>
+    <summary>Qu’est-ce que c’est <b>Python</b>?</summary>
+    <p>
+    <b>Python</b> est un langage de programmation (un peu comme le français) : c’est l’outil qui va lire et exécuter les instructions que tu écris (tes programmes).
+    On commence par l’installer sur ton ordinateur.
+  </p>
   </details>
+  
+  
 
-  <h3>2. Installer Git (et Git Bash)</h3>
+  <h3 class="sous-titre-3">2. Installer Git (et Git Bash)</h3>
   <p><b>Git</b> est un outil pour sauvegarder l’historique de tes fichiers (on l’utilise beaucoup en programmation). <b>Git Bash</b> est un terminal convivial pour Windows fourni avec Git.</p>
 
   <ol>
@@ -247,12 +281,12 @@ git config --global user.email "ton.email@example.com"</code></pre>
   <details>
     <summary><b>Petite explication : Git vs GitHub</b></summary>
     <p>
-      Git est le logiciel sur ton ordinateur. GitHub (ou GitLab) est comme un service en ligne où tu peux stocker une copie de tes projets pour y accéder depuis d'autres ordinateurs.
+      Git est le logiciel sur ton ordinateur. GitHub (ou GitLab) est comme un service en ligne où tu peux stocker une copie de tes projets pour y accéder depuis d'autres ordinateurs.( C'est là où est stocké et hébergé ce site )
       Pour commencer, tu n’as pas besoin de GitHub — tu peux apprendre Git localement.
     </p>
   </details>
 
-  <h3>3. Vérifier que tout fonctionne (Python, pip, Git)</h3>
+  <h3 class="sous-titre-3">3. Vérifier que tout fonctionne (Python, pip, Git)</h3>
   <p>Maintenant, allons dans le terminal (Git Bash) et vérifions les commandes. Tape exactement : </p>
   <div class="cmd-row">
     <pre class="cmd language-bash"><code>python --version
@@ -260,11 +294,16 @@ python -m pip --version
 git --version</code></pre>
   </div>
   <p>Résultat attendu (exemples) :</p>
-  <ul>
-    <li><code>Python 3.x.x</code></li>
-    <li><code>pip x.x.x from ...</code></li>
-    <li><code>git version x.y.z</code></li>
-  </ul>
+  <div class="cmd-row">
+    <pre class="language-bash"><code>
+Python 3.12.11 
+pip 25.2 from .... (python 3.12)
+git version 2.51.0
+
+# Les numéros sont les versions
+# Tu pourrais avoir une version différente 
+</code></pre>
+  </div>
 
   <p><b>Si une commande n’est pas reconnue :</b></p>
   <ol>
@@ -273,7 +312,7 @@ git --version</code></pre>
     <li>Si besoin, relance l’ordinateur ou ferme/réouvre le terminal.</li>
   </ol>
 
-  <h3>4. Créer ton premier dossier projet — pas à pas</h3>
+  <h3 class="sous-titre-3">4. Créer ton premier dossier projet — pas à pas</h3>
   <p>On va créer un dossier (un emplacement) pour ranger le projet. C’est très simple :</p>
   <div class="cmd-row">
     <pre class="cmd language-bash"><code># Aller dans le dossier "Documents" (toutes plateformes) :
@@ -308,26 +347,33 @@ ls</code></pre>
   </details>
 
     
-  <h3>5. Installer Vs code</h3>
+  <h3 class="sous-titre-3">5. Installer Visual Studio code ou VS Code</h3>
 <ol>
       <li>
       <b>Télécharger VS Code</b> depuis le site officiel : <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a>. :contentReference[oaicite:0]{index=0}
     </li>
 
-    2. <b>Choisir la bonne version</b> :
-    <ul>
-      <li>Windows : User Installer (pour un utilisateur) ou System Installer (si tu veux l’installer pour tous les comptes).</li>
+   <li>
+       <b>Choisir la bonne version</b> :
+   
+        <ul>
+            <li>Windows : User Installer (pour un utilisateur) ou System Installer (si tu veux l’installer pour tous les comptes).</li>
       <li>macOS : ouvre le .zip / .dmg et glisse VS Code dans Applications.</li>
       <li>Linux : utilise le package .deb (Debian/Ubuntu) ou .rpm (Fedora) ou installe via le gestionnaire de paquets. Exemple : télécharger le .deb puis <code>sudo apt install ./vscode.deb</code>. :contentReference[oaicite:1]{index=1}</li>
-    </ul>
+        </ul>
+        
+   </li>
+      
+ 
 
     <li>
       <b>Exemples pas à pas (Windows)</b> :
-      <ol>
+      
+      <ul>
         <li>Double-clic sur le fichier téléchargé (User Installer).</li>
         <li>Accepte la licence et garde les options par défaut (tu peux cocher « Add to PATH » si proposé).</li>
         <li>Termine l’installation et lance VS Code depuis le menu Démarrer.</li>
-      </ol>
+      </ul>
     </li>
 
     <li>
@@ -343,12 +389,18 @@ ls</code></pre>
     <li>
       <b>Installer l’extension Python (conseillé)</b> :
       <p>Va dans l’onglet Extensions (icône en forme de blocs ou <code>Ctrl+Shift+X</code>), cherche « Python » (par Microsoft) et clique sur <b>Installer</b>. Cette extension aide pour l’autocomplétion, le diagnostic des erreurs et le débogage.</p>
-      <p><i>Analogie :</i> l’extension Python, c’est comme une loupe et un guide posé sur ton plan de travail : elle t’aide à repérer les erreurs et à travailler plus vite.</p>
+      
+      <details>
+    <summary>Qu’est-ce que c’est l’extension <b>Python</b> ?</summary>
+    <p>
+   c’est comme une loupe et un guide posé sur ton plan de travail : elle t’aide à repérer les erreurs et à travailler plus vite, un peu comme le correcteur d'orthographe de ton téléphone.
+  </p>
+  </details>
     </li>
 </ol>
 
     
-  <h3>5. Écrire et lancer ton premier script Python — tout expliqué</h3>
+  <h3 class="sous-titre-3">5. Écrire et lancer ton premier script Python — tout expliqué</h3>
   <p>On va créer un petit fichier Python qui écrit un message dans le terminal. C’est l’étape la plus excitante !</p>
 
   <ol>
@@ -378,7 +430,7 @@ print("Bonjour depuis Git Bash !")</code></pre>
 
     <li><b>Résultat attendu</b> : tu vois dans le terminal la ligne suivante :</li>
     <div class="cmd-row">
-      <pre class="cmd language-bash"><code>Bonjour depuis Git Bash !</code></pre>
+      <pre class=" language-bash"><code>Bonjour depuis Git Bash !</code></pre>
     </div>
   </ol>
 
@@ -394,28 +446,36 @@ print("Bonjour depuis Git Bash !")</code></pre>
     <div class="cmd-row">
       <pre class="cmd language-python"><code>print(2 + 2)
 name = input("Comment tu t'appelles ? ")
-print("Bonjour", name)</code></pre>
+print("Bonjour", name)
+
+#Resultat attendu
+"""
+4
+Comment tu t'appelles ? ....
+Bonjour ....
+"""</code></pre>
+<pre class="language-bash"><code>print(2 + 2)
+name = input("Comment tu t'appelles ? ")
+#Resultat attendu
+4
+Comment tu t'appelles ? ....
+Bonjour ....
+</code></pre>
     </div>
-    <p>Ces petits essais t’aident à comprendre comment Python lit et exécute les lignes une par une.</p>
+    <p>Ces petits essais t’aident à comprendre comment Python lit et exécute les lignes une par une. les <code>...</code> c'est toi qui saisit ton nom</p>
   </details>
 
-  <hr>
-  <p><b>Derniers conseils pour un débutant :</b></p>
-  <ol>
-    <li>Ne t’inquiète pas des erreurs — elles arrivent toujours. Lis ce que l’ordinateur affiche : il donne souvent un indice précis (ligne, type d’erreur).</li>
-    <li>Prends ton temps : fais une étape à la fois (installer → vérifier → créer dossier → écrire fichier → exécuter).</li>
-    <li>Si quelque chose bloque, nous serons là pour t'aider et t'assister.</li>
-  </ol>
+  
 
 </section>
     <hr>
     
     <section>
-  <h2 class="sous-titre">Pour ceux qui ont un smartphone (Android )</h2>
+  <h2 class="sous-titre" id="2">Pour ceux qui ont un smartphone</h2>
 
 <p>
   Peut-être que tu n’as pas encore d’ordinateur, mais seulement un téléphone Android.  
-  Pas de problème ! Tu peux quand même apprendre à coder directement depuis ton smartphone.  
+  Pas de problème ! Tu peux coder directement depuis ton smartphone sans problème. 
 </p>
 
 <p>
@@ -429,14 +489,7 @@ print("Bonjour", name)</code></pre>
   <b>Termux</b>, c’est comme une <i>clé magique</i> qui ouvre une porte secrète, donnant accès à une salle spéciale appelée <b>terminal</b>.  
 </p>
 
-<details>
-  <summary> Qu’est-ce qu’un <b>terminal</b> ?</summary>
-  <p>
-    Un <b>terminal</b> est un écran où tu écris des commandes en texte pour donner des ordres à ton appareil.  
-    C’est comme discuter avec ton téléphone en langage direct, sans passer par des boutons ou des icônes.  
-    Exemple : au lieu d’appuyer sur un bouton pour installer une application, tu écris une commande et ton téléphone le fait.
-  </p>
-</details>
+
 
 <p>
   Dans ce terminal, tu ne cliques pas avec les doigts comme sur WhatsApp ou YouTube.  
@@ -445,34 +498,26 @@ print("Bonjour", name)</code></pre>
   <i>« Hé, range-moi ce dossier », « écris-moi ça », « calcule ça »…</i>  
 </p>
 
-<div class="question">À quoi sert Termux ?</div>
+Termux sert à:
 <ul>
   <li>À transformer ton téléphone en un ordinateur miniature.</li>
   <li>À apprendre à coder même sans PC.</li>
   <li>À exécuter des programmes et tester directement tes idées.</li>
 </ul>
 
-<h3>1. Installer Termux</h3>
+<h3 class="sous-titre-3">1. Installer Termux</h3>
 <p>
   D’abord, il faut télécharger Termux.  
   ⚠️ Attention : ne le prends pas sur le Play Store, car cette version n’est plus à jour (comme un cahier rempli de vieilles leçons).  
   Il faut aller sur <a href="https://f-droid.org/fr/packages/com.termux/" target="_blank">F-Droid</a>, qui est comme une librairie en ligne pour télécharger des applications gratuites et fiables.  
 </p>
 
-<details>
-  <summary> Qu’est-ce que <b>F-Droid</b> ?</summary>
-  <p>
-    <b>F-Droid</b> est une boutique d’applications gratuite et ouverte (un peu comme un marché bio 🥦 pour les applis).  
-    Contrairement au Play Store, tout y est <i>libre</i> et transparent : tu peux y trouver des applications sûres, sans pub et mises à jour régulièrement.
-  </p>
-</details>
-
 <p>
   Une fois Termux installé et ouvert, tu verras un écran noir avec du texte blanc.  
-  Pas de panique 😅 ! Cet écran, c’est comme si tu parlais à ton téléphone en langage de commandes.
+  Pas de panique ! Cet écran, c’est comme si tu parlais à ton téléphone en langage de commandes.
 </p>
 
-<h3>2. Mettre à jour les paquets</h3>
+<h3 class="sous-titre-3">2. Mettre à jour les paquets</h3>
 <p>
   Comme pour ton téléphone, où tu fais des mises à jour pour avoir les dernières fonctionnalités et corriger les bugs, ici aussi il faut mettre à jour Termux.  
   C’est un peu comme remplir ton frigo avant de commencer à cuisiner : il faut être sûr que tout est frais.
@@ -484,7 +529,7 @@ pkg update && pkg upgrade -y</code></pre>
 </div>
 
 <details>
-  <summary>>Qu’est-ce qu’un <b>paquet</b> ?</summary>
+  <summary>Petite explications sur ce c'est <b>paquet</b> ?</summary>
   <p>
     Un <b>paquet</b> est comme une petite boîte qui contient un logiciel ou un outil.  
     Quand on dit « mettre à jour les paquets », ça veut dire : installer les nouvelles versions de tous les outils pour qu’ils soient prêts et sécurisés.
@@ -496,7 +541,7 @@ pkg update && pkg upgrade -y</code></pre>
   Attends que ça finisse, ça peut prendre quelques minutes selon ta connexion.
 </p>
 
-<h3>3. Installer Python</h3>
+<h3 class="sous-titre-3">3. Installer Python</h3>
 <p>
   Maintenant, il est temps d’installer Python, notre langage de programmation.  
   Imagine que Python est comme une langue étrangère : en l’installant, ton téléphone apprend à parler cette langue.  
@@ -522,7 +567,7 @@ pkg install python</code></pre>
   Beaucoup de grands développeurs travaillent encore aujourd’hui avec ce genre d’outils !
 </p>
 
-<h3>4. Vérifier l’installation</h3>
+<h3 class="sous-titre-3">4. Vérifier l’installation</h3>
 <div class="cmd-row">
   <pre class="cmd language-bash"><code># On vérifie que Python est bien installé.
 python --version</code></pre>
@@ -547,12 +592,10 @@ python --version</code></pre>
 </p>
 
 <div class="cmd-row">
-  <pre class="cmd language-bash"><code>Python 3.11.7</code></pre>
-</div>
-
-<p>
-  Ici, "3.11.7" est la version de Python. Toi, tu peux avoir une version un peu différente (par exemple <code>3.12.2</code>), et ce n’est pas grave : l’important est que quelque chose s’affiche !
-</p>
+      <pre class=" language-bash"><code>Python 3.12.11
+#Ici, 3.12.11 est la version de Python.
+#Toi, tu peux avoir une version
+#différente comme 3.12.15</code></pre> </div>
 
 <p>
    Imagine que tu viens d’acheter un nouveau téléphone. Avant de l’utiliser, tu l’allumes pour vérifier qu’il fonctionne et qu’il a bien une batterie.  
@@ -560,11 +603,11 @@ python --version</code></pre>
 </p>
 
 
-      <h3>5. Écrire et lancer ton premier script</h3>
+      <h3 class="sous-titre-3">5. Écrire et lancer ton premier script</h3>
 
 <p>
   Maintenant que Python est installé et reconnu, on va écrire notre tout premier programme.  
-  C’est un peu comme envoyer ton premier SMS 📱 avec un nouveau téléphone : on vérifie qu’il fonctionne vraiment.
+  C’est un peu comme envoyer ton premier SMS  avec un nouveau téléphone : on vérifie qu’il fonctionne vraiment.
 </p>
 
 <p>
@@ -581,7 +624,7 @@ nano main.py</code></pre>
 </div>
 
 <details>
-  <summary> <div class="question2">Qu’est-ce qu’un <b>script</b> ?</div></summary>
+  <summary>Un <b>script</b> c'est quoi ?</summary>
   <p>
     Un <b>script</b> est simplement un fichier texte qui contient du code que Python va lire et exécuter.  
     Dans notre cas, <code>main.py</code> est notre premier script : un petit programme que nous allons lancer.
@@ -593,7 +636,7 @@ nano main.py</code></pre>
 </p>
 
 <div class="cmd-row">
-  <pre class="cmd language-python"><code># La commande print() sert à afficher du texte à l’écran.
+  <pre class="language-python"><code># La commande print() sert à afficher du texte à l’écran.
 print("Bonjour depuis Termux !")</code></pre>
 </div>
 
@@ -601,9 +644,13 @@ print("Bonjour depuis Termux !")</code></pre>
   <summary> Qu’est-ce que <code>print()</code> ?</summary>
   <p>
     La fonction <code>print()</code> est l’une des plus utilisées en Python.  
-    Elle sert à afficher du texte ou des résultats à l’écran.  
-    Exemple : <code>print(2 + 3)</code> affichera <code>5</code>.
-  </p>
+    Elle sert à afficher du texte ou des résultats à l’écran.
+    <div class="cmd-row">
+  <pre class="cmd language-python"><code># Exemple
+print(2 + 2)  # 4
+print(3 * 4)  #12
+
+</code></pre>
 </details>
 
 <p>
@@ -638,7 +685,7 @@ python main.py</code></pre>
 </p>
 
 <div class="cmd-row">
-  <pre class="cmd language-plaintext"><code>Bonjour depuis Termux !</code></pre>
+  <pre class="language-bash"><code>Bonjour depuis Termux !</code></pre>
 </div>
 
 <details>
@@ -656,11 +703,11 @@ python main.py</code></pre>
 </p>
 
       
- <h2 class="sous-titre"> Commandes de navigation et gestion de fichiers</h2>
+ <h2 class="sous-titre" id="3"> Commandes de navigation et gestion de fichiers</h2>
 
 
 
-<h3>1️ Navigation dans les dossiers</h3>
+<h3>Navigation dans les dossiers</h3>
 
 <div class="cmd-row">
   <pre class="cmd language-bash"><code># Liste les fichiers et dossiers dans le dossier actuel
@@ -692,22 +739,8 @@ pwd</code></pre>
 tree</code></pre>
 </div>
 
-<div class="cmd-row">
-  <pre class="cmd language-bash"><code># Copier un projet Git depuis Internet
-git clone url_du_repo</code></pre>
-</div>
 
-<div class="cmd-row">
-  <pre class="cmd language-bash"><code># Se déplacer sur une autre branche Git
-git checkout nom_de_branche</code></pre>
-</div>
-
-<div class="cmd-row">
-  <pre class="cmd language-bash"><code># Voir toutes les branches disponibles
-git branch</code></pre>
-</div>
-
-<h3>2️ Manipulation des fichiers</h3>
+<h3>Manipulation des fichiers</h3>
 
 <div class="cmd-row">
   <pre class="cmd language-bash"><code># Crée un nouveau fichier vide
@@ -776,14 +809,28 @@ Le plus important maintenant est de <b>pratiquer un peu chaque jour</b> : même 
 Petit à petit, tu deviendras à l’aise et tu pourras créer des projets plus grands  !
 </p>
 
-<p>Maintenant que vous avez installé des outils, On se retrouve au deuxième module sur les variables et types des données, N'oubliez pas de vous exercer sur <a href="404.html">la page des exercices</a> </p>
-   
+
 
     
     </section>
     <hr>
+    
+    
+  <p><b>Derniers conseils pour un débutant :</b></p>
+  <ol>
+    <li>Ne t’inquiète pas des erreurs — elles arrivent toujours. Lis ce que l’ordinateur affiche : il donne souvent un indice précis (ligne, type d’erreur).</li>
+    <li>Prends ton temps : fais une étape à la fois (installer → vérifier → créer dossier → écrire fichier → exécuter).</li>
+    <li>Si quelque chose bloque, nous serons là pour t'aider et t'assister.</li>
+    
+    <li>Voici juste en dessous les problèmes fréquents</li>
+  </ol>
+  
+  <p>Maintenant que vous avez installé des outils, On se retrouve au deuxième module <a href="404.html">sur les variables et types des données</a>, N'oubliez pas de jeter un coup d'oeil juste ici en dessous pour apprendre un peu plus sur les problème souvent rencontré  </p>
+   
+  
+  <hr>
     <section>
-        <h2 class="sous-titre">3. Problèmes courants</h2>
+        <h2 class="sous-titre" id="4">Problèmes courants</h2>
         
         <h3><code class="inline">bash: commande introuvable</code></h3>
         <p>Cela signifie que le terminal ne trouve pas la commande que tu as tapée.</p>
@@ -792,6 +839,7 @@ Petit à petit, tu deviendras à l’aise et tu pourras créer des projets plus 
           <li><b>Vérifie la casse :</b> Les noms de commandes sont sensibles à la casse.</li>
           <li><b>Vérifie ta position :</b> Utilise la commande <code class="inline">pwd</code> pour savoir où tu es. Utilise <code class="inline">ls</code> pour lister le contenu du dossier actuel.</li>
         </ul>
+        
 
         <h3><code class="inline">FileNotFoundError: [Errno 2] No such file or directory</code></h3>
         <p>Le programme ne trouve pas le fichier ou le dossier spécifié.</p>
