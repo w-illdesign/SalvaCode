@@ -344,7 +344,13 @@ export const PARTICIPANTS = [
   {
     id: 4+9+4,
     name: "Naz",
-    avatar: "participants/p6.png",
+    avatar: "participants/smith.jpg",
+    score: 7,
+  },
+  {
+    id: 0,
+    name: "Smith",
+    avatar: "participants/smith.jpg",
     score: 7,
   },
 ];
