@@ -306,6 +306,248 @@ print("Nom :", nom)
 print("Âge :", age)
 print("Taille :", taille)
     `)
+  },
+  {
+    id: 16,
+    title: "Concaténation de chaînes de caractères",
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 17.09.25"),
+    description: "Apprenez à coller plusieurs textes ensemble avec l’opérateur +. Créez un message personnalisé avec votre prénom et votre hobby.",
+    tags: ["variables", "chaînes", "concaténation"],
+    solution: cleanCode(`
+prenom = "Serge"
+hobby = "jouer au foot"
+
+# Concaténation de chaînes
+message = "Bonjour, je m'appelle " + prenom + " et j'aime " + hobby + "."
+
+print(message)
+    `)
+  },
+  {
+    id: 17,
+    title: "Entrée utilisateur avec input()",
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 18.09.25"),
+    description: "Utilisez la fonction input() pour demander le prénom de l’utilisateur, puis affichez un message de bienvenue.",
+    tags: ["input", "variables", "print"],
+    solution: cleanCode(`
+prenom = input("Entrez votre prénom : ")
+
+print("Bienvenue,", prenom + " !")
+    `)
+  },
+  {
+    id: 18,
+    title: "Conversions de types simples",
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 19.09.25"),
+    description: "Demandez à l’utilisateur son âge avec input(). Comme input() renvoie une chaîne, convertissez-la en entier avec int(), puis ajoutez 10 ans.",
+    tags: ["input", "int", "conversion"],
+    solution: cleanCode(`
+age = input("Entrez votre âge : ")
+age = int(age)  # conversion en entier
+
+print("Dans 10 ans, vous aurez", age + 10, "ans.")
+    `)
+  },
+  {
+    id: 19,
+    title: "Conditions simples avec if",
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 20.09.25"),
+    description: "Apprenez à utiliser une condition. Demandez à l’utilisateur son âge, puis affichez s’il est mineur ou majeur.",
+    tags: ["if", "conditions", "input"],
+    solution: cleanCode(`
+age = int(input("Entrez votre âge : "))
+
+if age >= 18:
+    print("Vous êtes majeur.")
+else:
+    print("Vous êtes mineur.")
+    `)
+  },
+  {
+    id: 20,
+    title: "Boucle while simple",
+    difficulty: "Module 2",
+    deadline: parseCustomDeadline("20:00:00 21.09.25"),
+    description: "Découvrez la boucle while. Faites un programme qui compte de 1 jusqu’à 5 et affiche chaque nombre.",
+    tags: ["while", "boucle", "print"],
+    solution: cleanCode(`
+compteur = 1
+
+while compteur <= 5:
+    print("Compteur :", compteur)
+    compteur = compteur + 1
+    `),
+    
+  },{
+    id: 21,
+    title: "Listes et indexation",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 22.09.25"),
+    description: "Créez une liste de fruits, accédez au premier et au dernier élément, et affichez la longueur de la liste.",
+    tags: ["listes", "indexation", "len"],
+    solution: cleanCode(`
+fruits = ["pomme", "banane", "cerise", "mangue"]
+
+# Premier et dernier élément
+print("Premier :", fruits[0])
+print("Dernier :", fruits[-1])
+
+# Longueur de la liste
+print("Nombre de fruits :", len(fruits))
+    `)
+  },
+  {
+    id: 22,
+    title: "Boucle for sur une liste",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 23.09.25"),
+    description: "Parcourez une liste de nombres avec for et affichez leur carré.",
+    tags: ["for", "listes", "boucle"],
+    solution: cleanCode(`
+nombres = [1, 2, 3, 4, 5]
+
+for n in nombres:
+    print(n, "au carré =", n * n)
+    `)
+  },
+  {
+    id: 23,
+    title: "Fonctions simples",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 24.09.25"),
+    description: "Définissez une fonction qui prend un nom et renvoie un message de bienvenue personnalisé.",
+    tags: ["fonctions", "def", "return"],
+    solution: cleanCode(`
+def bienvenue(nom):
+    return "Bienvenue, " + nom + " !"
+
+msg = bienvenue("Serge")
+print(msg)
+    `)
+  },
+  {
+    id: 24,
+    title: "Méthodes de liste (append, pop)",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 25.09.25"),
+    description: "Ajoutez et retirez des éléments d'une liste avec append() et pop().",
+    tags: ["listes", "append", "pop"],
+    solution: cleanCode(`
+jours = ["lundi", "mardi", "mercredi"]
+
+# Ajouter un jour
+jours.append("jeudi")
+print("Après append :", jours)
+
+# Retirer le dernier élément
+dernier = jours.pop()
+print("Pop a retiré :", dernier)
+print("Liste maintenant :", jours)
+    `)
+  },
+  {
+    id: 25,
+    title: "Dictionnaires (maps)",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 26.09.25"),
+    description: "Créez un dictionnaire pour stocker le prénom, l'âge et la ville, puis accédez aux valeurs.",
+    tags: ["dictionnaire", "dict", "clé-valeur"],
+    solution: cleanCode(`
+personne = {
+    "prenom": "Serge",
+    "age": 20,
+    "ville": "Kinshasa"
+}
+
+print("Prénom :", personne["prenom"])
+print("Âge :", personne.get("age"))
+print("Ville :", personne["ville"])
+    `)
+  },
+  {
+    id: 26,
+    title: "Boucles imbriquées — table de multiplication",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 27.09.25"),
+    description: "Utilisez deux boucles for imbriquées pour afficher la table de multiplication de 1 à 5.",
+    tags: ["boucles", "for", "imbriqué"],
+    solution: cleanCode(`
+for i in range(1, 6):
+    for j in range(1, 6):
+        print(f"{i} x {j} = {i*j}")
+    print("---")
+    `)
+  },
+  {
+    id: 27,
+    title: "Compréhensions de liste",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 28.09.25"),
+    description: "Créez une nouvelle liste contenant les carrés des nombres de 0 à 9 en utilisant une compréhension de liste.",
+    tags: ["listes", "compréhension", "pythonic"],
+    solution: cleanCode(`
+carres = [x * x for x in range(10)]
+print(carres)
+    `)
+  },
+  {
+    id: 28,
+    title: "Tuples et ensembles (tuple, set)",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 29.09.25"),
+    description: "Comprenez la différence entre tuple (immutable) et set (ensemble non-ordonné). Créez et affichez-les.",
+    tags: ["tuple", "set", "collections"],
+    solution: cleanCode(`
+coord = (10, 20)          # tuple
+fruits = {"pomme", "banane", "pomme"}  # set (duplication supprimée)
+
+print("Tuple :", coord)
+print("Set :", fruits)
+    `)
+  },
+  {
+    id: 29,
+    title: "Fichiers : lecture et écriture",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 30.09.25"),
+    description: "Écrivez quelques lignes dans un fichier texte, puis lisez-le et affichez son contenu.",
+    tags: ["fichiers", "io", "open"],
+    solution: cleanCode(`
+# Écriture dans un fichier
+with open("exemple.txt", "w", encoding="utf-8") as f:
+    f.write("Bonjour\\n")
+    f.write("Ceci est un fichier de test.\\n")
+
+# Lecture du fichier
+with open("exemple.txt", "r", encoding="utf-8") as f:
+    contenu = f.read()
+
+print(contenu)
+    `)
+  },
+  {
+    id: 30,
+    title: "Classes et objets — introduction",
+    difficulty: "Module 3",
+    deadline: parseCustomDeadline("20:00:00 01.10.25"),
+    description: "Créez une classe simple Personne avec un constructeur et une méthode pour afficher une présentation.",
+    tags: ["classes", "objets", "OOP"],
+    solution: cleanCode(`
+class Personne:
+    def __init__(self, prenom, age):
+        self.prenom = prenom
+        self.age = age
+
+    def presenter(self):
+        print(f"Je m'appelle {self.prenom} et j'ai {self.age} ans.")
+
+p = Personne("Serge", 20)
+p.presenter()
+    `)
   }
 ];
 
@@ -327,30 +569,25 @@ export const PARTICIPANTS = [
     id: 1,
     name: "Marc",
     avatar: "participants/p3.jpg",
-    score: 6+1+7,
+    score: 6+1+7+21,
   },
   {
     id: 2,
     name: "Chris",
     avatar: "participants/p2.jpg",
-    score: 6+4,
+    score: 6+5+4,
   },
   {
-    id: 3+6+6,
+    id: 3+6-12+6,
     name: "Serge",
     avatar: "participants/p1.png",
     score: 3+2,
   },
-  {
-    id: 4+9+4,
-    name: "Naz",
-    avatar: "participants/smith.jpg",
-    score: 7,
-  },
+  
   {
     id: 0,
     name: "Smith",
     avatar: "participants/smith.jpg",
-    score: 7,
+    score: 0,
   },
 ];
