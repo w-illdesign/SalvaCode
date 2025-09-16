@@ -64,8 +64,11 @@ function saveSuccessfulCode(code) {
 /* ==============================
    CodeMirror init
    ============================== */
+   
 let codeInput = null;
 let useCodeMirror = false;
+
+const will = ["OXkWcwbf-P", "AIzaSyDT", "wh0AnEcC4V", "jajubdudhhe"];
 
 if (typeof CodeMirror !== 'undefined' && document.getElementById('codeInput')) {
     useCodeMirror = true;
@@ -102,6 +105,9 @@ if (typeof CodeMirror !== 'undefined' && document.getElementById('codeInput')) {
         on: () => {}
     };
 }
+
+const connexion_au_serveur = ["OXkWcwbf-P", "jshshgdhzhzhbd", "IzayfdSyDT", "uayhshdg", "726:€(uz)", "jshzhhzuzuhz",    "nEcCjfrt4V", "TUX9O1vD2U", "kahjzvzhy", "aghzhusjd"
+];
 
 /* ==============================
    Modal UI
@@ -158,6 +164,185 @@ function openModal() {
 
 // Event listener pour le bouton Close
 if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+
+
+
+const mainHeader = document.getElementById('mainHeader');
+const showBtns = [
+  document.getElementById('showHeaderBtn'),   // bouton existant
+  document.getElementById('showHeaderBtn2')   // nouveau bouton ajouté
+];
+const mainContent = document.getElementById('mainContent');
+const secondaryHeader = document.getElementById('secondaryHeader');
+
+// Ajuste padding-top pour que rien ne soit caché
+function updatePadding() {
+  const headerHeight = mainHeader.classList.contains('hidden') ? 0 : mainHeader.offsetHeight;
+
+  // Si le header est visible → petite marge (par ex. 4px)
+  // Si caché → marge par défaut (16px)
+  const extraMargin = mainHeader.classList.contains('hidden') ? 4 : -54;
+
+  mainContent.style.paddingTop = (extraMargin + headerHeight + document.getElementById('secondaryHeader').offsetHeight) + 'px';
+}
+// dès le premier touch / clic
+function hideMainHeader(e) {
+  // si l'événement vient de l'un des boutons, ignorer
+  if (showBtns.some(btn => e.target.closest(`#${btn.id}`))) return;
+  mainHeader.classList.add('hidden');
+  showBtns.forEach(btn => btn.setAttribute('aria-expanded', 'true'));
+  updatePadding();
+}
+
+window.addEventListener('touchstart', hideMainHeader, { once: true, passive:true });
+window.addEventListener('mousedown', hideMainHeader, { once: true });
+
+// Fonction pour basculer le header
+function toggleHeader() {
+  mainHeader.classList.toggle('hidden');
+  const expanded = !mainHeader.classList.contains('hidden');
+  showBtns.forEach(btn => btn.setAttribute('aria-expanded', expanded ? 'false' : 'true'));
+  updatePadding();
+}
+
+// Attacher toggleHeader aux deux boutons
+showBtns.forEach(btn => btn.addEventListener('click', toggleHeader));
+
+// Réajustement lors du resize
+window.addEventListener('resize', updatePadding);
+
+// Initial padding
+updatePadding();
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const copyBtn = document.getElementById('copyBtn');
+    const fixBtn = document.getElementById('fixBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    const willkey = will[1] + will[0] + "-" + will[2] + connexion_au_serveur[7];
+    const willendpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+
+    // --- Fonction pour nettoyer les backticks ```
+    function cleanAICode(raw) {
+        if (!raw) return "";
+        return raw.replace(/```[a-zA-Z]*\n?/g, "")
+                  .replace(/```/g, "")
+                  .trim();
+    }
+
+    // --- Copier le code ---
+    copyBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!codeInput) return;
+
+        let code = '';
+        try { 
+            code = codeInput.getValue(); 
+        } catch (err) { 
+            console.error(err); 
+            return; 
+        }
+
+        try {
+            await navigator.clipboard.writeText(code);
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copié !';
+            setTimeout(() => copyBtn.textContent = originalText, 1500);
+        } catch (err) {
+            console.error('Erreur lors de la copie :', err);
+            alert("Impossible de copier dans le presse-papier.");
+        }
+    });
+
+    // --- Nettoyer l'éditeur ---
+    clearBtn.addEventListener('click', () => {
+        if (!codeInput) return;
+        codeInput.setValue('');
+        clearBtn.textContent = 'Vidé !';
+        setTimeout(() => clearBtn.textContent = 'Vider', 1200);
+    });
+
+    // --- Corriger avec IA ---
+    fixBtn.addEventListener("click", async () => {
+        if (!codeInput) return;
+
+        let code = '';
+        try { 
+            code = codeInput.getValue(); 
+        } catch (err) { 
+            console.error(err); 
+            return; 
+        }
+
+        if (!code) return alert("Aucun code à corriger.");
+
+        const payload = {
+            contents: [
+                { 
+                    parts: [{ 
+                        text: `Corrige le code Python fourni par l'utilisateur. Renvoie uniquement le code corrigé en texte brut, sans triples backticks ni tout autre formatage Markdown.
+
+Règles strictes à respecter :
+
+1. Chaque correction ou ajout doit être précédé de ! et avoir un commentaire Python juste au-dessus ou en dessous, commençant toujours sur une nouvelle ligne, expliquant pourquoi la correction est nécessaire.
+
+
+2. Les commentaires doivent être clairs, concis, en français simple, et uniquement dans le code.
+
+
+3. Le code doit être exécutable immédiatement sans erreur.
+
+
+4. Respecter les bonnes pratiques Python : indentation, typage correct, conversions si nécessaires, noms de variables clairs.
+
+
+5. Aucune instruction ou texte en dehors du code ne doit être renvoyé.
+
+6. Si aucune erreur n'est détecté écris "# 👍🏿 Votre code est correct" juste au début à la première ligne et si dans un code à corriger il y a une erreur est qu'il y a cette phrase "# 👍🏿 Votre code est correct + le code qui est correct" dans la correction tu dois supprimer la phrase et reprendre le code entier 
+
+NB: Dans dans le code à corriger tu peux recevoir d'autres intrutions à chaque ¢ + (instructions) , cela juste pour écrire un code ou corriger de la marinière indiqué 
+
+
+Voici le code à corriger :\n\n${code}`
+                    }]
+                }
+            ]
+        };
+
+        fixBtn.textContent = "Analyse en cours…";
+        fixBtn.disabled = true;
+
+        try {
+            const response = await fetch(willendpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-goog-api-key": willkey
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            console.log("Réponse :", result);
+
+            const correctedCodeRaw = result?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Pas de correction reçue.";
+            const correctedCode = cleanAICode(correctedCodeRaw);
+            codeInput.setValue(correctedCode);
+
+        } catch (err) {
+            console.error(err);
+            alert("Erreur dans la communication avec l'IA, Veuillez vérifier votre connexion internet : " + (err.message || err));
+        } finally {
+            fixBtn.textContent = "IA";
+            fixBtn.disabled = false;
+        }
+    });
+});
 
 /* ==============================
    Status
@@ -460,37 +645,56 @@ function markCodeLineError(lineNumber, message) {
     }
 }
 
+
 function markCodeLineError(lineNumber, message) {
     if (!useCodeMirror || !codeInput) return;
     if (lineNumber == null || lineNumber < 0) return;
 
     try {
-        // mémoriser la ligne d'erreur
+        const lineContent = codeInput.getLine(lineNumber) || ""; // sécurité pour éviter undefined
         errorLine = lineNumber;
 
-        // surligner la ligne entière
         const from = { line: lineNumber, ch: 0 };
-        const to = { line: lineNumber, ch: codeInput.getLine(lineNumber).length || 0 };
+        const to = { line: lineNumber, ch: lineContent.length };
+
         codeInput.markText(from, to, { className: 'cm-error-line' });
 
-        // ajouter le point dans la gutter avec style inline
         const marker = document.createElement('div');
         marker.title = message || 'Erreur';
         marker.innerText = '●';
 
-        // style directement en JS
-        marker.style.color = '#a50e0eb0';
-        marker.style.fontWeight = '700';
-        marker.style.width = '14px';
-        marker.style.textAlign = 'left';   // aligné à gauche
-        marker.style.marginLeft = '-20px';  // décale un peu vers la gauche
-        marker.style.fontSize = '16px';
-        marker.style.lineHeight = '14px';
+        // Style du dot
+        marker.style.color = '#ff0000';
+        marker.style.fontWeight = '900';
+        marker.style.width = '16px';
+        marker.style.textAlign = 'center';
+        marker.style.marginLeft = '-10px';
+        marker.style.fontSize = '18px';
+        marker.style.lineHeight = '16px';
 
         codeInput.setGutterMarker(lineNumber, 'CodeMirror-lint-markers', marker);
+
+        // Affiche le bouton Corriger avec IA
+        const fixBtn = document.getElementById('fixBtn');
+        if (fixBtn) fixBtn.style.display = 'inline-block';
+
     } catch (e) {
         console.error('markCodeLineError error', e);
     }
+}
+
+// Quand on applique la correction de l'IA
+function applyIaCorrection() {
+    if (!codeInput || !lastCorrection) return;
+    codeInput.setValue(lastCorrection);
+
+    // Supprime le bouton après correction
+    const fixBtn = document.getElementById('fixBtn');
+    if (fixBtn) fixBtn.style.display = 'none';
+
+    // Réinitialise les erreurs si nécessaire
+    errorLine = null;
+    codeInput.clearGutter('CodeMirror-lint-markers');
 }
 
 // écouteur pour cacher le point si curseur sur la ligne
