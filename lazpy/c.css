@@ -1,0 +1,521 @@
+/* ==============================
+   Variables globales (thème, couleurs, polices)
+   ============================== */
+:root {
+  --bg: #0f1724;
+  --panel: #111217;
+  --card-start: #282a36;
+  --card-end: #24252f;
+  --accent: #50fa7b;
+  --accent-2: #ff79c6;
+  --muted: #9aa0ac;
+  --text: #e6eef6;
+  --error: #ff6b6b;
+  --radius: 12px;
+  --shadow: 0 12px 40px rgba(2,6,23,0.75);
+  --mono: "Fira Code", monospace;
+}
+
+/* ==============================
+   Reset / global
+   ============================== */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg), #081022);
+    color: var(--text);
+    font-family: Inter, system-ui, sans-serif;
+}
+
+/* ==============================
+   Layout principal
+   ============================== */
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    
+    height: 100%;
+    padding: 0; /* optionnel */
+}
+
+.top-row {
+    flex: 0 0 auto; /* ne prend que l'espace nécessaire */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.top-row {
+    flex: 0 0 auto; /* garde sa hauteur normale */
+}
+
+/* ==============================
+   CodeMirror full height
+   ============================== */
+.editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    background: var(--panel);
+    border-radius: 10px;
+}
+
+/* Force CodeMirror à prendre tout l’espace vertical et horizontal */
+.editor .CodeMirror {
+    flex: 1;
+    height: fit-content;
+    
+    background: inherit;
+    color: inherit;
+    font-family: var(--mono);
+    font-size: 14px;
+    
+}
+
+.CodeMirror{
+    width: 100%;
+    border-right: none;
+    
+}
+/* Optionnel : s’assure que le contenu de CodeMirror défile correctement */
+.editor .CodeMirror-scroll {
+    overflow: auto;
+}
+
+/* S’assure que le textarea original ne gêne pas */
+.editor textarea {
+    flex: 1;
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    
+}
+
+textarea {
+    overflow-x: auto;
+    white-space: pre;
+    padding-right: 60px;     /* marge à droite */
+    width: 100%;
+    height: 100%;
+    font-family: var(--mono);
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+/* ==============================
+   Contrôles / boutons
+   ============================== */
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #071018;
+  border: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.04);
+  color: var(--muted);
+}
+
+.btn.small {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ==============================
+   Modale
+   ============================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;              /* caché par défaut, affiché via JS */
+  align-items: center;        /* centre verticalement */
+  justify-content: center;    /* centre horizontalement */
+  z-index: 1000;
+  padding: 16px;              /* pour éviter que le contenu touche les bords sur mobile */
+}
+
+.modal-content {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 16px;
+  max-width: 600px;           /* largeur max */
+  width: 100%;                /* prend tout l'espace disponible sur mobile */
+  max-height: 90%;            /* pour ne pas dépasser la hauteur de l'écran */
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;           /* scroll si le contenu dépasse */
+}
+
+.modal-content .close {
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+}
+
+
+/* ==============================
+   Terminal
+   ============================== */
+/* ==============================
+   Ligne interactive : prompt + textarea
+   ============================== */
+/* wrapper ligne prompt + textarea */
+.input-block {
+  display: block;
+  width: 100%;
+  
+  box-sizing: border-box;
+}
+
+.prompt-inline {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+ 
+  white-space: nowrap;
+}
+
+.terminal-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 4px;
+  padding: 4px 6px;
+  color: #dbeafe;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  resize: none;
+}
+
+/* ==============================
+   Terminal
+   ============================== */
+.terminal {
+  width: 100%;
+  max-height: 80px;        /* limite la hauteur maximale du terminal */
+  min-height: 220px;        /* hauteur minimale */
+  background: #0b1220;
+  color: #dbeafe;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 13px;
+  overflow-y: auto;         /* active le scroll vertical si nécessaire */
+  overflow-x: a;       /* pas de scroll horizontal */
+  line-height: 1.45;
+  border-radius: 8px;
+  box-sizing: border-box;   /* inclut le padding dans la taille */
+}
+
+
+/* ==============================
+   Historique (optionnel)
+   ============================== */
+.hist-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 8px;
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ==============================
+   Spinner
+   ============================== */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.08);
+  border-top-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================
+   Raccourcis clavier
+   ============================== */
+kbd {
+  background: #0b1220;
+  border-radius: 6px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255,255,255,0.03);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+
+/* Style spécifique pour le top-row / header */
+.header-style {
+    background: linear-gradient(90deg, rgba(40,42,54,0.95), rgba(36,37,47,0.95));
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.header-style .header-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header-style .controls-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.header-style .title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+}
+
+.header-style .small {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.header-style kbd {
+    background: #0b1220;
+    border-radius: 6px;
+    padding: 2px 6px;
+    border: 1px solid rgba(255,255,255,0.03);
+    font-family: var(--mono);
+    font-size: 12px;
+}
+.btn.primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: #ffffff79;
+    border: none;
+    
+    border-radius: 30px;
+    padding: 8px; /* carré autour du SVG */
+    width: 40px;  /* taille fixe */
+    height: 40px; /* taille fixe */
+}
+
+.btn.primary svg {
+    width: 30px;
+    height: 30px;
+    pointer-events: none; /* évite les problèmes de clic sur le SVG */
+}
+
+/* Point d'erreur (statusDot) */
+#statusDot {
+    width: 12px;           /* taille du point */
+    height: 12px;
+    background-color: red; /* couleur du point */
+    border-radius: 50%;    /* rond parfait */
+    display: inline-block;
+    margin-left: 4px;      /* petit décalage si nécessaire */
+    vertical-align: middle;
+    transition: opacity 0.2s ease; /* animation douce */
+}
+
+#statusDot.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.history-sidebar {
+  width: 250px;
+  background: #1e1e2f;
+  color: #dbeafe;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+/* Responsive : mobile */
+@media (max-width: 900px) {
+  .history-sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px; /* cachée par défaut */
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s;
+  }
+  .history-sidebar.open {
+    left: 0;
+  }
+}
+
+
+/* Overlay : invisible sur PC */
+.history-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+}
+
+/* Sidebar responsive */
+.history-sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 300px;
+  height: 100%;
+  background: #1e1e2f;
+  color: #dbeafe;
+  z-index: 999;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* Ouvrir la sidebar */
+.history-sidebar.open {
+  transform: translateX(0);
+}
+
+/* Header */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#runBtn {
+  position: relative;
+}
+
+#runBtn .tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background: #111217;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 8px;
+  position: absolute;
+  bottom: 125%; /* position au-dessus du bouton */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+#runBtn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+

@@ -461,7 +461,7 @@ img.loaded {
    MAIN / GRID / CARDS
    ========================= */
 main {
-    padding: 18px 16px;
+    padding: 18px 6px;
     max-width: 1200px;
     margin: 0 auto;
 }

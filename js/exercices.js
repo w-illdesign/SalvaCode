@@ -80,6 +80,8 @@ const modules = [
         "Créer une variable <code>est_etudiant</code> avec la valeur booléenne <code>True</code>.",
         "Afficher chaque variable et son type avec <code>type()</code>."
       ],
+       "code": "\n# Solution\nnom = \"Alice\"\nage = 20\nest_etudiant = True\n\nprint(nom, type(nom))\nprint(age, type(age))\nprint(est_etudiant, type(est_etudiant))\n      ",
+       "codeCmd": true,
       "solution": "\n# Solution\nnom = \"Alice\"\nage = 20\nest_etudiant = True\n\nprint(nom, type(nom))\nprint(age, type(age))\nprint(est_etudiant, type(est_etudiant))\n      ",
       "solutionCmd": true
     },
