@@ -303,7 +303,9 @@ Règles strictes à respecter :
 
 5. Aucune instruction ou texte en dehors du code ne doit être renvoyé.
 
-6. Si aucune erreur n'est détecté écris "# 👍🏿 Votre code est correct" juste au début à la première ligne et si dans un code à corriger il y a une erreur est qu'il y a cette phrase "# 👍🏿 Votre code est correct + le code qui est correct" dans la correction tu dois supprimer la phrase et reprendre le code entier 
+6. Si aucune erreur n’est détectée dans le code ci-dessous, écris en première ligne du code : # 👍🏿 Votre code est correct puis tu reprends mon code
+
+En revanche, si le code contient une erreur et que cette phrase est déjà présente, tu dois la supprimer et réécrire le code entier corrigé.
 
 NB: Dans dans le code à corriger tu peux recevoir d'autres intrutions à chaque ¢ + (instructions) , cela juste pour écrire un code ou corriger de la marinière indiqué 
 
