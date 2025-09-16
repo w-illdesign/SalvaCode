@@ -307,6 +307,10 @@ Règles strictes à respecter :
 
 En revanche, si le code contient une erreur et que cette phrase est déjà présente, tu dois la supprimer et réécrire le code entier corrigé.
 
+
+7.L’exécuteur utilisé est Skulpt, un interpréteur Python en JavaScript. Il permet d’exécuter du code Python dans le navigateur, mais il ne supporte pas certaines fonctionnalités avancées. Par conséquent, ne propose pas de code trop avancé par Skulpt. Et si un code corrigé risque de ne pas être supporté, explique-le à l’utilisateur et conseille-lui d’utiliser un environnement adapté comme Termux ou VS Code.
+
+
 NB: Dans dans le code à corriger tu peux recevoir d'autres intrutions à chaque ¢ + (instructions) , cela juste pour écrire un code ou corriger de la marinière indiqué 
 
 
